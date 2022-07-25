@@ -1,12 +1,12 @@
 .modal{
     max-width: 1000px !important;
-    height: 100%;
+    height: 85vh;
     background-color: #3D4345 !important;
     font-family: 'Michroma';
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 6%;
+    top: 4%;
 }
 
 .codebox{
@@ -42,8 +42,8 @@
     gap: 20px;
     color: #00FFB2;
     justify-content: flex-start;
-    height: 100%;
-    overflow: hidden;
+    height: 550px;
+    overflow: auto;
 }
 
 .textarea{
@@ -95,4 +95,33 @@
     border: 1px solid #00FFB2;
     border-radius: 3px !important;
     transform: matrix(0.99, 0, -0.12, 1, 0, 0);
+}
+
+.inputs{
+
+}
+
+.input{
+    padding: 0px 20px;
+}
+
+.inputText{
+    width: 100%;
+    background-color: transparent;
+    z-index: 5;
+    position: relative;
+    top: -25px;
+}
+
+.inputPlaceholder{
+    background-color: transparent;
+    z-index: 2;
+}
+
+.placeholderParag{
+    color: gray;
+}
+
+.test{
+    background-color: red;
 }

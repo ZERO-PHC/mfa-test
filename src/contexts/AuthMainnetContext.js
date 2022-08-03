@@ -1,11 +1,19 @@
 import * as fcl from "@onflow/fcl";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import "../../flow/configMainnet";
+// import "../../flow/configMainnet";
 
 export const AuthMainnetContext = createContext({});
 
 export const useMainnetAuth = () => useContext(AuthMainnetContext);
+
+// fcl.config({
+//   "app.detail.title": "My Galleryz", // this adds a custom name to our wallet
+//   "app.detail.icon": "https://res.cloudinary.com/do4mactw0/image/upload/v1655577809/Logo_m6ofww.png", // this adds a custom image to our wallet
+//   "accessNode.api": "https://rest-mainnet.onflow.org",
+//   "discovery.wallet": "https://fcl-discovery.onflow.org/authn", // this is for the local dev wallet
+//   "0xDeployer": process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, // this auto configures `0xDeployer` to be replaced by the address in txs and scripts
+// })
 
 export default function AuthMainnetProvider({ children }) {
   const [user, setUser] = useState({ loggedIn: false, addr: undefined });

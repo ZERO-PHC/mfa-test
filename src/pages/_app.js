@@ -3,6 +3,7 @@ import AuthMainnetProvider from "../contexts/AuthMainnetContext";
 import TransactionProvider from "../contexts/TransactionContext";
 import { NftsProvider } from "../contexts/NftsContext";
 import { StepsProvider } from "../contexts/MagicSchoolStepsContext";
+import {SamplersNftsProvider} from "../contexts/Samplers/SamplersNftsContext";
 
 import { ChakraProvider } from '@chakra-ui/react'
 import '../styles/globals.css'
@@ -13,11 +14,13 @@ function MyApp({ Component, pageProps }) {
         <AuthProvider>
           <AuthMainnetProvider>
             <TransactionProvider>
-              <NftsProvider>
-                <StepsProvider>
-                  <Component {...pageProps} />
-                </StepsProvider>
-              </NftsProvider>
+              <SamplersNftsProvider>
+                <NftsProvider>
+                  <StepsProvider>
+                    <Component {...pageProps} />
+                  </StepsProvider>
+                </NftsProvider>
+              </SamplersNftsProvider>
             </TransactionProvider>
           </AuthMainnetProvider>
         </AuthProvider>

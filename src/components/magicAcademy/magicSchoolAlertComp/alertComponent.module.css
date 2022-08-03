@@ -1,0 +1,14 @@
+.content{
+  transform: matrix(0.99, 0, -0.14, 1, 0, 0) !important;
+  font-family: "Monument";
+  width: 500px !important;
+  min-width: 500px;
+}
+
+.button{
+  background-color: #00FFB2;
+  background: linear-gradient(to right, #00FFB2, #00FFB2);
+  color: black;
+  border: 1px solid #00FFB2;
+  box-shadow: 0px 0px 4px #00ffb380;
+}

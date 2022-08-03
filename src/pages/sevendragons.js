@@ -3,15 +3,18 @@ import ProjectNavbar from "../components/projectNavbar/ProjectNavbar";
 
 import { useEffect, useState } from "react";
 
+import { useMagicSchoolSteps } from "../contexts/MagicSchoolStepsContext";
 import { useNFTs } from "../contexts/NftsContext";
 import { useAuth } from "../contexts/AuthContext";
-import DragonsSection from "../sections/DragonsSection";
-import SamplersComponent from "../components/SamplersComponent";
+
+import DragonsSection from "../sections/sevenDragonsSections/DragonsSection";
+import SamplersComponent from "../components/sevenDragonsComps/SamplersComponent";
 
 
-const Home = () => {
+const SevenDragons = () => {
   const { user } = useAuth();
   const { projects, getSamplers, SelectedRarity, Samplers } = useNFTs();
+  const { stepsSamplers, setStepsSamplers } = useMagicSchoolSteps();
 
   useEffect(() => {
     if (user) getSamplers(user?.addr);
@@ -23,6 +26,8 @@ const Home = () => {
       projectUrl="/sevendragons"
       logoProjectLink="logoSevenDragon.png"
       projectName="SEVEN DRAGONS"
+      projectDataLoginPage={stepsSamplers}
+      setProjectDataLoginPage={setStepsSamplers}
       />
       <main>
         <SamplersComponent />
@@ -32,7 +37,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SevenDragons;
 
   const Wrapper = styled.main`
     position: relative;

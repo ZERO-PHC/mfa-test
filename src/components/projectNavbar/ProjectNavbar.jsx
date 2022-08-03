@@ -4,43 +4,66 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAuth } from "../../contexts/AuthContext";
-import MagicSchoolPopover from "../magicSchoolPopover/MagicSchoolPopover";
+import MagicSchoolPopover from "../magicAcademy/magicSchoolPopover/MagicSchoolPopover";
 
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import AddressComp from "./addressComp/AddressComp";
 
-const ProjectNavbar = ({projectUrl, projectName, logoProjectLink}) => {
+const ProjectNavbar = ({
+  projectUrl,
+  projectName,
+  logoProjectLink,
+  projectDataLoginPage,
+  setProjectDataLoginPage,
+  projectDataMintPage,
+  setProjectDataMintPage,
+}) => {
   const { logIn, logOut, user, flow } = useAuth();
   const router = useRouter();
-
-  console.log("user" + user)
 
   useEffect(() => {
     if (!user?.loggedIn) {
       router.push(projectUrl, undefined, { shallow: true });
     }
-  }, [user]);
+  }, [projectUrl, router, user]);
 
   return (
     <HeaderWrapper>
       <div>
         <Link href={projectUrl}>
-          <Image className="logo" width={50} height={50} src={`/project/logos/${logoProjectLink}`}/>
+          <Image
+            className="logo"
+            width={50}
+            height={50}
+            src={`/project/logos/${logoProjectLink}`}
+            alt='Project Logo'
+          />
         </Link>
         <h2>{projectName}</h2>
       </div>
       {user?.addr ? (
         <section>
-            <AddressComp flow={flow} user={user} />
-          <div style={{width:"1rem"}}></div>
+          <MagicSchoolPopover
+            magicSchoolData={projectDataMintPage}
+            setMagicSchoolData={setProjectDataMintPage}
+            projectToCheck={`${projectName} Login Page`}
+            name={`${projectName} Mint Page`}
+          />
+          <AddressComp flow={flow} user={user} />
+          <div style={{ width: "1rem" }}></div>
           <div className="addressBox" onClick={logOut}>
             <Icon icon="majesticons:logout" height={"2em"} />
           </div>
         </section>
       ) : (
         <div className="buttons">
-          <MagicSchoolPopover/>
+          <MagicSchoolPopover
+            magicSchoolData={projectDataLoginPage}
+            setMagicSchoolData={setProjectDataLoginPage}
+            projectToCheck={`${projectName} Cadence Config`}
+            name={`${projectName} Login Page`}
+          />
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP
           </div>
@@ -61,11 +84,11 @@ const HeaderWrapper = styled.header`
   z-index: 20;
   padding: 1rem 3rem;
   font-family: "Monument";
-  
+
   section {
     width: 40%;
     display: flex;
-    justify-content:end;
+    justify-content: end;
   }
 
   div {
@@ -85,7 +108,6 @@ const HeaderWrapper = styled.header`
       cursor: pointer;
     }
   }
-
 
   .auth-btn {
     font-family: "Monument";

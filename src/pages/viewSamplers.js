@@ -1,0 +1,80 @@
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import SamplerCard from "../components/magicAcademy/SamplerCard";
+import Image from "next/image";
+
+const samplers = [
+  {
+    id: 0,
+    name: "Orbies",
+    xp: "1500",
+    active: true,
+  },
+  {
+    id: 1,
+    name: "Seven Dragons ",
+    xp: "3000",
+    active: true,
+  },
+  {
+    id: 2,
+    name: "Packers",
+    xp: "4500",
+    active: false,
+  },
+  {
+    id: 3,
+    name: "Flozzar",
+    xp: "6000",
+    active: false,
+  },
+];
+
+export default function ViewSamplers() {
+  return (
+    <Wrapper>
+      <header>
+        <div>
+          <Image src="/assets/logo.png" alt="logo" height={100} width={100} />
+        </div>
+      </header>
+      <section>
+        {samplers.map((sampler) => (
+          <SamplerCard {...sampler} />
+        ))}
+      </section>
+    </Wrapper>
+  );
+}
+
+const Wrapper = styled.main`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #6100ff -47.66%, #000000 100%);
+
+  header {
+    height: 20%;
+  }
+
+  button {
+    background: black;
+    border: 1px solid #00ffb2;
+    color: #00ffb2;
+    padding: 0.2rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0rem;
+  }
+
+  section {
+    width: 80%;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;

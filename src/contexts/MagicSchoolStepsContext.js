@@ -12,6 +12,7 @@ export const StepsProvider = ({ children }) => {
   const [stepsMintSamplers, setStepsMintSamplers] = useState(MintPageDataSamplers);
   const [stepsCadence, setStepsCadence] = useState(CadencePageData);
 
+
   const value = { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers, stepsCadence, setStepsCadence };
 
   return (

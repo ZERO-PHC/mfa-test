@@ -11,6 +11,7 @@ export const MintPageDataSamplers = [
         professorText: { title: "Let's build the ming page of your Dapp!" },
       },
     ],
+    professorAvatar:"/magicSchoolModal/profZero.png",
     completed: true,
   },
   {

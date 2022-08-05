@@ -18,6 +18,8 @@ const ProjectNavbar = ({
   setProjectDataLoginPage,
   projectDataMintPage,
   setProjectDataMintPage,
+  stepsCadence,
+  setStepsCadence
 }) => {
   const { logIn, logOut, user, flow } = useAuth();
   const router = useRouter();
@@ -27,6 +29,7 @@ const ProjectNavbar = ({
       router.push(projectUrl, undefined, { shallow: true });
     }
   }, [projectUrl, router, user]);
+
 
   return (
     <HeaderWrapper>
@@ -49,6 +52,7 @@ const ProjectNavbar = ({
             setMagicSchoolData={setProjectDataMintPage}
             projectToCheck={`${projectName} Login Page`}
             name={`${projectName} Mint Page`}
+            professor={"/zeroAvatar.png"}
           />
           <AddressComp flow={flow} user={user} />
           <div style={{ width: "1rem" }}></div>
@@ -59,10 +63,18 @@ const ProjectNavbar = ({
       ) : (
         <div className="buttons">
           <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to deploy the Orbies Contract"}
+            magicSchoolData={stepsCadence}
+            setMagicSchoolData={setStepsCadence}
+            name={`${projectName} Cadence Page`}
+            professor={"/frlabsAvatar.png"}
+          />
+          <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to build the Login Page"}
             magicSchoolData={projectDataLoginPage}
             setMagicSchoolData={setProjectDataLoginPage}
-            projectToCheck={`${projectName} Cadence Config`}
             name={`${projectName} Login Page`}
+            professor={"/zeroAvatar.png"}
           />
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP
@@ -72,6 +84,8 @@ const ProjectNavbar = ({
     </HeaderWrapper>
   );
 };
+
+export default ProjectNavbar;
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -102,8 +116,6 @@ const HeaderWrapper = styled.header`
   }
 
   img {
-    padding-right: 10px !important;
-
     &:hover {
       cursor: pointer;
     }
@@ -148,5 +160,3 @@ const HeaderWrapper = styled.header`
     font-family: "MonumentBold";
   }
 `;
-
-export default ProjectNavbar;

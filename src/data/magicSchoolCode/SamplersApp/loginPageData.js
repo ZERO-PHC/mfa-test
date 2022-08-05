@@ -7,6 +7,7 @@ export const LoginPageDataSamplers = [
     subtitle2:
       "In this guide you will learn how to create an authentication page using FCL",
     codeSnippet: [""],
+    professorAvatar:"/magicSchoolModal/profZero.png",
     completed: true,
   },
   {

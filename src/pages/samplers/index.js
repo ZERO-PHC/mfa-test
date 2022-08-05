@@ -19,7 +19,7 @@ let gradient2 = "89.11deg, #0e0d0d 25.47%, #413F77 99.28%";
 let gradient3 = "89.11deg, #0e0d0d 25.47%, #B2BE21 121.65%";
 
 const Samplers = () => {
-    const { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers } = useMagicSchoolSteps();  
+    const { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers, stepsCadence, setStepsCadence } = useMagicSchoolSteps();  
     const { user } = useAuth();
     const { getSamplers, SelectedRarity, Samplers } = useSamplersNFTs();
 
@@ -63,6 +63,8 @@ const Samplers = () => {
       setProjectDataLoginPage={setStepsSamplers}
       projectDataMintPage={stepsMintSamplers}
       setProjectDataMintPage={setStepsMintSamplers}
+      stepsCadence={stepsCadence}
+      setStepsCadence={setStepsCadence}
         />
       <main className="indexMain">
         <Tabs rarities={rarities} />

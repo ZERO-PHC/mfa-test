@@ -18,7 +18,7 @@ import AlertSchoolAlertComponent from '../magicSchoolAlertComp/MagicSchoolAlertC
 import { useAuth } from '../../../contexts/AuthContext'
 import * as style from './PopoverStyles.module.css'
 
-  const MagicSchoolPopover = ({magicSchoolData, name, setMagicSchoolData, projectToCheck}) => {
+  const MagicSchoolPopover = ({magicSchoolData, name, setMagicSchoolData, projectToCheck, title, professor}) => {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
     const [alertOpen, setAlertOpen] = useState(false)
 
@@ -48,18 +48,20 @@ import * as style from './PopoverStyles.module.css'
         <PopoverStyle>
             <Popover>
                 <PopoverTrigger>
-                <Button onClick={checkStorage}>?</Button>
+                <Button onClick={checkStorage} className={style.logo}><img src={professor}/></Button>
                 </PopoverTrigger>
                 <Portal>
                     <PopoverContent className={style.content}>
                         <PopoverArrow className={style.arrow}/>
-                        <PopoverHeader className={style.header}>Explore the dapp and click this icon after that</PopoverHeader>
+                        <PopoverHeader className={style.header}>
+                           { title ? title :"Explore the dapp and click this icon after that" }
+                        </PopoverHeader>
                         <PopoverCloseButton className={style.closeBtn}/>
                         <PopoverBody className={style.body}>
                             <Button 
                             colorScheme='blue' 
-                            onClick={checkProject() ? onOpen : () =>  setAlertOpen(true)
-                            }>
+                            onClick={onOpen}
+                            >
                                 START
                             </Button>
                         </PopoverBody>
@@ -75,15 +77,16 @@ import * as style from './PopoverStyles.module.css'
 export default MagicSchoolPopover 
 
 const PopoverStyle = styled.div`
-    
     div{
         font-family: "Monument" !important;
     }
+
     button{
-        background: rgb(170,170,170);
-        background: radial-gradient(circle, rgba(170,170,170,1) 2%, rgba(102,102,102,1) 100%);
-        color: #00FFB2;
+        background: transparent;
         border-radius: 50%;
-        margin-right: 5px;
+
+        &:hover{
+            transition: 1s;
+        }
     }
 `

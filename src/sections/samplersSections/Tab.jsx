@@ -17,4 +17,8 @@ export default function Tab({ label, img }) {
 
 const Wrapper = styled.div`
   display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

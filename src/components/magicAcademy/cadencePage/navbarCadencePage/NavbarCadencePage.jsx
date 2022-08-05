@@ -52,8 +52,6 @@ const HeaderWrapper = styled.header`
   }
 
   img {
-    padding-right: 10px !important;
-
     &:hover {
       cursor: pointer;
     }

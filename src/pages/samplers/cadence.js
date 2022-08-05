@@ -18,7 +18,6 @@ const Cadence = () => {
             cadenceData={stepsCadence}
             setCadenceData={setStepsCadence}
             />
-            <h1>Cadence</h1>
         </Wrapper>
     )
 }

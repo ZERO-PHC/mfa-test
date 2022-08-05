@@ -3,12 +3,14 @@ import { SamplersContract } from "./samplersContract";
 export const CadencePageData = [
   {
     title: "Welcome",
-    subtitle: "Samplers Contract deployment guide",
-    content:
-      "Our goal is not to teach you all the details of building this smart contract, it is very simple and beginner level. On this page we will show you how to deploy it for the next FCL teachings",
-    content2:
-      "If you want to learn about Cadence and Smart Contracts, we recommend that you join the next Emerald Academy Bootcamp",
+    professorName: "I'm FRLABS,",
+    introduction: "I will be your Flow Professor!",
+    subtitle: "On this teaching you will learn how to deploy the Orbie Contract on Flow Blockchain Testnet!",
+    subtitle2: "At the end of this challenge you will win:",
+    rewards1: "- +500 XP",
+    rewards2: "- UNLOCK Orbie Cadence Float",
     codeSnippet: [""],
+    professorAvatar:"/magicSchoolModal/profFrlabs.png",
     completed: true,
   },
   {
@@ -1055,104 +1057,62 @@ export const CadencePageData = [
       "We need to add the account information to the flow CLI recognize and access our account to deploy the smart contract",
     path: "Inside the json add the testnet-account information like bellow:",
     structureLink: "step2-cadence.png",
-    codeSnippet: [
+    formResult: ["", ""],
+    form: [
       {
-        code: `"testnet-account": {`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "In your flow.json file, declare the testnet-account information",
-        },
+        text: `"address":`,
+        input: "PAST-YOUR-ADDRESS-HERE",
       },
       {
-        code: `"address": "PASTE YOUR ADDRESS HERE!",`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "Here in our teach will be empty but you need to paste your address in your code!",
-        },
-      },
-      {
-        code: `"key": {`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "In your flow.json file, declare the key information",
-        },
-      },
-      {
-        code: `"type": "hex",`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "In your flow.json file, declare the key type, we will use the pattern hex",
-        },
-      },
-      {
-        code: `"index": 0,`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "This is the index of your key, we will use 0, want understand more about this? Check the key index docs here:",
-          link: [
-            {
-              text: "Multiple Keys Docs",
-              href: "https://docs.onflow.org/faq/developers/#is-it-possible-to-add-multiple-public-keys-to-a-given-accountaddress-so-that-it-can-be-controlled-by-more-than-one-private-key",
-            },
-          ],
-        },
-      },
-      {
-        code: `"signatureAlgorithm": "ECDSA_P256k",`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "We will use the pattern ECDSA_P256k",
-        },
-      },
-      {
-        code: `"hashAlgorithm": "SHA3_256",`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "We will use the pattern SHA3_256",
-        },
-      },
-      {
-        code: `"privateKey": "PASTE YOUR PRIVATE KEY HERE"`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "Here in our teach will be empty but you need to paste your private key in your code!",
-        },
-      },
-      {
-        code: `}}}`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "Close the json file",
-        },
-      },
+        text: `"privateKey": `,
+        input: "PAST-YOUR-PRIVATE-KEY-HERE",
+      }
     ],
-    completed: false,
+    codeSnippet: [""],
+    completed: true,
     allCode: `
-                    "testnet-account": {
-                        "address": "PASTE YOUR ADDRESS HERE!",
-                        "key": {
-                            "type": "hex",
-                            "index": 0,
-                            "signatureAlgorithm": "ECDSA_P256k",
-                            "hashAlgorithm": "SHA3_256",
-                            "privateKey": "PASTE YOUR PRIVATE KEY HERE"
-                        }
-                    }
-                }
+    {
+      "emulators": {
+        "default": {
+          "port": 3569,
+          "serviceAccount": "emulator-account"
+        }
+      },
+      "contracts": {
+        "contracts": { 
+          "Samplers": "./samplersContract/Samplers.cdc" 
+        }
+      },
+      "networks": {
+        "emulator": "127.0.0.1:3569",
+        "mainnet": "access.mainnet.nodes.onflow.org:9000",
+        "testnet": "access.devnet.nodes.onflow.org:9000"
+      },
+      "accounts": {
+        "emulator-account": {
+          "address": "f8d6e0586b0a20c7",
+          "key": "67428e633de0118d8c651d078909a71fa7151995d0c8d0c4aebac41b592ba5cc"
+        },
+        "testnet-account": {
+          "address": "PAST-YOUR-ADDRESS-HERE",
+          "key": {
+            "type": "hex",
+            "index": 0,
+            "signatureAlgorithm": "ECDSA_P256k",
+            "hashAlgorithm": "SHA3_256",
+            "privateKey": "PAST-YOUR-PRIVATE-KEY-HERE"
+          }
+        }
+    
+      },
+      "deployments": {
+        "testnet": {
+          "testnet-account": [
+            "Samplers"
+          ]
+        }
+      }
+    }
         `,
     alert: true,
   },

@@ -4,9 +4,9 @@ import Image from "next/image"
 
 
 
-export default function SamplerCard({name, id, xp, active}) {
+export default function SamplerCard({name, id, xp, active, handleCardSelection}) {
     return (
-        <Wrapper>
+        <Wrapper onClick={handleCardSelection}>
             
             <section>
                 <div className='sampler-name'>

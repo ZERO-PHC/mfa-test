@@ -18,6 +18,8 @@ const ProjectNavbar = ({
   setProjectDataLoginPage,
   projectDataMintPage,
   setProjectDataMintPage,
+  autoOpen,
+  setAutoOpen,
 }) => {
   const { logIn, logOut, user, flow } = useAuth();
   const router = useRouter();
@@ -27,6 +29,7 @@ const ProjectNavbar = ({
       router.push(projectUrl, undefined, { shallow: true });
     }
   }, [projectUrl, router, user]);
+
 
   return (
     <HeaderWrapper>
@@ -49,6 +52,8 @@ const ProjectNavbar = ({
             setMagicSchoolData={setProjectDataMintPage}
             projectToCheck={`${projectName} Login Page`}
             name={`${projectName} Mint Page`}
+            autoOpen={autoOpen}
+            setAutoOpen={setAutoOpen}
           />
           <AddressComp flow={flow} user={user} />
           <div style={{ width: "1rem" }}></div>
@@ -58,11 +63,14 @@ const ProjectNavbar = ({
         </section>
       ) : (
         <div className="buttons">
+       
           <MagicSchoolPopover
             magicSchoolData={projectDataLoginPage}
             setMagicSchoolData={setProjectDataLoginPage}
             projectToCheck={`${projectName} Cadence Config`}
             name={`${projectName} Login Page`}
+            autoOpen={autoOpen}
+            setAutoOpen={setAutoOpen}
           />
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP
@@ -102,7 +110,7 @@ const HeaderWrapper = styled.header`
   }
 
   img {
-    padding-right: 10px !important;
+    // padding-right: 10px !important;
 
     &:hover {
       cursor: pointer;
@@ -148,5 +156,8 @@ const HeaderWrapper = styled.header`
     font-family: "MonumentBold";
   }
 `;
+
+
+
 
 export default ProjectNavbar;

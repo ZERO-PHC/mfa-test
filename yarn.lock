@@ -1939,6 +1939,18 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.5.tgz"
   "version" "2.11.5"
 
+"@rive-app/canvas@1.0.75":
+  "integrity" "sha512-DLQL0Zhsg/XyTNlI2lwQiZ7hcSar87A0BfedB9EhmdVLl/m+y7P2zHUBtSZgpjtHPRf+XRhlLbrHyIKvZjgP9A=="
+  "resolved" "https://registry.npmjs.org/@rive-app/canvas/-/canvas-1.0.75.tgz"
+  "version" "1.0.75"
+
+"@rive-app/react-canvas@^3.0.21":
+  "integrity" "sha512-CzOxIg3wH6m8SWm0Xov/3PAzqBkn1ZFnDnjRPorg61wZow7wbE6Z9yiH+BzjJA7pewV2sZJhB6U3AMJEWjbMOw=="
+  "resolved" "https://registry.npmjs.org/@rive-app/react-canvas/-/react-canvas-3.0.21.tgz"
+  "version" "3.0.21"
+  dependencies:
+    "@rive-app/canvas" "1.0.75"
+
 "@rushstack/eslint-patch@^1.1.3":
   "integrity" "sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA=="
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz"

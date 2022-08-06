@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SamplerCard from "../components/magicAcademy/SamplerCard";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const samplers = [
   {
@@ -30,7 +31,16 @@ const samplers = [
   },
 ];
 
+
+
 export default function ViewSamplers() {
+  const router = useRouter();
+  const handleCardSelection = (id) => {
+    console.log(id);
+      // route to the sampler id page
+      // router.push(`/samplers/${id}`);
+      router.push(`/samplers`);
+  }
   return (
     <Wrapper>
       <header>
@@ -39,8 +49,8 @@ export default function ViewSamplers() {
         </div>
       </header>
       <section>
-        {samplers.map((sampler) => (
-          <SamplerCard {...sampler} />
+        {samplers.map((sampler, i) => (
+          <SamplerCard key={i} {...sampler} handleCardSelection={handleCardSelection}  />
         ))}
       </section>
     </Wrapper>

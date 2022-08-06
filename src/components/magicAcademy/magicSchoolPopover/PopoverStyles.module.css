@@ -26,12 +26,12 @@
     font-family: "Monument";
     font-size: .75rem;
     align-self: flex-end;
-    width: 87px;
     color: black;
     background: rgba(194, 186, 186, 0.5);
     border: 1px solid #00FFB2;
     border-radius: 6px;
     transform: matrix(0.99, 0, -0.17, 1, 0, 0);
+    margin-right: 0.5rem;
   }
 
   .body > button:hover {

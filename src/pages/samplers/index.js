@@ -19,14 +19,20 @@ let gradient2 = "89.11deg, #0e0d0d 25.47%, #413F77 99.28%";
 let gradient3 = "89.11deg, #0e0d0d 25.47%, #B2BE21 121.65%";
 
 const Samplers = () => {
-    const { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers } = useMagicSchoolSteps();  
-    const { user } = useAuth();
-    const { getSamplers, SelectedRarity, Samplers } = useSamplersNFTs();
+  const {
+    stepsSamplers,
+    setStepsSamplers,
+    stepsMintSamplers,
+    setStepsMintSamplers,
+  } = useMagicSchoolSteps();
+  const { user } = useAuth();
+  const { getSamplers, SelectedRarity, Samplers } = useSamplersNFTs();
+  const [AutoOpen, setAutoOpen] = useState(true);
 
   useEffect(() => {
     if (user) getSamplers(user?.addr);
   }, [user]);
-  
+
   let bgColor;
 
   switch (SelectedRarity) {
@@ -44,26 +50,29 @@ const Samplers = () => {
       break;
   }
 
-  let filtered = ""
-  if(Samplers.length > 10){
-    filtered = Samplers.slice(0,20)
+  let filtered = "";
+  if (Samplers.length > 10) {
+    filtered = Samplers.slice(0, 20);
   }
 
   return (
     <Wrapper
-    style={{
-      background: `linear-gradient(${bgColor})`,
-    }}
+      style={{
+        background: `linear-gradient(${bgColor})`,
+      }}
     >
+      {AutoOpen && <div className="overlay"></div>}
       <ProjectNavbar
-      projectUrl="/samplers"
-      logoProjectLink="logoSamplers.png"
-      projectName="SAMPLERS"
-      projectDataLoginPage={stepsSamplers}
-      setProjectDataLoginPage={setStepsSamplers}
-      projectDataMintPage={stepsMintSamplers}
-      setProjectDataMintPage={setStepsMintSamplers}
-        />
+        projectUrl="/samplers"
+        logoProjectLink="logoSamplers.png"
+        projectName="SAMPLERS"
+        projectDataLoginPage={stepsSamplers}
+        setProjectDataLoginPage={setStepsSamplers}
+        projectDataMintPage={stepsMintSamplers}
+        setProjectDataMintPage={setStepsMintSamplers}
+        autoOpen={AutoOpen}
+        setAutoOpen={setAutoOpen}
+      />
       <main className="indexMain">
         <Tabs rarities={rarities} />
         <SamplerContent />
@@ -78,54 +87,63 @@ const Samplers = () => {
               height: "50%",
             }}
           >
-            {(Samplers.length > 0 && Samplers.length <= 20)
-            ?
-            (<MySamplers samplers={Samplers} />)
-            :
-            (
-            <div className="samplersAndButton">
-            <MySamplers samplers={filtered}/>
-            {Samplers.length > 0 && <VerticallyCenter samplers={Samplers} />}
-            </div>
-            )
-          }
+            {Samplers.length > 0 && Samplers.length <= 20 ? (
+              <MySamplers samplers={Samplers} />
+            ) : (
+              <div className="samplersAndButton">
+                <MySamplers samplers={filtered} />
+                {Samplers.length > 0 && (
+                  <VerticallyCenter samplers={Samplers} />
+                )}
+              </div>
+            )}
           </div>
         </footer>
       </main>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default Samplers;
 
 const Wrapper = styled.main`
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .indexMain {
+    max-width: 70%;
     width: 100%;
-    height: 100vh;
+    background: white;
+    height: 80%;
+    border-radius: 9px;
+    margin-bottom: 2em;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+  }
+
+  .samplersAndButton {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    
-    .indexMain {
-      max-width: 70%;
-      width: 100%;
-      background: white;
-      height: 80%;
-      border-radius: 9px;
-      margin-bottom: 2em;
-    }
+    justify-content: center;
+  }
 
-    footer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 20%;
-    }
-
-    .samplersAndButton{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  `;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+  }
+`;

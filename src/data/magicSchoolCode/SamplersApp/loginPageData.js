@@ -1,21 +1,23 @@
 import { CssCode } from "./cssCode";
+import {deployerAddress} from "../../../contexts/MagicSchoolStepsContext"
 
 export const LoginPageDataSamplers = [
   {
     title: "Welcome",
-    subtitle: "Authentication page guide",
-    subtitle2:
-      "In this guide you will learn how to create an authentication page using FCL",
+    professorName: "I'm Zerø,",
+    introduction: "I will be your React and FCL Professor!",
+    subtitle: "On this teaching you will learn how to create the Orbie Authentication page on Flow Blockchain Testnet!",
+    subtitle2: "At the end of this challenge you will win:",
+    rewards1: "- +1500 XP",
+    rewards2: "- UNLOCK Orbie Login Page Float",
     codeSnippet: [""],
     professorAvatar:"/magicSchoolModal/profZero.png",
     completed: true,
   },
   {
     title: "Step 1",
-    subtitle: "Create a next js app",
-    subtitle2: "Install the flow fcl and types dependencies",
-    footer:
-      "We used in our application some styling dependencies has well, feel free to use whatever you want in your app",
+    subtitle: "We love React and NextJS, let's use it! Create a next js app",
+    subtitle2: "Install the Flow FCL and Types dependencies",
     codeSnippet: [
       {
         code: "npm create next-app",
@@ -43,11 +45,18 @@ export const LoginPageDataSamplers = [
   {
     title: "Step 2",
     subtitle: "Add the styles inside /styles/globals.css",
+    subtitle2: "You can remove all the code inside globals.css and paste the code below",
     codeSnippet: [
       {
         professorText: {
           title:
-            "Our focus it's not CSS, but if you want learn more about it you can check the link below: https://www.w3schools.com/css/default.asp",
+            "Our focus it's not CSS, but if you want learn more about it you can check the link below:",
+          link: [
+            {
+              text: "CSS Docs",
+              href: "https://www.w3schools.com/css/default.asp"
+            }
+          ]
         },
       },
     ],
@@ -56,15 +65,15 @@ export const LoginPageDataSamplers = [
   },
   {
     title: "Step 3",
-    subtitle: "Create a new Folder /flow",
-    subtitle2: "Inside of it create a file config.js",
+    subtitle: "Create a new Folder /flow inside root NextJS app!",
+    subtitle2: "Inside /flow create a new file named config.js! Write the code below to be able to copy it!",
     codeSnippet: [
       {
         code: `const fcl = require("@onflow/fcl");`,
         match: false,
         percent: 0,
         professorText: {
-          title: "Create a new Folder /flow",
+          title: "Let's start the step 3, Initialize the FCL!",
         },
       },
       {
@@ -74,7 +83,7 @@ export const LoginPageDataSamplers = [
         professorText: { title: "Call the config method of fcl" },
       },
       {
-        code: `"app.detail.title": "App name",`,
+        code: `"app.detail.title": "Orbies App",`,
         match: false,
         percent: 0,
         professorText: { title: "Set the title of your app" },
@@ -104,21 +113,12 @@ export const LoginPageDataSamplers = [
         },
       },
       {
-        code: `"0xDeployer": "0x4ba0ed5a326eef6b",`,
+        code: `"0xDeployer": "YOUR DEPLOYER ADDRESS",`,
         match: false,
         percent: 0,
         professorText: {
           title:
             "Set the deployer address here and we will use just 0xDeployer in our scripts and transactions",
-        },
-      },
-      {
-        code: `"0xCORE": "0x4ba0ed5a326eef6b"`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "Set the core address here and we will use just 0xCORE in our scripts and transactions",
         },
       },
       {
@@ -144,10 +144,8 @@ export const LoginPageDataSamplers = [
   },
   {
     title: "Step 4",
-    subtitle: "Create a new folder contexts",
-    subtitle2: "Inside of it create a file /AuthContext.js",
-    content:
-      "In our application we use contexts from React to interact with the blockchain through FCL",
+    subtitle: "We will use contexts from React to interact with the blockchain through FCL",
+    subtitle2: " Create a new folder named contexts and Inside of /contexts create a file named AuthContext.js",
     codeSnippet: [
       {
         code: `import * as fcl from "@onflow/fcl";`,
@@ -183,7 +181,13 @@ export const LoginPageDataSamplers = [
         code: `export const useAuth = () => useContext(AuthContext);`,
         match: false,
         percent: 0,
-        professorText: { title: "Create a new hook called useAuth" },
+        professorText: { 
+          title: "Create a new hook called useAuth, React Context it's a way to manage state globally, learn more about it:",
+          links: [{
+            title: "React Context Docs",
+            href: "https://www.w3schools.com/react/react_usecontext.asp"
+          }]
+       },
       },
       {
         code: `export default function AuthProvider({ children }) {`,
@@ -343,6 +347,7 @@ export const LoginPageDataSamplers = [
   {
     title: "Step 5",
     subtitle: "Inside pages/_app.js add the AuthProvider",
+    subtitle2: "Fill in the code below, copy and paste it into your /_app.js",
     codeSnippet: [
       {
         code: `import "../../styles/globals.css";`,
@@ -422,9 +427,9 @@ export const LoginPageDataSamplers = [
   {
     title: "Step 6",
     subtitle:
-      "Inside your component/page that you will add the buttons to login and logout",
+      "Open the component where you will add the buttons to login and logout",
     subtitle2:
-      "Now we just need to import the Auth Context to our page or component and use the functions we created earlier",
+      "Import the Auth Context to your component and use the functions we created earlier",
     codeSnippet: [
       {
         code: `import { useAuth } from "../contexts/AuthContext";`,
@@ -531,7 +536,7 @@ export const LoginPageDataSamplers = [
     title: "Done",
     subtitle:
       "You got it! Your application is already authenticating the users!",
-    subtitle2: "The next step is to login!",
+    subtitle2: "The next step is the mint page!",
     codeSnippet: [
       {
         professorText: {

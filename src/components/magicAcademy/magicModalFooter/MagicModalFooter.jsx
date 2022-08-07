@@ -2,11 +2,7 @@ import styled from "styled-components";
 import TimeLine from "../../timeLine/TimeLine";
 import { Button } from "@chakra-ui/react";
 
-const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar }) => {
-    const onComplete = () => {
-      //reload page
-      window.location.reload();
-    };
+const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar, onComplete }) => {
 
   return (
     <Wrapper>

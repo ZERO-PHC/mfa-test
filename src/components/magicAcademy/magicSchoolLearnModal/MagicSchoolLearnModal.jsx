@@ -21,6 +21,7 @@ import StepNoCodeView from "../stepNoCodeView/StepNoCodeView";
 import MagicModalFooter from "../magicModalFooter/MagicModalFooter";
 import ProfessorTextDialogBox from "../professorTextDialogBox/ProfessorTextDialogBox";
 import MagicSchoolFormWrapper from "../magicSchoolForm/MagicSchoolFormWrapper";
+import MagicAlertBadMagic from "../magicAlertBadMagic/MagicAlertBadMagic";
 
 const MagicSchoolLearnModal = ({
   isOpen,
@@ -33,10 +34,16 @@ const MagicSchoolLearnModal = ({
   const [n, setN] = useState(0);
   const [professorText, setProfessorText] = useState([]);
   const [structDrawerOpen, setStructDrawerOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertTxt, setAlertTxt] = useState("");
 
   const router = useRouter();
 
   const oneMoreStep = () => {
+    if(steps[n].alert){
+      setAlertOpen(true)
+      setAlertTxt(steps[n].alertText)
+    }
     setN(n + 1);
   };
   const oneLessStep = () => {
@@ -52,10 +59,8 @@ const MagicSchoolLearnModal = ({
   }, [n]);
 
   const onComplete = () => {
-    localStorage.setItem(name, JSON.stringify(steps));
     onClose();
     if (name.includes("Cadence")) {
-      // window.location.reload()
       router.push("/samplers");
     }
     if (name.includes("Login")) {
@@ -65,6 +70,7 @@ const MagicSchoolLearnModal = ({
 
   return (
     <Wrapper>
+      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen}/>
       <Fade in={isOpen}>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -113,6 +119,8 @@ const MagicSchoolLearnModal = ({
                 {
                 steps[n].form && (
                     <MagicSchoolFormWrapper
+                    structDrawerOpen={structDrawerOpen}
+                    setStructDrawerOpen={setStructDrawerOpen}
                     step={steps[n]}
                     />
                 )
@@ -124,8 +132,7 @@ const MagicSchoolLearnModal = ({
                 &&
                 <ProfessorTextDialogBox
                 professorText={professorText}
-                steps={steps}
-                n={n}
+                step={steps[n]}
                 />
                 }
               <MagicModalFooter
@@ -133,6 +140,7 @@ const MagicSchoolLearnModal = ({
                 steps={steps}
                 oneMoreStep={oneMoreStep}
                 oneLessStep={oneLessStep}
+                onComplete={onComplete}
                 professorAvatar={steps[0].professorAvatar}
                 />
             </ModalFooter>

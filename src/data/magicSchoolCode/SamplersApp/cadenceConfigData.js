@@ -1,4 +1,6 @@
+import React from "react";
 import { SamplersContract } from "./samplersContract";
+import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
 
 export const CadencePageData = [
   {
@@ -28,7 +30,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "Initialize a new flow.json file, learn more about flow init here: ",
+            "Initialize a new flow.json file, this will be our global configuration file, learn more about flow init here: ",
           link: [
             {
               text: "Flow Cli Initialize",
@@ -48,7 +50,7 @@ export const CadencePageData = [
     structureLink: "step2-cadence.png",
     codeSnippet: [
       {
-        code: "import NonFungibleToken from 0x4ba0ed5a326eef6b",
+        code: "import NonFungibleToken from 0x631e88ae7f1d7c20",
         match: false,
         percent: 0,
         professorText: {
@@ -57,7 +59,7 @@ export const CadencePageData = [
         },
       },
       {
-        code: "import MetadataViews from 0x4ba0ed5a326eef6b",
+        code: "import MetadataViews from 0x631e88ae7f1d7c20",
         match: false,
         percent: 0,
         professorText: {
@@ -1000,12 +1002,8 @@ export const CadencePageData = [
     subtitle:
       "Let's create an account that we will use to deploy the Smart Contract",
     subtitle2:
-      "Through the flow cli in your terminal we will generate two keys:",
-    subtitle3: "One Private Key and one Public Key",
-    content:
-      "if you do not know what are these keys you can learn about <a>here</a>",
-    path: "In your terminal digit the command bellow:",
-    footer: "Save the keys for a moment, we will need them in the next steps.",
+      "Through the flow CLI in your terminal we will generate two keys - Public Key and Private Key",
+    subtitle3: "Save the keys for a moment, we will need them in the next steps.",
     structureLink: "step3-cadence.png",
     codeSnippet: [
       {
@@ -1038,7 +1036,7 @@ export const CadencePageData = [
     codeSnippet: [
       {
         professorText: {
-          title: "Hey, this is the website link:",
+          title: "Apprentice, here is the link to the Flow Faucet! There is the perfect place to create accounts and replenish them with Flow token on the testnet:",
           link: [
             {
               text: "Flow Faucet Testnet",
@@ -1052,23 +1050,28 @@ export const CadencePageData = [
   },
   {
     title: "Step 5",
-    subtitle: "Get back to your IDE and open the file flow.json",
+    subtitle: "Get the address generated in the faucet and the private key generated in your terminal",
     subtitle2:
-      "We need to add the account information to the flow CLI recognize and access our account to deploy the smart contract",
-    path: "Inside the json add the testnet-account information like bellow:",
+      "Paste the information here and I will generate your flow.json file for you to replace in your IDE",
     structureLink: "step2-cadence.png",
     formResult: ["", ""],
     form: [
       {
         text: `"address":`,
-        input: "PAST-YOUR-ADDRESS-HERE",
+        input: `"${deployerAddress}"`,
       },
       {
         text: `"privateKey": `,
-        input: "PAST-YOUR-PRIVATE-KEY-HERE",
+        input: `"${privateKey}"`,
       }
     ],
-    codeSnippet: [""],
+    codeSnippet: [
+      {
+        professorText: {
+          title: "Apprentice, I already added the Orbies path contract to your flow.json file, click the copy button and paste it into your IDE",
+        },
+      },
+    ],
     completed: true,
     allCode: `
     {
@@ -1094,13 +1097,13 @@ export const CadencePageData = [
           "key": "67428e633de0118d8c651d078909a71fa7151995d0c8d0c4aebac41b592ba5cc"
         },
         "testnet-account": {
-          "address": "PAST-YOUR-ADDRESS-HERE",
+          "address": "${deployerAddress}",
           "key": {
             "type": "hex",
             "index": 0,
             "signatureAlgorithm": "ECDSA_P256k",
             "hashAlgorithm": "SHA3_256",
-            "privateKey": "PAST-YOUR-PRIVATE-KEY-HERE"
+            "privateKey": "${privateKey}"
           }
         }
     
@@ -1115,85 +1118,13 @@ export const CadencePageData = [
     }
         `,
     alert: true,
+    alertText: "Apprentice, this was a test and if you filled in your Private Key in the previous step you failed! Lucky for you I'm not a malefactor and we're on Testnet! Never ever share your Private Key with anyone again! It is your master key that holds all your tokens and NFTs"
   },
   {
     title: "Step 6",
-    subtitle: "Now we need to add in our flow.json the contract path",
-    path: "Add the path to the contracts json object inside flow.json, just like bellow:",
-    structureLink: "step2-cadence.png",
-    codeSnippet: [
-      {
-        code: `"contracts": { "Samplers": "./samplersContract/Samplers.cdc" }`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "Declare the contract path in your flow.json file",
-        },
-      },
-    ],
-    completed: false,
-    allCode: `"contracts": { "Samplers": "./samplersContract/Samplers.cdc" }`,
-  },
-  {
-    title: "Step 7",
-    subtitle: "And let the flow CLI know that we want to deploy this contract",
-    path: "To do it, inside your deployments add the code bellow:",
-    structureLink: "step2-cadence.png",
-    codeSnippet: [
-      {
-        code: `"deployments": {`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "Declare the deployments in your flow.json file",
-        },
-      },
-      {
-        code: `"testnet": {`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "We will deploy on testnet, if you want to deploy on mainnet, just change the name of the network",
-        },
-      },
-      {
-        code: `"testnet-account": [ "Samplers" ]`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title:
-            "Declare the testnet-account that will deploy the contract and an array with the contracts names to deploy",
-        },
-      },
-      {
-        code: `}}`,
-        match: false,
-        percent: 0,
-        professorText: {
-          title: "Close the json file",
-        },
-      },
-    ],
-    completed: false,
-    allCode: `
-        "deployments": {
-			"testnet": {
-				"testnet-account": [
-					"Samplers"
-				]
-			}
-		}
-        `,
-  },
-  {
-    title: "Step 8",
-    subtitle: "There it go! You got it!",
+    subtitle: "Last step apprentice! I'm surprised at you!",
     subtitle2:
-      "Now we just need to run in our terminal the command to deploy the contract",
-    path: "To do it, inside your terminal run the command bellow:",
-    footer:
-      "Now we can go to our Samplers Application and learn how to make it!",
+      "Now you just need to run in your terminal the command to deploy the contract",
     codeSnippet: [
       {
         code: `flow project deploy --network=testnet`,
@@ -1201,7 +1132,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "Run the command to deploy the contract! You are almost there!",
+            "Run this command on your terminal to deploy the contract! You are almost there!",
         },
       },
     ],

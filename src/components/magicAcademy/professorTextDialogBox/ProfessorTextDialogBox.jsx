@@ -1,7 +1,7 @@
 import TeachBox from "../../../../public/teachBox.svg";
 import styled from "styled-components";
 
-const ProfessorTextDialogBox = ({steps, n, professorText}) => {
+const ProfessorTextDialogBox = ({step, professorText}) => {
     return (
         <Wrapper>
             <div className={"professorText"}>
@@ -12,13 +12,13 @@ const ProfessorTextDialogBox = ({steps, n, professorText}) => {
                       <ul>
                         {
                         (
-                          steps[n].codeSnippet[0].professorText 
+                          step.codeSnippet[0].professorText 
                           &&
-                          steps[n].codeSnippet[0].professorText.link != undefined
+                          step.codeSnippet[0].professorText.link != undefined
                           )
                         
                         &&
-                          steps[n].codeSnippet[0].professorText.link.map(
+                          step.codeSnippet[0].professorText.link.map(
                             (link, index) => {
                               return (
                                 <a

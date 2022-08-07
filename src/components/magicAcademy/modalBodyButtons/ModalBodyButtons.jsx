@@ -3,19 +3,21 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import styled from "styled-components";
 import CodeStructDrawer from "../codeStructDrawer/CodeStructDrawer";
 
-const ModalBodyButtons = ({ steps, n, structDrawerOpen, setStructDrawerOpen }) => {
+const ModalBodyButtons = ({ step, structDrawerOpen, setStructDrawerOpen, textToCopy }) => {
   return (
     <Wrapper>
       <div className={"footerCodeBox"}>
-        {steps[n].completed && (
+        {step.completed && (
           <div className={"footerCodeBoxDiv"}>
             <div className={"footerBtns"}>
-              <CopyToClipboard text={steps[n].allCode}>
+              {step.allCode && 
+              <CopyToClipboard text={textToCopy ? textToCopy : step.allCode}>
                 <button>
                   {" "}
                   Copy <Icon icon="ci:copy" height={"2em"} />{" "}
                 </button>
               </CopyToClipboard>
+              }
               <button onClick={() => setStructDrawerOpen(true)}>
                 Check Structure{" "}
                 <Icon icon="clarity:tree-view-line" height={"2em"} />
@@ -23,7 +25,7 @@ const ModalBodyButtons = ({ steps, n, structDrawerOpen, setStructDrawerOpen }) =
               <CodeStructDrawer
                 open={structDrawerOpen}
                 setOpen={setStructDrawerOpen}
-                step={steps[n]}
+                step={step}
               />
             </div>
           </div>

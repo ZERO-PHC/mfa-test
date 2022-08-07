@@ -19,7 +19,9 @@ const ProjectNavbar = ({
   projectDataMintPage,
   setProjectDataMintPage,
   stepsCadence,
-  setStepsCadence
+  setStepsCadence,
+  cadenceScriptsTransaction,
+  setCadenceScriptsTransaction
 }) => {
   const { logIn, logOut, user, flow } = useAuth();
   const router = useRouter();
@@ -48,9 +50,16 @@ const ProjectNavbar = ({
       {user?.addr ? (
         <section>
           <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to create the Orbies Scripts and Transactions"}
+            magicSchoolData={cadenceScriptsTransaction}
+            setMagicSchoolData={setCadenceScriptsTransaction}
+            name={`${projectName} Scripts-Transactions Page`}
+            professor={"/frlabsAvatar.png"}
+          />
+          <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to build the Mint Page"}
             magicSchoolData={projectDataMintPage}
             setMagicSchoolData={setProjectDataMintPage}
-            projectToCheck={`${projectName} Login Page`}
             name={`${projectName} Mint Page`}
             professor={"/zeroAvatar.png"}
           />

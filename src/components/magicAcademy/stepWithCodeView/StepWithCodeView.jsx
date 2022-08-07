@@ -11,14 +11,7 @@ const StepWithCodeView = ({ steps, n, setSteps, setProfessorText, name, structDr
           {steps[n].subtitle && <li>{steps[n].subtitle}</li>}
         </div>
         <div className={"learnbox"}>
-          {steps[n].subtitle2 ? (
-            <p>{steps[n].subtitle2}</p>
-          ) : (
-            <p>
-              Write down the code for the internalization of the lesson and then
-              you can copy it to your clipboard.
-            </p>
-          )}
+          {steps[n].subtitle2 && <p>{steps[n].subtitle2}</p>}
           <MagicSchoolInputWrapper
             step={n}
             steps={steps}
@@ -28,8 +21,7 @@ const StepWithCodeView = ({ steps, n, setSteps, setProfessorText, name, structDr
           />
         </div>
         <ModalBodyButtons
-        steps={steps}
-        n={n}
+        step={steps[n]}
         structDrawerOpen={structDrawerOpen}
         setStructDrawerOpen={setStructDrawerOpen}
         />

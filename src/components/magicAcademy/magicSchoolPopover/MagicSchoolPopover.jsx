@@ -96,8 +96,6 @@ margin: 0rem 1rem;
         height: 1rem;
         width: 1rem;    
     }
-
-   
 `
 
 

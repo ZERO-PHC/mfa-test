@@ -25,7 +25,7 @@ export default function AuthProvider({ children }) {
     fcl.currentUser.subscribe(setUser)
     console.log(user.addr)
     if(user.addr != "") getFlow(user.addr)
-  }, []);
+  }, [user.addr]);
 
 
   const logOut = async () => {

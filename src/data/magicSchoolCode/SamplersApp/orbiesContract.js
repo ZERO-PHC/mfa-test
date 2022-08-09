@@ -1,12 +1,13 @@
-export const SamplersContract = `
+export const OrbiesContract = `
 
 // This is an example implementation of a Flow Non-Fungible Token
 // It is not part of the official standard but it assumed to be
 // very similar to how many NFTs would implement the core functionality.
-import NonFungibleToken from 0x4ba0ed5a326eef6b
-import MetadataViews from 0x4ba0ed5a326eef6b
+import NonFungibleToken from 0x631e88ae7f1d7c20
+import MetadataViews from 0x631e88ae7f1d7c20
 
-pub contract Samplers: NonFungibleToken {
+
+pub contract Orbies: NonFungibleToken {
 
     pub var totalSupply: UInt64
 
@@ -48,7 +49,7 @@ pub contract Samplers: NonFungibleToken {
             self.thumbnail = thumbnail
             self.type = type
 
-            Samplers.totalSupply = Samplers.totalSupply + 1
+            Orbies.totalSupply = Orbies.totalSupply + 1
         }
     
         pub fun getViews(): [Type] {
@@ -96,7 +97,7 @@ pub contract Samplers: NonFungibleToken {
         // deposit takes a NFT and adds it to the collections dictionary
         // and adds the ID to the id array
         pub fun deposit(token: @NonFungibleToken.NFT) {
-            let token <- token as! @Samplers.NFT
+            let token <- token as! @Orbies.NFT
 
             let id: UInt64 = token.uuid
 
@@ -117,8 +118,8 @@ pub contract Samplers: NonFungibleToken {
 
         pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
             let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-            let samplers = nft as! &Samplers.NFT
-            return samplers as &AnyResource{MetadataViews.Resolver}
+            let orbies = nft as! &Orbies.NFT
+            return orbies as &AnyResource{MetadataViews.Resolver}
         }
 
         destroy() {
@@ -133,7 +134,7 @@ pub contract Samplers: NonFungibleToken {
 
     pub resource NFTMinter {
         pub fun mintNFT(
-                recipient: &Samplers.Collection{NonFungibleToken.CollectionPublic},
+                recipient: &Orbies.Collection{NonFungibleToken.CollectionPublic},
                 name: String, description: String, thumbnail: String, type: String) {
 
                 var newNFT <- create NFT( name: name, description: description, thumbnail: thumbnail, type: type )
@@ -141,7 +142,6 @@ pub contract Samplers: NonFungibleToken {
                 // deposit it in the recipient's account using their reference
                 recipient.deposit(token: <-newNFT)
             }
-		
 	}
 
     init() {
@@ -149,8 +149,8 @@ pub contract Samplers: NonFungibleToken {
         self.totalSupply = 0
 
         // Set the named paths
-        self.CollectionStoragePath = /storage/SamplersCollection
-        self.CollectionPublicPath = /public/SamplersCollection
+        self.CollectionStoragePath = /storage/OrbiesCollection
+        self.CollectionPublicPath = /public/OrbiesCollection
         self.MinterStoragePath = /storage/myGalleryCollectionMinter
 
         let minter <- create NFTMinter()

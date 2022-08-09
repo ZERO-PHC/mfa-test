@@ -3,7 +3,10 @@ import * as fcl from "@onflow/fcl";
 
 // ----------- SCRIPTS  -----------
 import { getSamplersScript } from "../../../flow/cadence/Samplers/scripts/get_samplers";
-import { PAID_MINT_SAMPLER } from "../../../flow/cadence/Samplers/transactions/paid_mint_sampler";
+import { getSamplersTransaction } from "../../../flow/cadence/Samplers/transactions/paid_mint_sampler";
+
+import serverAuthorization from "../../../util/Authorization";
+
 
 export const SamplersNftsContext = React.createContext("");
 export const useSamplersNFTs = () => useContext(SamplersNftsContext);
@@ -40,13 +43,16 @@ export const SamplersNftsProvider = ({ children }) => {
 
     try {
       const txid = await fcl.mutate({
-        cadence: PAID_MINT_SAMPLER,
+        cadence: getSamplersTransaction,
         args: (arg, t) => [
           arg(name, t.String),
           arg(description, t.String),
           arg(thumbnail, t.String),
           arg(type, t.String),
         ],
+        proposer: fcl.currentUser,
+        payer: fcl.currentUser,
+        authorizations: [fcl.currentUser, serverAuthorization],
         limit: 999,
       });
 

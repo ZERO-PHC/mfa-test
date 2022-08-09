@@ -23,9 +23,7 @@ const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen}) =
       }
     },
     "contracts": {
-      "contracts": { 
-        "Samplers": "./samplersContract/Samplers.cdc" 
-      }
+        "Orbies": "./Orbies.cdc" 
     },
     "networks": {
       "emulator": "127.0.0.1:3569",
@@ -42,7 +40,7 @@ const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen}) =
         "key": {
           "type": "hex",
           "index": 0,
-          "signatureAlgorithm": "ECDSA_P256k",
+          "signatureAlgorithm": "ECDSA_P256",
           "hashAlgorithm": "SHA3_256",
           "privateKey": "${privateKey}"
         }
@@ -52,7 +50,7 @@ const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen}) =
     "deployments": {
       "testnet": {
         "testnet-account": [
-          "Samplers"
+          "Orbies"
         ]
       }
     }

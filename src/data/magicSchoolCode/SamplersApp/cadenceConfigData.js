@@ -1,5 +1,5 @@
 import React from "react";
-import { SamplersContract } from "./samplersContract";
+import { OrbiesContract } from "./orbiesContract";
 import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
 
 export const CadencePageData = [
@@ -18,8 +18,8 @@ export const CadencePageData = [
   {
     title: "Step 1",
     subtitle:
-      "Create a new folder inside your preference path named /samplersContract",
-    subtitle2: "In your terminal use the follow command inside the path /samplersContract",
+      "Create a new folder inside your preference path named /orbiesContract",
+    subtitle2: "In your terminal use the follow command inside the path /orbiesContract",
     footer:
       "This command will create a flow.json file inside your folder! Copy the command and run it in your terminal!",
     structureLink: "step1-cadence.png",
@@ -45,8 +45,8 @@ export const CadencePageData = [
   },
   {
     title: "Step 2",
-    subtitle: "Inside of your folder /samplersContract create a new file named Samplers.cdc",
-    subtitle2: "You don't need to do anything here, just copy the code and paste it in your Samplers.cdc file, but if you want learn what it's going on, let's go!",
+    subtitle: "Inside of your folder /orbiesContract create a new file named Orbies.cdc",
+    subtitle2: "You don't need to do anything here, just copy the code and paste it in your Orbies.cdc file, but if you want learn what it's going on, let's go!",
     structureLink: "step2-cadence.png",
     codeSnippet: [
       {
@@ -55,7 +55,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "So you want to understand more about the Sampelrs Contract? Let's go! Import the testnet NonFungibleToken Standard contract",
+            "So you want to understand more about the Orbies Contract? Let's go! Import the testnet NonFungibleToken Standard contract",
         },
       },
       {
@@ -68,12 +68,12 @@ export const CadencePageData = [
         },
       },
       {
-        code: "pub contract Samplers: NonFungibleToken {",
+        code: "pub contract Orbies: NonFungibleToken {",
         match: false,
         percent: 0,
         professorText: {
           title:
-            "Initialize the Samplers contract, he will implement the NonFungibleToken standard interface contract!",
+            "Initialize the Orbies contract, he will implement the NonFungibleToken standard interface contract!",
         },
       },
       {
@@ -82,7 +82,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "We will start with the totalSupply variable, this variable will keep track of the total number of NFTs minted from the Samplers contract",
+            "We will start with the totalSupply variable, this variable will keep track of the total number of NFTs minted from the Orbies contract",
         },
       },
       {
@@ -118,7 +118,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "We will declare a new variable called CollectionStoragePath, this variable will be used to store the path of the collection of the Samplers contract",
+            "We will declare a new variable called CollectionStoragePath, this variable will be used to store the path of the collection of the Orbies contract",
         },
       },
       {
@@ -127,7 +127,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "And the same for the CollectionPublicPath variable, this variable will be used to store the public path of the collection of the Samplers contract",
+            "And the same for the CollectionPublicPath variable, this variable will be used to store the public path of the collection of the Orbies contract",
         },
       },
       {
@@ -257,7 +257,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "Declare a new resource called NFT, in Flow Blockchain NFTs and Tokens are resources, to Samplers NFT will implement the NonFungibleToken.INFT interface and the MetadataViews.Resolver interface, learn more about resources here:",
+            "Declare a new resource called NFT, in Flow Blockchain NFTs and Tokens are resources, to Orbies NFT will implement the NonFungibleToken.INFT interface and the MetadataViews.Resolver interface, learn more about resources here:",
           link: [
             {
               text: "Resources",
@@ -356,12 +356,12 @@ export const CadencePageData = [
         },
       },
       {
-        code: "Samplers.totalSupply = Samplers.totalSupply + 1",
+        code: "Orbies.totalSupply = Orbies.totalSupply + 1",
         match: false,
         percent: 0,
         professorText: {
           title:
-            "Update the totalSupply variable of the Samplers contract",
+            "Update the totalSupply variable of the Orbies contract",
         },
       },
       {
@@ -559,7 +559,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "Close the NFT resource! You made it! Now we can create NFTs resources from our Samplers Contract!",
+            "Close the NFT resource! You made it! Now we can create NFTs resources from our Orbies Contract!",
         },
       },
       {
@@ -577,7 +577,7 @@ export const CadencePageData = [
         percent: 0,
         professorText: {
           title:
-            "Declare the ownedNFTs dictionary variable of the Collection resource, the Samplers NFTs will be stored here! Learn more about dictionaries here: ",
+            "Declare the ownedNFTs dictionary variable of the Collection resource, the Orbies NFTs will be stored here! Learn more about dictionaries here: ",
           link: [{
             title: "Dictionaries",
             href: "https://docs.onflow.org/cadence/language/values-and-types/#dictionaries"
@@ -648,12 +648,12 @@ export const CadencePageData = [
         },
       },
       {
-        code: "let token <- token as! @Samplers.NFT",
+        code: "let token <- token as! @Orbies.NFT",
         match: false,
         percent: 0,
         professorText: {
           title:
-            "Declare the token variable of the deposit function, cast the argument that we got to @Samplers.NFT, if the type does not match our program will panic(stop and close the execution)!",
+            "Declare the token variable of the deposit function, cast the argument that we got to @Orbies.NFT, if the type does not match our program will panic(stop and close the execution)!",
         },
       },
       {
@@ -751,21 +751,21 @@ export const CadencePageData = [
         },
       },
       {
-        code: "let samplers = nft as! &Samplers.NFT",
+        code: "let orbies = nft as! &Orbies.NFT",
         match: false,
         percent: 0,
         professorText: {
           title:
-            "Declare the samplers variable of the borrowViewResolver function, cast the argument that we got to &Samplers.NFT, if the type does not match our program will panic(stop and close the execution)!",
+            "Declare the orbies variable of the borrowViewResolver function, cast the argument that we got to &Orbies.NFT, if the type does not match our program will panic(stop and close the execution)!",
         },
       },
       {
-        code: "return samplers as &AnyResource{MetadataViews.Resolver}",
+        code: "return orbies as &AnyResource{MetadataViews.Resolver}",
         match: false,
         percent: 0,
         professorText: {
           title:
-            "Return the samplers variable of the borrowViewResolver function, this variable will contain the ViewResolver resource that we want to borrow!",
+            "Return the orbies variable of the borrowViewResolver function, this variable will contain the ViewResolver resource that we want to borrow!",
         },
       },
       {
@@ -859,7 +859,7 @@ export const CadencePageData = [
         },
       },
       {
-        code: "recipient: &Samplers.Collection{NonFungibleToken.CollectionPublic},",
+        code: "recipient: &Orbies.Collection{NonFungibleToken.CollectionPublic},",
         match: false,
         percent: 0,
         professorText: {
@@ -922,7 +922,7 @@ export const CadencePageData = [
         },
       },
       {
-        code: "self.CollectionStoragePath = /storage/SamplersCollection",
+        code: "self.CollectionStoragePath = /storage/OrbiesCollection",
         match: false,
         percent: 0,
         professorText: {
@@ -931,7 +931,7 @@ export const CadencePageData = [
         },
       },
       {
-        code: "self.CollectionPublicPath = /public/SamplersCollection",
+        code: "self.CollectionPublicPath = /public/OrbiesCollection",
         match: false,
         percent: 0,
         professorText: {
@@ -995,7 +995,7 @@ export const CadencePageData = [
       }
     ],
     completed: true,
-    allCode: `${SamplersContract}`,
+    allCode: `${OrbiesContract}`,
   },
   {
     title: "Step 3",
@@ -1074,48 +1074,6 @@ export const CadencePageData = [
     ],
     completed: true,
     allCode: `
-    {
-      "emulators": {
-        "default": {
-          "port": 3569,
-          "serviceAccount": "emulator-account"
-        }
-      },
-      "contracts": {
-        "contracts": { 
-          "Samplers": "./samplersContract/Samplers.cdc" 
-        }
-      },
-      "networks": {
-        "emulator": "127.0.0.1:3569",
-        "mainnet": "access.mainnet.nodes.onflow.org:9000",
-        "testnet": "access.devnet.nodes.onflow.org:9000"
-      },
-      "accounts": {
-        "emulator-account": {
-          "address": "f8d6e0586b0a20c7",
-          "key": "67428e633de0118d8c651d078909a71fa7151995d0c8d0c4aebac41b592ba5cc"
-        },
-        "testnet-account": {
-          "address": "${deployerAddress}",
-          "key": {
-            "type": "hex",
-            "index": 0,
-            "signatureAlgorithm": "ECDSA_P256k",
-            "hashAlgorithm": "SHA3_256",
-            "privateKey": "${privateKey}"
-          }
-        }
-    
-      },
-      "deployments": {
-        "testnet": {
-          "testnet-account": [
-            "Samplers"
-          ]
-        }
-      }
-    }
         `,
     alert: true,
     alertText: "Apprentice, this was a test and if you filled in your Private Key in the previous step you failed! Lucky for you I'm not a malefactor and we're on Testnet! Never ever share your Private Key with anyone again! It is your master key that holds all your tokens and NFTs"
@@ -1154,6 +1112,6 @@ export const CadencePageData = [
     ],
     completed: true,
     lastStep: true,
-    path: "/samplers",
+    path: "/orbies",
   },
 ];

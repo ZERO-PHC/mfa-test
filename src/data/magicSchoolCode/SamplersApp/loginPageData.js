@@ -16,8 +16,8 @@ export const LoginPageDataSamplers = [
   },
   {
     title: "Step 1",
-    subtitle: "We love React and NextJS, let's use it! Create a next js app",
-    subtitle2: "Install the Flow FCL and Types dependencies",
+    subtitle: "We love React and NextJS, let's use it!",
+    subtitle2: "Create a next js app",
     codeSnippet: [
       {
         code: "npm create next-app",
@@ -27,23 +27,33 @@ export const LoginPageDataSamplers = [
           title: "Create a new next js app",
         },
       },
+    ],
+    completed: false,
+    allCode: `
+            npm create next-app 
+        `,
+  },
+  {
+    title: "Step 2",
+    subtitle: "Inside your app file let's install the flow dependencies",
+    subtitle2: "Use the command bellow on your terminal",
+    codeSnippet: [
       {
         code: "npm i @onflow/fcl @onflow/types",
         match: false,
         percent: 0,
         professorText: {
-          title: "Install the flow fcl and types dependencies",
+          title: "Let's go! Install the flow dependencies on your project!",
         },
-      },
+      }
     ],
     completed: false,
     allCode: `
-            npm create next-app
             npm i @onflow/fcl @onflow/types 
         `,
   },
   {
-    title: "Step 2",
+    title: "Step 3",
     subtitle: "Add the styles inside /styles/globals.css",
     subtitle2: "You can remove all the code inside globals.css and paste the code below",
     codeSnippet: [
@@ -64,7 +74,7 @@ export const LoginPageDataSamplers = [
     allCode: `${CssCode.Globals}`,
   },
   {
-    title: "Step 3",
+    title: "Step 4",
     subtitle: "Create a new Folder /flow inside root NextJS app!",
     subtitle2: "Inside /flow create a new file named config.js! Write the code below to be able to copy it!",
     codeSnippet: [
@@ -143,7 +153,7 @@ export const LoginPageDataSamplers = [
         `,
   },
   {
-    title: "Step 4",
+    title: "Step 5",
     subtitle: "We will use contexts from React to interact with the blockchain through FCL",
     subtitle2: " Create a new folder named contexts and Inside of /contexts create a file named AuthContext.js",
     codeSnippet: [
@@ -345,7 +355,7 @@ export const LoginPageDataSamplers = [
         `,
   },
   {
-    title: "Step 5",
+    title: "Step 6",
     subtitle: "Inside pages/_app.js add the AuthProvider",
     subtitle2: "Fill in the code below, copy and paste it into your /_app.js",
     codeSnippet: [
@@ -410,22 +420,22 @@ export const LoginPageDataSamplers = [
     ],
     completed: false,
     allCode: `
-        import "../../styles/globals.css";
-        import AuthProvider from "../contexts/AuthContext"
-        
-        function MyApp({ Component, pageProps }) {
-            return (
-            <AuthProvider>
-                <Component {...pageProps} />
-            </AuthProvider>
-            )
-        }
-        
-        export default MyApp;
+  import "../../styles/globals.css";
+  import AuthProvider from "../contexts/AuthContext"
+  
+  function MyApp({ Component, pageProps }) {
+      return (
+      <AuthProvider>
+          <Component {...pageProps} />
+      </AuthProvider>
+      )
+  }
+  
+  export default MyApp;   
         `,
   },
   {
-    title: "Step 6",
+    title: "Step 7",
     subtitle:
       "Open the component where you will add the buttons to login and logout",
     subtitle2:
@@ -515,21 +525,21 @@ export const LoginPageDataSamplers = [
     ],
     completed: false,
     allCode: `
-        import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
-        const Component = () => {
-            const { logIn, logOut, user } = useAuth();
+const Component = () => {
+    const { logIn, logOut, user } = useAuth();
 
-            return (
-                <>
-                    <button onClick={logIn}>Login</button>
-                    <button onClick={logOut}>Logout</button>
-                    <p>User Address - {user.addr}</p>
-                </>
-            )
-        }
+    return (
+        <>
+            <button onClick={logIn}>Login</button>
+            <button onClick={logOut}>Logout</button>
+            <p>User Address - {user.addr}</p>
+        </>
+    )
+}
 
-        export default Component;
+export default Component;
         `,
   },
   {

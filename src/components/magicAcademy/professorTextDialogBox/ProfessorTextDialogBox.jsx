@@ -60,7 +60,7 @@ width: 100%;
 .professorText > p{
     color: #00FFB2;
     width: 100%;
-    padding: 0 30px;
+    padding: 0 50px;
     height: 100px;
     display: flex;
     flex-direction: column;

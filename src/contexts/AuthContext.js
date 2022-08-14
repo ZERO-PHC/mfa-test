@@ -23,7 +23,6 @@ export default function AuthProvider({ children }) {
 
   useEffect(() => {
     fcl.currentUser.subscribe(setUser)
-    console.log(user.addr)
     if(user.addr != "") getFlow(user.addr)
   }, [user.addr]);
 
@@ -52,18 +51,14 @@ export default function AuthProvider({ children }) {
         pub fun main(address: Address): UFix64{
           let balanceVault =  getAccount(address).getCapability(/public/flowTokenBalance).borrow<&FlowToken.Vault{FungibleToken.Balance}>()!
           return balanceVault.balance
-        }
-        `,
+        }`,
         args: (arg, t) => [arg(address, t.Address)],
       });
-
-      console.log("Flow Token", res);
       setFlow(res)
     } catch (error) {
       console.log("err:", error);
     }
   }
-
 
   const value = {
     logOut,
@@ -72,8 +67,6 @@ export default function AuthProvider({ children }) {
     user,
     flow
   };
-
-  // console.log("AuthProvider", value);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

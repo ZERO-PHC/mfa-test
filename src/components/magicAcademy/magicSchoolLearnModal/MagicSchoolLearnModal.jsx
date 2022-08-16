@@ -61,7 +61,7 @@ const MagicSchoolLearnModal = ({
   const onComplete = () => {
     onClose();
     if (name.includes("Cadence")) {
-      router.push("/samplers");
+      router.push("/orbies");
     }
     if (name.includes("Login")) {
       logIn();

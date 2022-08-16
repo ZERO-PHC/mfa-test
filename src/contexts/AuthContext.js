@@ -65,7 +65,8 @@ export default function AuthProvider({ children }) {
     logIn,
     signUp,
     user,
-    flow
+    flow,
+    getFlow
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

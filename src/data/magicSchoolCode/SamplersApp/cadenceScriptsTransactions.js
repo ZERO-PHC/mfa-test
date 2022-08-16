@@ -20,6 +20,7 @@ export const CadenceScriptsTransactions = [
     title: "Step 1",
     subtitle: "Create a folder named cadence inside flow folder",
     subtitle2: "Inside your cadence folder create a file named getOrbiesScript.js",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/transactions/orbies-transactions-step1.png",
     codeSnippet: [
       {
         code: `export const getOrbiesScript = \``,
@@ -126,8 +127,8 @@ export const CadenceScriptsTransactions = [
       
     ],
     completed: false,
-    allCode: `
-export const getOrbiesScript = \`
+    allCode: 
+`export const getOrbiesScript = \`
 
 import Orbies from 0xDeployer
 import MetadataViews from 0x631e88ae7f1d7c20
@@ -151,14 +152,13 @@ pub fun main(address: Address): [Orbies.NFTMetaData] {
   }
     
   return answer
-}
-    \`
-    `,
+}\``,
   },
   {
     title: "Step 2",
     subtitle: "Let's create the transaction file to mint the Orbies NFTs",
     subtitle2: "Inside your cadence folder create a file named mintOrbieTransaction.js",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/transactions/orbies-transactions-step2.png",
     codeSnippet: [
       {
         code: `export const mintOrbieTransaction = \``,
@@ -437,8 +437,8 @@ pub fun main(address: Address): [Orbies.NFTMetaData] {
       },
     ],
     completed: false,
-    allCode: `
-export const getOrbiesTransaction = \`
+    allCode: 
+`export const getOrbiesTransaction = \`
 
 import Orbies from 0xDeployer
 import NonFungibleToken from 0x631e88ae7f1d7c20

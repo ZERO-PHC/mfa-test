@@ -1,4 +1,4 @@
-export const getSamplersTransaction = `
+export const getOrbiesTransaction = `
 
 import Orbies from 0xDeployer
 import NonFungibleToken from 0x631e88ae7f1d7c20
@@ -50,4 +50,4 @@ transaction( name: String, description: String, thumbnail: String, type: String)
     self.adminMinter.mintNFT(recipient: self.recipientCollection, name: name, description: description, thumbnail: thumbnail, type: type)
   }
 }
-`;
+`

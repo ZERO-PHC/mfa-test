@@ -1,5 +1,4 @@
 import { CssCode } from "./cssCode";
-import {deployerAddress} from "../../../contexts/MagicSchoolStepsContext"
 
 export const LoginPageDataSamplers = [
   {
@@ -16,8 +15,9 @@ export const LoginPageDataSamplers = [
   },
   {
     title: "Step 1",
-    subtitle: "We love React and NextJS, let's use it!",
-    subtitle2: "Create a next js app",
+    subtitle: "We love React and NextJS, let's use it! Create a new directory and call it /orbies-dapp",
+    subtitle2: "Inside your orbies-dapp directory let's create a next js app",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step1.png",
     codeSnippet: [
       {
         code: "npm create next-app",
@@ -29,14 +29,13 @@ export const LoginPageDataSamplers = [
       },
     ],
     completed: false,
-    allCode: `
-            npm create next-app 
-        `,
+    allCode: `npm create next-app`,
   },
   {
     title: "Step 2",
     subtitle: "Inside your app file let's install the flow dependencies",
     subtitle2: "Use the command bellow on your terminal",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step1.png",
     codeSnippet: [
       {
         code: "npm i @onflow/fcl @onflow/types",
@@ -48,14 +47,13 @@ export const LoginPageDataSamplers = [
       }
     ],
     completed: false,
-    allCode: `
-            npm i @onflow/fcl @onflow/types 
-        `,
+    allCode: `npm i @onflow/fcl @onflow/types`,
   },
   {
     title: "Step 3",
     subtitle: "Add the styles inside /styles/globals.css",
     subtitle2: "You can remove all the code inside globals.css and paste the code below",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step3.png",
     codeSnippet: [
       {
         professorText: {
@@ -77,6 +75,7 @@ export const LoginPageDataSamplers = [
     title: "Step 4",
     subtitle: "Create a new Folder /flow inside root NextJS app!",
     subtitle2: "Inside /flow create a new file named config.js! Write the code below to be able to copy it!",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step4.png",
     codeSnippet: [
       {
         code: `const fcl = require("@onflow/fcl");`,
@@ -139,22 +138,22 @@ export const LoginPageDataSamplers = [
       },
     ],
     completed: false,
-    allCode: `
-        const fcl = require("@onflow/fcl");
+    allCode: 
+`const fcl = require("@onflow/fcl");
 
-        fcl.config({
-            "app.detail.title": "App name",
-            "app.detail.icon": "imagelink",
-            "accessNode.api": "https://rest-testnet.onflow.org",
-            "discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn",
-            "0xDeployer": "YOUR-DEPLOYER-ADDRESS"",
-            })
-        `,
+fcl.config({
+"app.detail.title": "Orbies App From MFA",
+"app.detail.icon": "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/mfaBlack1.png",
+"accessNode.api": "https://rest-testnet.onflow.org",
+"discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn",
+"0xDeployer": "YOUR-DEPLOYER-ADDRESS",
+})`,
   },
   {
     title: "Step 5",
     subtitle: "We will use contexts from React to interact with the blockchain through FCL",
     subtitle2: " Create a new folder named contexts and Inside of /contexts create a file named AuthContext.js",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step5.png",
     codeSnippet: [
       {
         code: `import * as fcl from "@onflow/fcl";`,
@@ -446,8 +445,8 @@ export const LoginPageDataSamplers = [
       },
     ],
     completed: false,
-    allCode: `
-import * as fcl from "@onflow/fcl";
+    allCode: 
+`import * as fcl from "@onflow/fcl";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import "../flow/config";
@@ -506,13 +505,13 @@ export default function AuthProvider({ children }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}    
-`,
+}`,
   },
   {
     title: "Step 6",
     subtitle: "Inside pages/_app.js add the AuthProvider",
     subtitle2: "Fill in the code below, copy and paste it into your /_app.js",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step6.png",
     codeSnippet: [
       {
         code: `import "../styles/globals.css";`,
@@ -595,6 +594,7 @@ export default MyApp;
       "Create a new folder named components and inside it create a new file called Navbar.jsx",
     subtitle2:
       "Let's create the Navbar Comp! Import the Auth Context to your component and use the functions we created earlier",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step7.png",
     codeSnippet: [
       {
         code: `import { useAuth } from "../contexts/AuthContext";`,
@@ -678,7 +678,7 @@ export default MyApp;
         professorText: { title: "Initialize a div to logged user case" },
       },
       {
-        code: `{flow.slice(0,6)} FLOW | {\`0x...\${user.addr.slice(14)}\`}`,
+        code: `{flow && flow.slice(0,6)} FLOW | {\`0x...\${user.addr.slice(14)}\`}`,
         match: false,
         percent: 0,
         professorText: { title: "Let's show the user Address inside the navbar!" },
@@ -759,7 +759,7 @@ const Navbar = () => {
       </div>
       {user.addr ? (
         <div className="logged">
-          <span>{flow.slice(0,6)} FLOW | {\`0x...\${user.addr.slice(14)}\`}</span>
+          <span>{flow && flow.slice(0,6)} FLOW | {\`0x...\${user.addr.slice(14)}\`}</span>
           <button onClick={logOut}>Logout</button>
         </div>
       ) : (
@@ -780,6 +780,7 @@ export default Navbar;
       "Create a new file named OrbiesSection.jsx",
     subtitle2:
       "Inside this component we will mint and show the orbies!",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step8.png",
     codeSnippet: [
       {
         code: `import { useEffect, useState } from "react";`,
@@ -1032,65 +1033,90 @@ export default Navbar;
       },
     ],
     completed: false,
-    allCode: `
-import { useEffect, useState } from "react";
+    allCode: 
+`import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 const selectedOrbies = {
-    common: false,
-    legendary: false,
-    rare: false
-}
+  common: false,
+  legendary: false,
+  rare: false,
+};
 
 const OrbiesSection = () => {
-    const { logIn, user } = useAuth();
-    const [selected, setSelected] = useState(selectedOrbies);
+  const { logIn, user } = useAuth();
+  const [selected, setSelected] = useState(selectedOrbies);
 
-    useEffect(() => {
-        handleSelect('common')
-    }, [])
+  useEffect(() => {
+    handleSelect("common");
+  }, []);
 
-    const handleSelect = (type) => {
-        setSelected({ ...selectedOrbies, [type]: !selected.type })
-    }
+  const handleSelect = (type) => {
+    setSelected({ ...selectedOrbies, [type]: !selected.type });
+  };
 
-
-    return (
-        <div className="orbiesSection">
-            <div className="orbiesTab">
-                <div className={ selected.common ? "commonTab" : "inactive"} onClick={() => handleSelect("common")}/>
-                <div className={ selected.legendary ? "legendaryTab" : "inactive"} onClick={() => handleSelect("legendary")} />
-                <div className={ selected.rare ? "rareTab" : "inactive"} onClick={() => handleSelect("rare")} />
+  return (
+    <div className="orbiesSection">
+      <div className="orbiesTab">
+        <div
+          className={selected.common ? "commonTab" : "inactive"}
+          onClick={() => handleSelect("common")}
+        />
+        <div
+          className={selected.legendary ? "legendaryTab" : "inactive"}
+          onClick={() => handleSelect("legendary")}
+        />
+        <div
+          className={selected.rare ? "rareTab" : "inactive"}
+          onClick={() => handleSelect("rare")}
+        />
+      </div>
+      <div className="orbiesContent">
+        {!user.addr ? (
+          <div className="orbiesText">
+            <h2>Welcome</h2>
+            <p>Sign up to get your Orbie NFT</p>
+            <button onClick={logIn} className="signUpBtn">
+              SIGN UP
+            </button>
           </div>
-            <div className="orbiesContent">
-                {!user.addr ? (
-                <div className="orbiesText"> 
-                    <h2>Welcome</h2>
-                    <p>Sign up to get your Orbie NFT</p>
-                    <button onClick={logIn} className="signUpBtn">SIGN UP</button>
-                </div>
-                ) : (
-                <div className="orbiesMintText"></div>
-                )}
-                <div className="orbieImg">
-                    {selected.common && <img src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieCommon.png" alt="" />}
-                    {selected.legendary && <img src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieLegendary.png" alt="" />}
-                    {selected.rare && <img src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieRare.png" alt="" />}
-                </div>
-            </div>
-            <div className="divider"></div>
-            <div className="orbies"></div>
+        ) : (
+          <div className="orbiesMintText"></div>
+        )}
+        <div className="orbieImg">
+          {selected.common && (
+            <img
+              src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieCommon.png"
+              alt=""
+            />
+          )}
+          {selected.legendary && (
+            <img
+              src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieLegendary.png"
+              alt=""
+            />
+          )}
+          {selected.rare && (
+            <img
+              src="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbieRare.png"
+              alt=""
+            />
+          )}
         </div>
-    )
-}
+      </div>
+      <div className="divider"></div>
+      <div className="orbies"></div>
+    </div>
+  );
+};
 
-export default OrbiesSection;
-        `,
+export default OrbiesSection;`,
   },
   {
     title: "Step 9",
     subtitle: "Go to your index.js file and clean it up!",
     subtitle2: "Let's initialize the Home component and import the code that we made on past steps!",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/loginPage/orbies-loginpage-step9.png",
     codeSnippet: [
       {
         code: `import Navbar from "../components/Navbar";`,
@@ -1167,8 +1193,8 @@ export default OrbiesSection;
       },
     ],
     completed: false,
-    allCode: `
-import Navbar from "../components/Navbar";
+    allCode: 
+`import Navbar from "../components/Navbar";
 import OrbiesSection from "../components/OrbiesSection";
 
 const Home = () => {
@@ -1180,8 +1206,7 @@ const Home = () => {
   );
 };
 
-export default Home;    
-        `,
+export default Home;`,
   },
   {
     title: "Done",

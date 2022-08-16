@@ -39,8 +39,8 @@ const ProjectNavbar = ({
         <Link href={projectUrl}>
           <Image
             className="logo"
-            width={50}
-            height={50}
+            width={70}
+            height={70}
             src={`/project/logos/${logoProjectLink}`}
             alt='Project Logo'
           />
@@ -122,6 +122,7 @@ const HeaderWrapper = styled.header`
   h2 {
     color: white;
     font-family: MonumentBold;
+    font-size: 2rem;
   }
 
   img {

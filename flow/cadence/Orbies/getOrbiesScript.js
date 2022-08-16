@@ -1,11 +1,11 @@
-export const getSamplersScript = `
+export const getOrbiesScript = `
 
 import Orbies from 0xDeployer
 import MetadataViews from 0x631e88ae7f1d7c20
 
 pub fun main(address: Address): [Orbies.NFTMetaData] {
   let collection = getAccount(address).getCapability(Orbies.CollectionPublicPath)
-                    .borrow<&Orbies.Collection{MetadataViews.ResolverCollection}>()
+                    .borrow<&{MetadataViews.ResolverCollection}>()
                     ?? panic("Could not borrow a reference to the nft collection")
 
   let ids = collection.getIDs()
@@ -24,3 +24,4 @@ pub fun main(address: Address): [Orbies.NFTMetaData] {
   return answer
 }
 `
+    

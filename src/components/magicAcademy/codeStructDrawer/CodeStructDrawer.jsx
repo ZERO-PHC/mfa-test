@@ -36,7 +36,7 @@ const CodeStructDrawer = ({open, setOpen, step}) => {
                     <div className={styles.structure}>
                         <p>Structure:</p>
                         <img 
-                        src={step.structureLink ? `/magicSchoolModal/structure/${step.structureLink}` : ""}
+                        src={step.structureLink ? step.structureLink : ""}
                         />
                     </div>
                 }

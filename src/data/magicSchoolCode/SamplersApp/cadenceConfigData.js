@@ -19,10 +19,8 @@ export const CadencePageData = [
     title: "Step 1",
     subtitle:
       "Create a new folder inside your preference path named /orbiesContract",
-    subtitle2: "In your terminal use the follow command inside the path /orbiesContract",
-    footer:
-      "This command will create a flow.json file inside your folder! Copy the command and run it in your terminal!",
-    structureLink: "step1-cadence.png",
+    subtitle2: "Open the file in your IDE and in your terminal use the follow command inside the path /orbiesContract",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/orbies-deploy-step1.png",
     codeSnippet: [
       {
         code: "flow init",
@@ -47,7 +45,7 @@ export const CadencePageData = [
     title: "Step 2",
     subtitle: "Inside of your folder /orbiesContract create a new file named Orbies.cdc",
     subtitle2: "You don't need to do anything here, just copy the code and paste it in your Orbies.cdc file, but if you want learn what it's going on, let's go!",
-    structureLink: "step2-cadence.png",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/orbies-deploy-step2.png",
     codeSnippet: [
       {
         code: "import NonFungibleToken from 0x631e88ae7f1d7c20",
@@ -1004,7 +1002,7 @@ export const CadencePageData = [
     subtitle2:
       "Through the flow CLI in your terminal we will generate two keys - Public Key and Private Key",
     subtitle3: "Save the keys for a moment, we will need them in the next steps.",
-    structureLink: "step3-cadence.png",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/step3-cadence.png",
     codeSnippet: [
       {
         code: `flow keys generate`,
@@ -1032,7 +1030,7 @@ export const CadencePageData = [
     subtitle2: "You can use the pattern Signature Algorithm and Hash Algorithm",
     subtitle3:
       "Click in create Account and copy the Address that will be generated",
-      structureLink: "step4-cadence.png",
+      structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/step4-cadence.png",
     codeSnippet: [
       {
         professorText: {
@@ -1053,7 +1051,7 @@ export const CadencePageData = [
     subtitle: "Get the address generated in the faucet and the private key generated in your terminal",
     subtitle2:
       "Paste the information here and I will generate your flow.json file for you to replace in your IDE",
-    structureLink: "step2-cadence.png",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/orbies-deploy-step2.png",
     formResult: ["", ""],
     form: [
       {
@@ -1083,6 +1081,7 @@ export const CadencePageData = [
     subtitle: "Last step apprentice! I'm surprised at you!",
     subtitle2:
       "Now you just need to run in your terminal the command to deploy the contract",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/deploy/orbies-deploy-step2.png",
     codeSnippet: [
       {
         code: `flow project deploy --network=testnet`,

@@ -21,6 +21,7 @@ export const MintPageDataSamplers = [
     title: "Step 1",
     subtitle: "Let's install some dependencies to be able to handle with authorizations",
     subtitle2: "Open your terminal inside your project path",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step1.png",
     codeSnippet: [
       {
         code: `npm i sha3 elliptic`,
@@ -36,6 +37,7 @@ export const MintPageDataSamplers = [
     title: "Step 2",
     subtitle: "We need a function to authorize our transaction to mint a new sampler.",
     subtitle2: "Create a new util folder and create the Authorization.js file inside of it",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step2.png",
     codeSnippet: [
       {
         code: `import * as fcl from "@onflow/fcl";`,
@@ -243,8 +245,8 @@ export const MintPageDataSamplers = [
       },
     ],
     completed: false,
-    allCode: `
-import * as fcl from "@onflow/fcl";
+    allCode: 
+`import * as fcl from "@onflow/fcl";
 const { SHA3 } = require("sha3");
 var EC = require('elliptic').ec;
 var ec = new EC('p256');
@@ -287,15 +289,15 @@ const serverAuthorization = async (account) => {
   }
 }
 
-export default serverAuthorization;
-        `,
+export default serverAuthorization;`,
   },
   {
     title: "Step 3",
     subtitle:
       "Let's create a new context!",
     subtitle2:
-      "Inside contexts folder create the NftContext.js file",
+      "Inside contexts folder create the NftsContext.js file",
+      structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step3.png",
     codeSnippet: [
       {
         code: `import React, { useState, useContext } from "react";`,
@@ -310,7 +312,7 @@ export default serverAuthorization;
         professorText: { title: "Import the fcl library!" },
       },
       {
-        code: `import { getOrbiesScript } from "../flow/cadence/getOrbiescript";`,
+        code: `import { getOrbiesScript } from "../flow/cadence/getOrbiesScript";`,
         match: false,
         percent: 0,
         professorText: { title: "Import the getOrbiesScript script!" },
@@ -630,7 +632,7 @@ export default serverAuthorization;
 import * as fcl from "@onflow/fcl";
 
 // ----------- SCRIPTS  -----------
-import { getOrbiesScript } from "../flow/cadence/getOrbiescript";
+import { getOrbiesScript } from "../flow/cadence/getOrbiesScript";
 import { getOrbiesTransaction } from "../flow/cadence/mintOrbieTransaction";
 import serverAuthorization from "../util/Authorization";
 
@@ -695,13 +697,13 @@ export default function NftsProvider({ children }){
     return (
     <NftsContext.Provider value={value}> {children} </NftsContext.Provider>
     );
-};      
-`,
+};`,
   },
   {
     title: "Step 4",
     subtitle: "Now we will import and use this new context in our _app.js file.",
     subtitle2: "Inside of /pages/_app.js import the new NftsContext",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step4.png",
     codeSnippet: [
       {
         code: `import "../styles/globals.css";`,
@@ -777,8 +779,8 @@ export default function NftsProvider({ children }){
       },
     ],
     completed: false,
-    allCode: `
-import "../styles/globals.css";
+    allCode: 
+`import "../styles/globals.css";
 import AuthProvider from "../contexts/AuthContext"
 import NftsProvider  from "../contexts/NftsContext"
 
@@ -792,13 +794,13 @@ return (
 )
 }
 
-export default MyApp;
-`,
+export default MyApp;`,
   },
   {
     title: "Step 5",
     subtitle: "Ok, let's create a new component to your app!",
     subtitle2: "Create the file MintOrbieType.jsx inside of /components",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step5.png",
     codeSnippet: [
       {
         code: `const MintOrbieType = ({type, description, price, isLoading, mintFn}) => {`,
@@ -823,12 +825,6 @@ export default MyApp;
         match: false,
         percent: 0,
         professorText: { title: "Create a h2 with the type prop!" },
-      },
-      {
-        code: ``,
-        match: false,
-        percent: 0,
-        professorText: { title: "" },
       },
       {
         code: `<p>{description}</p>`,
@@ -877,25 +873,25 @@ export default MyApp;
     allCode: 
 `const MintOrbieType = ({type, description, price, isLoading, mintFn}) => {
 
-return (
-  <div className="orbiesText">
-    <h2>{type}</h2>
-    <p>{description}</p>
-    <p>{price} FLOW</p>
-    {isLoading ? <p>Loading...</p> : ""}
-    <button onClick={mintFn}>BUY</button>
-  </div>
-);
+  return (
+    <div className="orbiesText">
+      <h2>{type}</h2>
+      <p>{description}</p>
+      <p>{price} FLOW</p>
+      {isLoading ? <p>Loading...</p> : ""}
+      <button onClick={mintFn}>BUY</button>
+    </div>
+  );
 };
 
-export default MintOrbieType;
-`,
+export default MintOrbieType;`,
   },
   {
     title: "Step 6",
     subtitle:
       "Let's get back to the OrbiesSection component and add edit your mint page!",
     subtitle2: "Import the NftsContext their functions and the MintOrbieType component",
+    structureLink: "https://magic-flow-academy.s3.sa-east-1.amazonaws.com/MFA-orbies/mintPage/orbies-mintpage-step6.png",
     codeSnippet: [
       {
         code: `import { useEffect, useState } from "react";`,
@@ -1358,7 +1354,7 @@ export default MintOrbieType;
       },
       {
         code: `export default OrbiesSection;`,
-        match: true,
+        match: false,
         percent: 1,
         professorText: { title: "Export the component!" },
       },

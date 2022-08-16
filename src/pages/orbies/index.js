@@ -1,63 +1,60 @@
-export const CssCode = {
-    "Globals": 
-`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Montserrat:wght@900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+import ProjectNavbar from "../../components/projectNavbar/ProjectNavbar";
+import OrbiesSection from "../../components/Orbies/OrbiesSection";
 
-html,
-body {
+import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
+import styled from "styled-components";
+
+const Orbies = () => {
+  const { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers, stepsCadence, setStepsCadence, orbiesScriptsTransactions, setOrbiesScriptsTransactions } = useMagicSchoolSteps();  
+
+  return (
+    <Wrapper>
+      <ProjectNavbar
+      projectUrl="/orbies"
+      logoProjectLink="logoSamplers.png"
+      projectName="ORBIES"
+      projectDataLoginPage={stepsSamplers}
+      setProjectDataLoginPage={setStepsSamplers}
+      projectDataMintPage={stepsMintSamplers}
+      setProjectDataMintPage={setStepsMintSamplers}
+      stepsCadence={stepsCadence}
+      setStepsCadence={setStepsCadence}
+      cadenceScriptsTransaction={orbiesScriptsTransactions}
+      setCadenceScriptsTransaction={setOrbiesScriptsTransactions}
+      />
+      <OrbiesSection />
+    </Wrapper>
+  );
+};
+
+export default Orbies;
+
+const Wrapper = styled.div`
+  background: linear-gradient(89.11deg, #0e0d0d 25.47%, #3f8e76 99.28%);
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   padding: 0;
   margin: 0;
   font-family: 'Monument','IBM Plex Sans' ,-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: linear-gradient(89.11deg, #0e0d0d 25.47%, #3f8e76 99.28%);
-  }
 
-@font-face {
-  font-family: 'Monument';
-  src: url("https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/MonumentExtended-Regular.otf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
+.logo{
+  display: flex;
+  align-items: center;
   font-family: 'MonumentBold';
-  src: url("https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/MonumentExtended-Ultrabold.otf");
-  font-weight: 400;
-  font-style: normal;
+  font-size: 1.25rem;
 }
 
-a {
-color: inherit;
-text-decoration: none;
+.logo > img{
+  width: 80px;
 }
 
-* {
-box-sizing: border-box;
-}
-
-.page{
-position: relative;
-width: 100%;
-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between;
-padding: 0;
-}
-
-nav{
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-height: 10%;
-width: 100%;
-color: white;
-z-index: 20;
-padding: 0 3rem;
-}
-
-button {
+.button {
 background-color: gray;
 border: none;
 padding: 10px 30px;
@@ -73,26 +70,15 @@ font-family: 'Monument';
 font-weight: 800;
 }
 
-button:hover {
+.button:hover {
 cursor: pointer;
-}
-
-.logo{
-  display: flex;
-  align-items: center;
-  font-family: 'MonumentBold';
-  font-size: 1.25rem;
-}
-
-.logo > img{
-  width: 80px;
 }
 
 .logged{
 display: flex;
 align-items: center;
 gap: 20px;
-padding: 5px 30px;
+padding: 10px 30px;
 padding-right: 3px;
 background-color: gray;
 border-radius: 40px;
@@ -169,15 +155,18 @@ font-size: .8rem;
 }
 
 .orbiesText{
-  padding: 0px 40px;
+  padding: 0px 80px;
 }
 
 .orbiesText > h2{
   font-family: "MonumentBold";
+  font-size: 2rem;
 }
 
 .orbiesText > p{
   width: 250px;
+  margin: 7px 0;
+  font-size: 1.2rem;
 }
 
 .orbiesText > button {
@@ -218,7 +207,8 @@ font-size: .8rem;
 
 .orbie{
   width: 100px;
-  top: -30px;
+  position: relative;
+  top: -40px;
 }
 .orbie > img{
   width: 100px;
@@ -226,5 +216,5 @@ font-size: .8rem;
 
 .none{
   display: none;
-}`
 }
+`

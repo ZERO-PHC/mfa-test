@@ -1,18 +1,18 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext } from "react";
 
-import { LoginPageDataSamplers } from "../data/magicSchoolCode/SamplersApp/loginPageData";
-import {MintPageDataSamplers} from "../data/magicSchoolCode/SamplersApp/mintPageData";
-import { CadencePageData } from "../data/magicSchoolCode/SamplersApp/cadenceConfigData";
-import { CadenceScriptsTransactions } from "../data/magicSchoolCode/SamplersApp/cadenceScriptsTransactions";
+import { OrbiesLoginPageDataSamplers } from "../data/magicSchoolCode/Orbies/loginPageData";
+import {OrbiesMintPageDataSamplers} from "../data/magicSchoolCode/Orbies/mintPageData";
+import { OrbiesCadencePageData } from "../data/magicSchoolCode/Orbies/cadenceConfigData";
+import { OrbiesCadenceScriptsTransactions } from "../data/magicSchoolCode/Orbies/cadenceScriptsTransactions";
 
 export const MagicSchoolStepsContext = React.createContext("");
 export const useMagicSchoolSteps = () => useContext(MagicSchoolStepsContext);
 
 export const StepsProvider = ({ children }) => {
-  const [stepsSamplers, setStepsSamplers] = useState(LoginPageDataSamplers);
-  const [stepsMintSamplers, setStepsMintSamplers] = useState(MintPageDataSamplers);
-  const [stepsCadence, setStepsCadence] = useState(CadencePageData);
-  const [orbiesScriptsTransactions, setOrbiesScriptsTransactions] = useState(CadenceScriptsTransactions);
+  const [stepsSamplers, setStepsSamplers] = useState(OrbiesLoginPageDataSamplers);
+  const [stepsMintSamplers, setStepsMintSamplers] = useState(OrbiesMintPageDataSamplers);
+  const [stepsCadence, setStepsCadence] = useState(OrbiesCadencePageData);
+  const [orbiesScriptsTransactions, setOrbiesScriptsTransactions] = useState(OrbiesCadenceScriptsTransactions);
   const [deployerAddress, setDeployerAddress] = useState("");
   const [privateKey, setPrivateKey] = useState("");
 

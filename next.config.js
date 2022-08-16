@@ -10,6 +10,10 @@ const nextConfig = {
     });
 
     return config;
+  },
+
+  images: {
+    domains: ['magic-flow-academy.s3.sa-east-1.amazonaws.com'],
   }
 }
 module.exports = nextConfig

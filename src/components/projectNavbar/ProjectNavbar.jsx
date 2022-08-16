@@ -41,7 +41,7 @@ const ProjectNavbar = ({
             className="logo"
             width={70}
             height={70}
-            src={`/project/logos/${logoProjectLink}`}
+            src={logoProjectLink}
             alt='Project Logo'
           />
         </Link>
@@ -129,6 +129,10 @@ const HeaderWrapper = styled.header`
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .addressBox:hover{
+    cursor: pointer;
   }
 
   .auth-btn {

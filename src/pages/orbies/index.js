@@ -1,6 +1,5 @@
 import ProjectNavbar from "../../components/projectNavbar/ProjectNavbar";
 import OrbiesSection from "../../components/Orbies/OrbiesSection";
-
 import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
 import styled from "styled-components";
 
@@ -11,7 +10,7 @@ const Orbies = () => {
     <Wrapper>
       <ProjectNavbar
       projectUrl="/orbies"
-      logoProjectLink="logoSamplers.png"
+      logoProjectLink="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/logo.png"
       projectName="ORBIES"
       projectDataLoginPage={stepsSamplers}
       setProjectDataLoginPage={setStepsSamplers}
@@ -33,7 +32,8 @@ const Wrapper = styled.div`
   background: linear-gradient(89.11deg, #0e0d0d 25.47%, #3f8e76 99.28%);
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -197,18 +197,19 @@ font-size: .8rem;
 
 .orbies{
   margin: auto;
-  width: 80%;
-  height: 80px;
-  background-color: black;
-  margin-top: 3px;
-  display: flex;
-  flex-wrap: wrap;
+    width: 80%;
+    height: 100%;
+    min-height: 120px;
+    background-color: black;
+    padding: 12px;
+    margin: 33px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .orbie{
   width: 100px;
-  position: relative;
-  top: -40px;
 }
 .orbie > img{
   width: 100px;

@@ -1,6 +1,6 @@
 import { CssCode } from "./cssCode";
 
-export const LoginPageDataSamplers = [
+export const OrbiesLoginPageDataSamplers = [
   {
     title: "Welcome",
     professorName: "I'm Zerø,",

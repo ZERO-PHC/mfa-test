@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TimeLine from "../../timeLine/TimeLine";
+import TimeLine from "../timeLine/TimeLine";
 import { Button } from "@chakra-ui/react";
 
 const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar, onComplete }) => {

@@ -1,6 +1,6 @@
 //import { CssCode } from "../src/codeSnippets/CssCode"
 
-export const MintPageDataSamplers = [
+export const OrbiesMintPageDataSamplers = [
   {
     title: "Welcome",
     professorName: "I'm Zerø,",

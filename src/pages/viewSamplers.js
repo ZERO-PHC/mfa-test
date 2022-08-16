@@ -39,8 +39,8 @@ export default function ViewSamplers() {
         </div>
       </header>
       <section>
-        {samplers.map((sampler) => (
-          <SamplerCard {...sampler} />
+        {samplers.map((sampler, index) => (
+          <SamplerCard {...sampler} key={index}/>
         ))}
       </section>
     </Wrapper>

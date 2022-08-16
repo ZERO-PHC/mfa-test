@@ -8,9 +8,8 @@ const TimeLine = ({timeLineLength, n}) => {
             {
             timeLineLength.slice(0, timeLineLength.length -1).map((item, index) => {
                 return (
-                    <>
+                    <div key={index} >
                     <div 
-                    key={index} 
                     className={`${n > item ? "completed timeLineItem" : "timeLineItem"}`}
                     >
                     </div>
@@ -19,7 +18,7 @@ const TimeLine = ({timeLineLength, n}) => {
                     className={`${n > item ? "completed timeLineItemNumber2" : "timeLineItemNumber2"}`}
                     ></div> 
                     : null}
-                    </>
+                    </div>
                 )
             })
             }

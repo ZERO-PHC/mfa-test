@@ -1,8 +1,7 @@
-import React from "react";
 import { OrbiesContract } from "./orbiesContract";
 import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
 
-export const CadencePageData = [
+export const OrbiesCadencePageData = [
   {
     title: "Welcome",
     professorName: "I'm FRLABS,",

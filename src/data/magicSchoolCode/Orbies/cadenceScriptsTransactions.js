@@ -1,5 +1,5 @@
 
-export const CadenceScriptsTransactions = [
+export const OrbiesCadenceScriptsTransactions = [
   {
     title: "Welcome",
     professorName: "I'm FR LABS,",

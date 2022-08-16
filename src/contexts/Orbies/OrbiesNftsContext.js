@@ -4,7 +4,7 @@ import * as fcl from "@onflow/fcl";
 // ----------- SCRIPTS  -----------
 import { getOrbiesScript } from "../../../flow/cadence/Orbies/getOrbiesScript";
 import { getOrbiesTransaction } from "../../../flow/cadence/Orbies/mintOrbieTransaction";
-import serverAuthorization from "../../../util/Authorization";
+import serverAuthorization from "../../util/Authorization";
 
 export const OrbiesNftsContext = React.createContext("");
 export const useNFTs = () => useContext(OrbiesNftsContext);

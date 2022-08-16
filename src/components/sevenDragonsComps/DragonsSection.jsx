@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import dragonsLogos from "../../../actions/dragonsLogos";
-import NftCardComponent from "../../components/NftCardComponent";
+import NftCardComponent from "../NftCardComponent";
 
 function DragonsSection() {
     

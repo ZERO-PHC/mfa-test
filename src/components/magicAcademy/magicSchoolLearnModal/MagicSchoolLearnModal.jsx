@@ -36,6 +36,7 @@ const MagicSchoolLearnModal = ({
   const [structDrawerOpen, setStructDrawerOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertTxt, setAlertTxt] = useState("");
+  const [addedPrivateKey, setAddedPrivateKey] = useState(false);
 
   const router = useRouter();
 
@@ -70,7 +71,7 @@ const MagicSchoolLearnModal = ({
 
   return (
     <Wrapper>
-      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen}/>
+      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen} addedPrivateKey={addedPrivateKey}/>
       <Fade in={isOpen}>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -121,10 +122,10 @@ const MagicSchoolLearnModal = ({
                     <MagicSchoolFormWrapper
                     structDrawerOpen={structDrawerOpen}
                     setStructDrawerOpen={setStructDrawerOpen}
+                    setAddedPrivateKey={setAddedPrivateKey}
                     step={steps[n]}
                     />
-                )
-                }
+              )}
             </ModalBody>
             <ModalFooter className={style.footer}>
                 {

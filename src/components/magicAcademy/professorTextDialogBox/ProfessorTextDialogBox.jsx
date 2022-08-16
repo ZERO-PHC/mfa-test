@@ -5,8 +5,10 @@ const ProfessorTextDialogBox = ({step, professorText}) => {
     return (
         <Wrapper>
             <div className={"professorText"}>
-                <p>
+              <div>
+                  <p>
                   {professorText.title}
+                  </p>
                   {professorText != undefined &&
                     professorText.title != undefined && (
                       <ul>
@@ -34,7 +36,8 @@ const ProfessorTextDialogBox = ({step, professorText}) => {
                           )}
                       </ul>
                     )}
-                </p>
+                
+                </div>
               </div>
         </Wrapper>
     )
@@ -50,15 +53,10 @@ width: 100%;
     background-repeat: no-repeat;
     background-position-x: center;
     margin: auto !important;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
-.professorText > svg{
-  margin: auto;
-}
-
-.professorText > p{
-    color: #00FFB2;
+.professorText > div{
     width: 100%;
     padding: 0 50px;
     height: 100px;
@@ -67,7 +65,15 @@ width: 100%;
     justify-content: space-between;
 }
 
-.professorText > p > ul{
+.professorText > svg{
+  margin: auto;
+}
+
+.professorText > div > p{
+    color: #00FFB2;
+}
+
+.professorText > div > p > ul{
     margin-top: 1px solid #00FFB2;
     display: flex;
     justify-content: center;
@@ -75,7 +81,7 @@ width: 100%;
     font-size: .75rem;
 }
 
-.professorText > p > ul > a{
+.professorText > div > ul > a{
     padding: 3px 10px;
     background-color: #00FFB2;
     color: black;

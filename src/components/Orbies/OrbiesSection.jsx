@@ -31,7 +31,7 @@ useEffect(() => {
 useEffect(() => {
   getOrbies(user.addr);
   getFlow(user.addr);
-}, [Orbies, getOrbies, getFlow, user.addr]);
+}, [Orbies, user.addr]);
 
 const handleSelect = (type) => {
   setSelected({ ...selectedOrbies, [type]: !selected.type });

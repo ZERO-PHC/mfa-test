@@ -8,7 +8,7 @@ const TimeLine = ({timeLineLength, n}) => {
             {
             timeLineLength.slice(0, timeLineLength.length -1).map((item, index) => {
                 return (
-                    <div key={index} >
+                    <div key={index} className="mainDiv">
                     <div 
                     className={`${n > item ? "completed timeLineItem" : "timeLineItem"}`}
                     >
@@ -31,10 +31,13 @@ export default TimeLine
 
 const Wrapper = styled.div`
     display: flex;
+    .mainDiv{
+    display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 250px;
     transition: 1s;
+    }
 
     .timeLineItem{
         /* border: 1px solid #00FFB2; */

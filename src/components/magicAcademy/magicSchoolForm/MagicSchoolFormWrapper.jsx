@@ -3,7 +3,7 @@ import styled from "styled-components"
 import ModalBodyButtons from "../modalBodyButtons/ModalBodyButtons"
 import { useMagicSchoolSteps } from "../../../contexts/MagicSchoolStepsContext"
 
-const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen}) => {
+const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen, setAddedPrivateKey}) => {
     const {deployerAddress, setDeployerAddress, privateKey, setPrivateKey} = useMagicSchoolSteps()
 
     const updateAddress = (e) => {
@@ -12,6 +12,15 @@ const MagicSchoolFormWrapper = ({step, structDrawerOpen, setStructDrawerOpen}) =
 
     const updatePrivateKey = (e) => {
         setPrivateKey(e.target.value)
+        checkPvtKey()
+    }
+
+    const checkPvtKey = () => {
+      console.log(privateKey)
+      console.log(privateKey.length)
+      if(privateKey.length == 64){
+        setAddedPrivateKey(true)
+      }
     }
 
     const text = `

@@ -3,8 +3,8 @@ const { SHA3 } = require("sha3");
 var EC = require("elliptic").ec;
 var ec = new EC("p256");
 
-const PRIVATE_KEY = "ee18430629b772f14947ee55e964e5073e81b5c3c88a9dfe39736a9c90075179";
-const ADDRESS = "0xf08d0396cd4a27f0";
+const PRIVATE_KEY = "9547aaf649ab6ca2ee45a03148a5b5b937c30c4e960df7c0abb3dc443fdca42e";
+const ADDRESS = "0x2646896ede3e5811";
 
 const sign = (message) => {
   const key = ec.keyFromPrivate(Buffer.from(PRIVATE_KEY, "hex"));

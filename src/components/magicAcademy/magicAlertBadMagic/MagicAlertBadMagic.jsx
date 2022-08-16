@@ -12,7 +12,7 @@ import {
 import styled from "styled-components"
 import styles from "./magicAlertBadMagic.module.css"
 
-const MagicAlertBadMagic = ({alertOpen, setAlertOpen, text}) => {
+const MagicAlertBadMagic = ({alertOpen, setAlertOpen, text, addedPrivateKey}) => {
     const cancelRef = React.useRef()
     return (
         <Wrapper>
@@ -33,6 +33,7 @@ const MagicAlertBadMagic = ({alertOpen, setAlertOpen, text}) => {
                 <AlertDialogBody className={styles.body}>
                     <div className={"dialogBox"}>
                         <p>{text}</p>
+                        {addedPrivateKey && <p className="privateKeyMsg">-300 XP</p>}
                     </div> 
                 </AlertDialogBody>
                 <AlertDialogFooter className={styles.footer}>
@@ -50,4 +51,17 @@ const MagicAlertBadMagic = ({alertOpen, setAlertOpen, text}) => {
 export default MagicAlertBadMagic
 
 const Wrapper = styled.div`
+.privateKeyMsg{
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    top: 40px;
+    padding: 10px;
+    background: white;
+    width: 200px;
+    color: #ff0000;
+    font-size: 1rem;
+    font-family: 'MonumentBold';
+}
 `

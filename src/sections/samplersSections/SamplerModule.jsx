@@ -22,7 +22,9 @@ const SamplerModule = ({ sampler }) => {
       break;
   }
 
-  return <img src={src} alt="sampler-img" height={80} width={100} />;
+  return <img style={{
+    transform: "skew(20deg)",
+  }} src={src} alt="sampler-img" height={80} width={100} />;
 }
 
 export default SamplerModule;

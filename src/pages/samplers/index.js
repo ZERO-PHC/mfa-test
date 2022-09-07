@@ -85,6 +85,7 @@ const Samplers = () => {
               width: "80%",
               minWidth: "785px",
               height: "50%",
+              transform: "skew(-20deg)",
             }}
           >
             {Samplers.length > 0 && Samplers.length <= 20 ? (

@@ -4,10 +4,10 @@ import Image from "next/image"
 
 
 
-export default function SamplerCard({name, id, xp, active, handleCardSelection}) {
+export default function SamplerCard({ name, id, xp, active, handleCardSelection }) {
     return (
         <Wrapper onClick={handleCardSelection}>
-            
+
             <section>
                 <div className='sampler-name'>
                     {name}
@@ -18,7 +18,7 @@ export default function SamplerCard({name, id, xp, active, handleCardSelection})
                 <div className='header-title'>
                     <span>
 
-                        SAMPLER LVL {id + 1} 
+                        SAMPLER LVL {id + 1}
                     </span>
                     <div>
                         <svg width="100%" height="8" viewBox="0 0 422 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,6 +61,20 @@ const Wrapper = styled.main`
   flex-direction:column;
   align-items:center;
   font-family:"Michroma", sans-serif;
+    border: 1px solid #D9D9D9;
+  animation: fadeIn 0.5s ease-in;
+  delay:2s;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(2rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0rem);
+        }
+    }
+    
 
   .sampler-name{
     font-size:1rem;

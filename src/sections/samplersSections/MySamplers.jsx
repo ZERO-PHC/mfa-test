@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 
   img{
+
     width: 75px;
   }
 

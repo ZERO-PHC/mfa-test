@@ -7,6 +7,7 @@ const samplers = [
   {
     id: 0,
     name: "Orbies",
+    path: "/orbies",
     xp: "1500",
     active: true,
   },

@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
-import HeroSection from "../components/HeroSection";
-import Navbar from "../components/Navbar";
 // useRouter 
 import { useRouter } from "next/router";
 

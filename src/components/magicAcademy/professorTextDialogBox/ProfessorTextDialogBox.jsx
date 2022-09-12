@@ -54,6 +54,7 @@ width: 100%;
     background-position-x: center;
     margin: auto !important;
     padding: 10px 20px;
+    font-size: .9rem;
 }
 
 .professorText > div{

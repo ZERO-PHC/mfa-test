@@ -33,6 +33,10 @@
     border-bottom: 1px solid #00FFB2;
 }
 
+.codeboxHeader > li {
+    font-size: .8rem;
+}
+
 .header{
     color: white;
     text-align: center;
@@ -49,6 +53,10 @@
     color: #00FFB2;
     justify-content: flex-start;
     overflow: auto;
+}
+
+.learnbox > p{
+    font-size: .8rem;
 }
 
 .learnbox > svg{

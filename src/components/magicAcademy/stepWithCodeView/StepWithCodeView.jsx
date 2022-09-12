@@ -50,6 +50,10 @@ const Wrapper = styled.section`
     padding: 10px;
     color: #00ffb2;
     border-bottom: 1px solid #00ffb2;
+
+     li{
+      font-size: .8rem;
+     }
   }
 
   .header {
@@ -67,6 +71,7 @@ const Wrapper = styled.section`
     color: #00ffb2;
     justify-content: flex-start;
     overflow: auto;
+    font-size: .9rem;
   }
 
   .learnbox > svg {

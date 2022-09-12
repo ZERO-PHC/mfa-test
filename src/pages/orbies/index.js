@@ -160,13 +160,13 @@ font-size: .8rem;
 
 .orbiesText > h2{
   font-family: "MonumentBold";
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .orbiesText > p{
   width: 250px;
   margin: 7px 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .orbiesText > button {
@@ -191,7 +191,7 @@ font-size: .8rem;
 .divider{
   background: url("https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/orbiesDivider.png");
   background-repeat: no-repeat;
-  height: 100px;
+  height: 60px;
   width: 100%;
 }
 

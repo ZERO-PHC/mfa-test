@@ -105,7 +105,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   color: white;
   z-index: 20;
-  padding: 1rem 3rem;
+  padding: .5rem 3rem;
   font-family: "Monument";
 
   section {
@@ -122,7 +122,7 @@ const HeaderWrapper = styled.header`
   h2 {
     color: white;
     font-family: MonumentBold;
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   img {
@@ -137,7 +137,7 @@ const HeaderWrapper = styled.header`
 
   .auth-btn {
     font-family: "Monument";
-    font-size: 12px;
+    font-size: 10px;
     padding: 10px 30px;
     background-color: gray;
     border-radius: 40px;

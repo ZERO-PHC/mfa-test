@@ -1,0 +1,27 @@
+.header{
+    background-color: #00FFB2;
+    color: black;
+    font-family: "Monument";
+}
+
+.body{
+    background-color: #141414;
+    color: white;
+    font-family: "Monument";
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.body > li {
+    font-size: .8rem;
+}
+
+.footer{
+    background-color: #00FFB2;
+}
+
+.structure{
+    padding: 30px 0;
+    text-align: center;
+}

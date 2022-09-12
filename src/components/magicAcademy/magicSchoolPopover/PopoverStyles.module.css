@@ -1,0 +1,52 @@
+.header {
+    font-family: "Monument";
+  }
+
+  .content{
+    padding: 10px;
+    width: 500px !important;
+    color: black;
+    box-shadow: 1px 4px 7px 1px #00ffb31e;
+    border: 1px solid #00FFB2;
+    border-radius: 3px !important;
+    transform: matrix(0.99, 0, -0.12, 1, 0, 0) !important;
+    flex-direction: row;
+  }
+
+  .content > button:hover{
+    cursor: pointer;
+  }
+
+
+  .arrow{
+    display: none;
+  }
+
+  .body > button {
+    font-family: "Monument";
+    font-size: .75rem;
+    align-self: flex-end;
+    width: 87px;
+    color: black;
+    background: rgba(194, 186, 186, 0.5);
+    border: 1px solid #00FFB2;
+    border-radius: 6px;
+    transform: matrix(0.99, 0, -0.17, 1, 0, 0);
+  }
+
+  .body > button:hover {
+    background: #00FFB2;
+    color: black;
+  }
+
+  .logo{
+    width: 55px;
+  }
+
+  .logo:hover{
+    transform: scale(1.1);
+  }
+
+  .logo > img{
+    max-width: 45px;
+  }

@@ -1,0 +1,238 @@
+.modal{
+    max-width: 1100px !important;
+    /* height: 85%; */
+    min-height: 94%;
+    background-color: #3D4345 !important;
+    margin-top: 0px;
+    font-family: 'Michroma';
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0%;
+    margin-top: 1rem !important;
+    margin-bottom: .75rem !important;
+}
+
+.codebox{
+    width: 100%;
+    /* height: 80%; */
+    display: flex;
+    flex-direction: column;
+    background-color: #161616;
+    border: 1px solid #00FFB2;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.codeboxHeader{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    color: #00FFB2;
+    border-bottom: 1px solid #00FFB2;
+}
+
+.header{
+    color: white;
+    text-align: center;
+    padding: 8px !important;
+}
+
+.learnbox{
+    padding: 30px;
+    padding-bottom: 2px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #00FFB2;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+.learnbox > svg{
+    color: #00FFB2;
+    position: absolute;
+    right: 94px;
+    top: 225px;
+}
+
+.learnbox > svg:hover{
+    cursor: pointer;
+}
+
+.learnbox::-webkit-scrollbar {
+width: .3em;
+position: absolute;
+}
+
+.learnbox::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.learnbox::-webkit-scrollbar-thumb {
+background-color: #00FFB2;
+border-radius: 10px;
+}
+
+
+.learnboxIntro{
+    padding: 100px 50px;
+    padding-bottom: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+    color: #00FFB2;
+    overflow: auto;
+}
+
+
+.textarea{
+    color: #00FFB2 !important;
+    background-color: rgba(0, 255, 178, 0.04);
+    border-radius: 10px;
+    padding: 33px;
+    z-index: 5;
+    position: absolute;
+    top: 170px;
+    width: 891px;
+    height: 100%;
+}
+
+.textarea:first-line{
+    color: #00FFB2;
+}
+
+.textarea2{
+    color: white !important;
+    background-color: rgba(0, 255, 178, 0.04);
+    border-radius: 10px;
+    padding: 33px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.body{
+    height: 600px !important;
+}
+
+.footer{
+    justify-content: space-around !important;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+}
+
+.professorText{
+    height: 160px;
+}
+
+.professorText > p{
+    color: #00FFB2;
+    width: 100%;
+    position: relative;
+    bottom: 120px;
+    padding: 0 30px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.professorText > p > ul{
+    margin-top: 1px solid #00FFB2;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    font-size: .75rem;
+}
+
+.professorText > p > ul > a{
+    padding: 3px 10px;
+    background-color: #00FFB2;
+    color: black;
+    transform: matrix(0.99, 0, -0.12, 1, 0, 0);
+}
+
+.closeBtn{
+    background-color: black;
+    color: #00FFB2;
+    border: 1px solid #00FFB2;
+    border-radius: 50% !important;
+    box-shadow: 0px 0px 4px #00ffb380;
+}
+
+.buttons > button{
+    background: rgb(41,75,65);
+    background: linear-gradient(216deg, rgba(41,75,65,1) 0%, rgba(22,22,22,1) 100%);
+    color: white;
+    box-shadow: 1px 4px 7px 1px #00ffb31e;
+    border: 1px solid #00FFB2;
+    border-radius: 3px !important;
+    transform: matrix(0.99, 0, -0.12, 1, 0, 0);
+}
+
+.input{
+    padding: 0px 20px;
+}
+
+.inputText{
+    width: 100%;
+    background-color: transparent;
+    z-index: 5;
+    position: relative;
+    top: -25px;
+}
+
+.inputPlaceholder{
+    background-color: transparent;
+    z-index: 2;
+}
+
+.placeholderParag{
+    color: gray;
+}
+
+.test{
+    background-color: red;
+}
+
+.footerCodeBox{
+    transition: 3s;
+    border-top: 1px solid #00FFB2;
+}
+
+.footerCodeBoxDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+.footerCodeBoxTexts{
+    display: flex;
+    color: #00FFB2;
+}
+
+.footerBtns{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.footerBtns > button{
+    padding: 0px 20px;
+    display: flex;
+    background-color: #00FFB2;
+    color: black;
+}
+
+.footerBtns > button > svg{
+    width: 20px;
+    margin-left: 2px;
+}

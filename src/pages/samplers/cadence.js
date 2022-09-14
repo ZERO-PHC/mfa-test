@@ -3,7 +3,7 @@ import NavbarCadencePage from "../../components/magicAcademy/cadencePage/navbarC
 import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
 
 const Cadence = () => {
-    const {stepsCadence, setStepsCadence} = useMagicSchoolSteps();
+    const {stepsCadence, setStepsCadence} = useMagicSchoolSteps([]);
 
     return (
         <Wrapper

@@ -17,16 +17,20 @@ import { Icon } from '@iconify/react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useRouter } from "next/router";
 import CodeStructDrawer from '../codeStructDrawer/CodeStructDrawer';
+import { useMagicSchoolSteps } from '../../../contexts/MagicSchoolStepsContext';
+
 
 const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }) => {
     const [n, setN] = useState(0)
     const [professorText, setProfessorText] = useState([])
     const [structDrawerOpen, setStructDrawerOpen] = useState(false)
+    const { completeStep}  =   useMagicSchoolSteps()
 
     const router = useRouter();
 
     const oneMoreStep = () => {
-        setN(n +1)
+        setN(n + 1)
+        completeStep(n)
     }
      const oneLessStep = () => {
         if(n > 0){
@@ -42,14 +46,16 @@ const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }
 
     const onComplete = () => {
         // localStorage.setItem(name, JSON.stringify(steps))
+        
+
         onClose()
-        if(name.includes("Cadence")){
-            // window.location.reload()
-            router.push("/samplers")
-        }
-        if(name.includes("Login")){
-            logIn()
-        }
+        // if(name.includes("Cadence")){
+        //     // window.location.reload()
+        //     router.push("/samplers")
+        // }
+        // if(name.includes("Login")){
+        //     logIn()
+        // }
     }
 
     return (
@@ -153,7 +159,8 @@ const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }
                                             PREV
                                         </Button>
                                         {!steps[n].lastStep ?
-                                        <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
+                                        // <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
+                                        <Button onClick={oneMoreStep} >
                                             NEXT 
                                         </Button>
                                         : 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Popover,
     PopoverTrigger,
@@ -19,11 +19,20 @@ import AlertSchoolAlertComponent from '../magicSchoolAlertComp/MagicSchoolAlertC
 import { useAuth } from '../../../contexts/AuthContext'
 import * as style from './PopoverStyles.module.css'
 import AvatarComponent from '../AvatarComponent';
+import HorizontalSpacer from '../../HorizontalSpacer';
 
 const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, projectToCheck, autoOpen, setAutoOpen }) => {
+    const [OpenModal, setOpenModal] = useState(false);
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure({ isOpen: false })
     const [alertOpen, setAlertOpen] = useState(false)
     const { logIn, logOut } = useAuth();
+
+
+    useEffect(() => {
+        // setTimeout(() => {
+        //     onOpen()
+        // }, 2000);
+    }, [])
 
 
     const checkStorage = () => {
@@ -47,11 +56,19 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
         } else { return true }
     }
 
+    const handleStart = () => {
+        onOpen()
+        setOpenModal(true)
+    }
+
 
     return (
         <PopoverStyle onClick={() => setAutoOpen(!autoOpen)}>
             <Popover isOpen={autoOpen}>
-                    <AvatarComponent checkStorage={checkStorage} />
+                <AvatarComponent checkStorage={checkStorage} path='/assets/frAvatar.png' active={true} />
+                <HorizontalSpacer width={'3rem'} />
+                <AvatarComponent checkStorage={checkStorage} path='/assets/ZerøAvatar.png' active={false} />
+
                 <Portal>
                     <PopoverContent className={style.content}>
                         <PopoverArrow className={style.arrow} />
@@ -67,8 +84,9 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
                             </Button>
                             <Button
                                 colorScheme='blue'
-                                onClick={checkProject() ? onOpen : () => setAlertOpen(true)
-                                }>
+
+                                // onClick={checkProject() ? onOpen : () => setAlertOpen(true)
+                                onClick={handleStart}>
                                 START
                             </Button>
                         </PopoverBody>
@@ -76,7 +94,7 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
                     </PopoverContent>
                 </Portal>
             </Popover>
-            <MagicSchoolLearnModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} onToggle={onToggle} name={name} steps={magicSchoolData} setSteps={setMagicSchoolData} logIn={logIn} />
+            <MagicSchoolLearnModal isOpen={OpenModal} onOpen={onOpen} onClose={onClose} onToggle={onToggle} name={name} steps={magicSchoolData} setSteps={setMagicSchoolData} logIn={logIn} />
         </PopoverStyle>
     )
 }

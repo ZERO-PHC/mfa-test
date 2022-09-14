@@ -41,7 +41,7 @@ const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }
     }, [n])
 
     const onComplete = () => {
-        localStorage.setItem(name, JSON.stringify(steps))
+        // localStorage.setItem(name, JSON.stringify(steps))
         onClose()
         if(name.includes("Cadence")){
             // window.location.reload()

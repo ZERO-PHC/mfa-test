@@ -4,6 +4,14 @@ import styled from "styled-components";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  onSnapshot,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 // import { Canvas, useFrame } from "@react-three/fiber";
 // import {
 //   Image,
@@ -16,11 +24,13 @@ import Image from "next/image";
 
 // useRouter
 import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 export default function Home() {
   const router = useRouter();
   const [Loading, setLoading] = useState(true);
+  const { login } = useAuth()
 
   const onLoad = (spline) => {
     console.log("loaded", spline);
@@ -50,8 +60,8 @@ export default function Home() {
             </div>
           </header>
           <section className="actions">
-            <button onClick={() => router.push("/viewSamplers")}>
-              SEE SAMPLERS
+            <button onClick={ login}>
+              login
             </button>
             <button>START GAME</button>
           </section>

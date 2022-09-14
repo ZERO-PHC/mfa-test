@@ -6,7 +6,7 @@ export const LoginPageDataSamplers = [
     subtitle: "Authentication page guide",
     subtitle2:
       "In this guide you will learn how to create an authentication page using FCL",
-    codeSnippet: [""],
+    codeSnippet: ["dn"],
     completed: true,
   },
   {

@@ -35,7 +35,7 @@ export const StepsProvider = ({ children }) => {
     // update the steps in the database of the user
     const docRef = doc(db, "users", user.uid);
     await updateDoc(docRef, {
-      completedAuthSteps: arrayUnion(n)
+      currentAuthStep: n,
     })
       .catch((error) => {
         console.error("Error adding document: ", error);

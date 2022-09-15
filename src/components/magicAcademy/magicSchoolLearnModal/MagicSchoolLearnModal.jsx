@@ -1,48 +1,69 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Fade, Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton, Button } from '@chakra-ui/react'
+import {
+  Fade,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+} from "@chakra-ui/react";
+import IntroAndFinishView from "../introAndFinishView/IntroAndFinishView";
+import StepWithCodeView from "../stepWithCodeView/StepWithCodeView";
+import StepNoCodeView from "../stepNoCodeView/StepNoCodeView";
+import MagicModalFooter from "../magicModalFooter/MagicModalFooter";
+import ProfessorTextDialogBox from "../professorTextDialogBox/ProfessorTextDialogBox";
+import MagicSchoolFormWrapper from "../magicSchoolForm/MagicSchoolFormWrapper";
+import MagicAlertBadMagic from "../magicAlertBadMagic/MagicAlertBadMagic";
 
-import styled from "styled-components"
-import * as style from "./MagicSchoolLearnModal.module.css"
-import MagicSchoolInputWrapper from '../magicSchoolInput/MagicSchoolInputWrapper';
-import TeachBox from "../../../../public/teachBox.svg"
-import TimeLine from '../../timeLine/TimeLine';
-import { Icon } from '@iconify/react';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import styled from "styled-components";
+import * as style from "./MagicSchoolLearnModal.module.css";
 import { useRouter } from "next/router";
+
 import CodeStructDrawer from '../codeStructDrawer/CodeStructDrawer';
 import { useMagicSchoolSteps } from '../../../contexts/MagicSchoolStepsContext';
 
 
-const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }) => {
-    const [n, setN] = useState(0)
-    const [professorText, setProfessorText] = useState([])
-    const [structDrawerOpen, setStructDrawerOpen] = useState(false)
-    const { completeStep}  =   useMagicSchoolSteps()
+const MagicSchoolLearnModal = ({
+  isOpen,
+  onClose,
+  name,
+  steps,
+  setSteps,
+}) => {
+  const [n, setN] = useState(0);
+  const [professorText, setProfessorText] = useState([]);
+  const [structDrawerOpen, setStructDrawerOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertTxt, setAlertTxt] = useState("");
+  const [addedPrivateKey, setAddedPrivateKey] = useState(false);
+  const { completeStep } = useMagicSchoolSteps()
+  const router = useRouter();
 
-    const router = useRouter();
 
-    const oneMoreStep = () => {
-        setN(n + 1)
-        completeStep(n)
+  const oneMoreStep = () => {
+    if(steps[n].alert){
+      setAlertOpen(true)
+      setAlertTxt(steps[n].alertText)
     }
-     const oneLessStep = () => {
-        if(n > 0){
-            setN(n -1)
-        }
-    }
+    setN(n + 1);
+    completeStep(n)
+  };
 
-    useEffect(() => {
-        if(steps[n].codeSnippet[0].professorText != undefined){
-            setProfessorText(steps[n].codeSnippet[0].professorText)
-        }
-    }, [n])
+  const oneLessStep = () => {
+    if (n > 0) {
+      setN(n - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (steps[n].codeSnippet[0].professorText != undefined) {
+      setProfessorText(steps[n].codeSnippet[0].professorText);
+    }
+  }, [n]);
 
     const onComplete = () => {
         // localStorage.setItem(name, JSON.stringify(steps))
@@ -55,140 +76,103 @@ const MagicSchoolLearnModal = ({ isOpen, onClose, name, steps, setSteps, logIn }
         // }
         // if(name.includes("Login")){
         //     logIn()
-        // }
-    }
+        }
+        
+  // const onComplete = () => {
+  //   onClose();
+  //   if (name.includes("Cadence")) {
+  //     router.push("/orbies");
+  //   }
+  //   if (name.includes("Login")) {
+  //     logIn();
+  //   }
+  // };
 
-    return (
-        <Wrapper>
-           <Fade in={isOpen}>
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                        <ModalContent className={style.modal}>
-                            <ModalHeader className={style.header}>
-                                {steps[n].title}
-                            </ModalHeader>
-                            <ModalCloseButton className={style.closeBtn}/>
-                            <ModalBody className={style.body}>
-                                {
-                                !steps[n].codeSnippet[0].code == "" ?
-                                (
-                                    <div className={style.codebox}>
-                                    <div className={style.codeboxHeader}>
-                                        {steps[n].subtitle && <li>{steps[n].subtitle}</li>}
-                                    </div>
-                                    <div className={style.learnbox}>
-                                        {steps[n].subtitle2 ? 
-                                        <p>{steps[n].subtitle2}</p> : 
-                                        <p>Write down the code for the internalization of the lesson and then you  can copy it to your clipboard.</p>
-                                        }
-                                        <MagicSchoolInputWrapper step={n} steps={steps} setSteps={setSteps} setProfessorText={setProfessorText} name={name}/>
-                                    </div>
-                                    <div className={style.footerCodeBox}>
-                                        {steps[n].completed &&
-                                        <div className={style.footerCodeBoxDiv}>
-                                            <div className={style.footerCodeBoxTexts}> 
-                                                {steps[n].footer && <li>{steps[n].footer}</li>}
-                                            </div>
-                                            <div className={style.footerBtns}>
-                                                <CopyToClipboard text={steps[n].allCode}>
-                                                    <button> Copy <Icon icon="ci:copy" height={"2em"}/> </button>
-                                                </CopyToClipboard>
-                                                <button onClick={() => setStructDrawerOpen(true)}>
-                                                    Check Structure <Icon icon="clarity:tree-view-line" height={"2em"}/>
-                                                </button>
-                                                <CodeStructDrawer open={structDrawerOpen} setOpen={setStructDrawerOpen} step={steps[n]}/>
-                                            </div>
-                                        </div>
-                                        }
-                                    </div>
-                                </div>
-                                )
-                                :
-                                <div className={style.learnboxIntro}>
-                                   {steps[n].subtitle && <li>{steps[n].subtitle}</li>}
-                                   {steps[n].subtitle2 && <li>{steps[n].subtitle2}</li>}
-                                    <div className={style.footerCodeBox}>
-                                        {(steps[n].allCode || steps[n].structureLink) &&
-                                        <div className={style.footerCodeBoxDiv}>
-                                            <div className={style.footerCodeBoxTexts}> 
-                                                {steps[n].footer && <li>{steps[n].footer}</li>}
-                                            </div>
-                                            <div className={style.footerBtns}>
-                                                {steps[n].allCode &&
-                                                <CopyToClipboard text={steps[n].allCode}>
-                                                    <button> Copy <Icon icon="ci:copy" height={"2em"}/> </button>
-                                                </CopyToClipboard>
-                                                }
-                                                {steps[n].structureLink && 
-                                                <button onClick={() => setStructDrawerOpen(true)}>
-                                                    Check Structure <Icon icon="clarity:tree-view-line" height={"2em"}/>
-                                                </button>}
-                                                <CodeStructDrawer open={structDrawerOpen} setOpen={setStructDrawerOpen} step={steps[n]}/>
-                                            </div>
-                                        </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                            </ModalBody>
-                            <ModalFooter className={style.footer}>
-                                    <div className={style.professorText}>
-                                        <TeachBox/>
-                                        <p> 
-                                            {professorText.title}
-                                            {
-                                                (steps[n].codeSnippet[0].professorText != undefined && professorText.title != undefined) &&
-                                                <ul>
-                                                    {
-                                                        steps[n].codeSnippet[0].professorText.link != undefined && 
-                                                        steps[n].codeSnippet[0].professorText.link.map((link, index) => {
-                                                            return (
-                                                            <a href={link.href} key={index} target={'_blank'} rel={'noreferrer'}>{link.text}</a>
-                                                            )    
-                                                        })
-                                                    }
-                                                </ul>
-                                            }
-                                        </p>
-                                    </div>
-                                <Footer>
-                                    <img src="/magicSchoolModal/ProfComponent.png" alt="" width={250} />
-                                    <TimeLine timeLineLength={ Object.keys(steps)} steps={steps} n={n} />
-                                    <div className={style.buttons}>
-                                        <Button mr={3} onClick={oneLessStep} disabled={n == 0}>
-                                            PREV
-                                        </Button>
-                                        {!steps[n].lastStep ?
-                                        // <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
-                                        <Button onClick={oneMoreStep} >
-                                            NEXT 
-                                        </Button>
-                                        : 
-                                        <Button onClick={() => onComplete()}>
-                                            COMPLETE
-                                        </Button>
-                                        
-                                        }
-                                    </div>
-                                </Footer>
-                            </ModalFooter>
-                        </ModalContent>
-                </Modal>
-            </Fade>        
-        </Wrapper>
-    )
-}
+  return (
+    <Wrapper>
+      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen} addedPrivateKey={addedPrivateKey}/>
+      <Fade in={isOpen}>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent className={style.modal}>
+            <ModalHeader className={style.header}>{steps[n].title}</ModalHeader>
+            <ModalCloseButton className={style.closeBtn} />
+            <ModalBody className={style.body}>
+              {
+                (n == 0 || n == steps.length - 1)
+                && (
+                  <IntroAndFinishView
+                    professorName={steps[n].professorName}
+                    introduction={steps[n].introduction}
+                    subtitle={steps[n].subtitle}
+                    subtitle2={steps[n].subtitle2}
+                    rewards1={steps[n].rewards1}
+                    rewards2={steps[n].rewards2}
+                    rewards3={steps[n].rewards3}
+                    footer={steps[n].footer}
+                    buttons={steps[n].buttons}
+                  />
+                )
+            }
+              {steps[n].codeSnippet[0].code && (
+                <StepWithCodeView
+                  steps={steps}
+                  n={n}
+                  setSteps={setSteps}
+                  setProfessorText={setProfessorText}
+                  name={name}
+                  structDrawerOpen={structDrawerOpen}
+                  setStructDrawerOpen={setStructDrawerOpen}
+                />
+              )}
+              {!(n == 0 || n == steps.length - 1) &&
+                !steps[n].codeSnippet[0].code && 
+                !steps[n].form &&
+                (
+                  <StepNoCodeView
+                    steps={steps}
+                    n={n}
+                    structDrawerOpen={structDrawerOpen}
+                    setStructDrawerOpen={setStructDrawerOpen}
+                  />
+                )}
+                {
+                steps[n].form && (
+                    <MagicSchoolFormWrapper
+                    structDrawerOpen={structDrawerOpen}
+                    setStructDrawerOpen={setStructDrawerOpen}
+                    setAddedPrivateKey={setAddedPrivateKey}
+                    step={steps[n]}
+                    />
+              )}
+            </ModalBody>
+            <ModalFooter className={style.footer}>
+                {
+                (steps[n].codeSnippet[0].code || steps[n].form)
+                &&
+                <ProfessorTextDialogBox
+                professorText={professorText}
+                step={steps[n]}
+                />
+                }
+              <MagicModalFooter
+                n={n}
+                steps={steps}
+                oneMoreStep={oneMoreStep}
+                oneLessStep={oneLessStep}
+                onComplete={onComplete}
+                professorAvatar={steps[0].professorAvatar}
+                />
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Fade>
+    </Wrapper>
+  );
+};
 
-export default MagicSchoolLearnModal
+export default MagicSchoolLearnModal;
 
 const Wrapper = styled.section`
-    width: 500px;
-`
-const Footer = styled.footer`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-`
-const TimeLineWrapper = styled.div`
-    display: flex;
-`
+  width: 500px;
+`;

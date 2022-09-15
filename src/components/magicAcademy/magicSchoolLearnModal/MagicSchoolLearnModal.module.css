@@ -1,7 +1,7 @@
 .modal{
-    max-width: 1050px !important;
+    max-width: 1100px !important;
     /* height: 85%; */
-    min-height: 91%;
+    min-height: 94%;
     background-color: #3D4345 !important;
     margin-top: 0px;
     font-family: 'Michroma';
@@ -9,6 +9,8 @@
     flex-direction: column;
     position: absolute;
     top: 0%;
+    margin-top: 1rem !important;
+    margin-bottom: .75rem !important;
 }
 
 .codebox{
@@ -31,9 +33,14 @@
     border-bottom: 1px solid #00FFB2;
 }
 
+.codeboxHeader > li {
+    font-size: .8rem;
+}
+
 .header{
     color: white;
     text-align: center;
+    padding: 8px !important;
 }
 
 .learnbox{
@@ -46,6 +53,10 @@
     color: #00FFB2;
     justify-content: flex-start;
     overflow: auto;
+}
+
+.learnbox > p{
+    font-size: .8rem;
 }
 
 .learnbox > svg{
@@ -85,16 +96,6 @@ border-radius: 10px;
     overflow: auto;
 }
 
-/* .learnboxIntro > svg{
-    color: #00FFB2;
-    position: absolute;
-    right: 94px;
-    top: 225px;
-}
-
-.learnboxIntro > svg:hover{
-    cursor: pointer;
-} */
 
 .textarea{
     color: #00FFB2 !important;
@@ -119,9 +120,6 @@ border-radius: 10px;
     padding: 33px;
     width: 100%;
     height: 100%;
-    /* position: absolute;
-    top: 170px;
-    width: 891px; */
     z-index: 2;
 }
 
@@ -133,6 +131,7 @@ border-radius: 10px;
     justify-content: space-around !important;
     display: flex;
     flex-direction: column;
+    padding: 0 !important;
 }
 
 .professorText{

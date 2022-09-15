@@ -158,28 +158,23 @@ export default function AuthProvider({ children }) {
         pub fun main(address: Address): UFix64{
           let balanceVault =  getAccount(address).getCapability(/public/flowTokenBalance).borrow<&FlowToken.Vault{FungibleToken.Balance}>()!
           return balanceVault.balance
-        }
-        `,
+        }`,
         args: (arg, t) => [arg(address, t.Address)],
       });
-
-      console.log("Flow Token", res);
       setFlow(res)
     } catch (error) {
       console.log("err:", error);
     }
   }
 
-
   const value = {
     logout,
     login,
     signUp,
     user,
-    flow
+    flow,
+    getFlow
   };
-
-  // console.log("AuthProvider", value);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

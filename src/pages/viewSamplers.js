@@ -8,6 +8,7 @@ const samplers = [
   {
     id: 0,
     name: "Orbies",
+    path: "/orbies",
     xp: "1500",
     active: true,
   },
@@ -49,8 +50,13 @@ export default function ViewSamplers() {
         </div>
       </header>
       <section>
+<<<<<<< HEAD
         {samplers.map((sampler, i) => (
           <SamplerCard key={i} {...sampler} handleCardSelection={handleCardSelection}  />
+=======
+        {samplers.map((sampler, index) => (
+          <SamplerCard {...sampler} key={index}/>
+>>>>>>> main
         ))}
       </section>
     </Wrapper>

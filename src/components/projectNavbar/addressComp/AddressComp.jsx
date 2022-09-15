@@ -5,7 +5,7 @@ const AddressComp = ({flow, user}) => {
         <AddressWrapper>
             <div className="addressBox">
                 {flow.length > 6 ? <p>FLOW {flow.slice(0,6)}</p> : <p> FLOW {flow} </p>}
-                <div className="dot"></div>
+                <div className="dot">|</div>
                 {user?.addr && (
                 <p>
                     {user?.addr.split(".")[0].length > 14
@@ -55,5 +55,10 @@ const AddressWrapper = styled.div`
                 }
             }
         }
+    }
+
+    .dot{
+        width: 8px;
+        padding: 8px;
     }
 `

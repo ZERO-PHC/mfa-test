@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from "next/image"
+import { useRouter } from "next/router"
 
 
 
@@ -41,8 +42,8 @@ export default function SamplerCard({ name, id, xp, active, handleCardSelection 
                             </li>
                         </ul>
                     </div>
-                    <button>
-                        START
+                    <button disabled={path == undefined ? true : false} onClick={() => router.push(path)}>
+                        {path == undefined ? "Coming soon..." : "Start"}
                     </button>
                 </div>
             </div>
@@ -116,11 +117,17 @@ const Wrapper = styled.main`
 
   .content{
     height:50%;
-    widht:100%;
+    width:100%;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:1rem 0.5rem 1rem 2rem;
+
+    button{
+        &:hover{
+            transform: scale(1.06);
+        }
+    }
   }
 
 `;

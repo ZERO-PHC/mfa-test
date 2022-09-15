@@ -18,8 +18,15 @@ const ProjectNavbar = ({
   setProjectDataLoginPage,
   projectDataMintPage,
   setProjectDataMintPage,
+<<<<<<< HEAD
   autoOpen,
   setAutoOpen,
+=======
+  stepsCadence,
+  setStepsCadence,
+  cadenceScriptsTransaction,
+  setCadenceScriptsTransaction
+>>>>>>> main
 }) => {
   const { logIn, logOut, user, flow } = useAuth();
   const router = useRouter();
@@ -37,9 +44,9 @@ const ProjectNavbar = ({
         <Link href={projectUrl}>
           <Image
             className="logo"
-            width={50}
-            height={50}
-            src={`/project/logos/${logoProjectLink}`}
+            width={70}
+            height={70}
+            src={logoProjectLink}
             alt='Project Logo'
           />
         </Link>
@@ -48,12 +55,23 @@ const ProjectNavbar = ({
       {user?.addr ? (
         <section>
           <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to create the Orbies Scripts and Transactions"}
+            magicSchoolData={cadenceScriptsTransaction}
+            setMagicSchoolData={setCadenceScriptsTransaction}
+            name={`${projectName} Scripts-Transactions Page`}
+            professor={"/frlabsAvatar.png"}
+          />
+          <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to build the Mint Page"}
             magicSchoolData={projectDataMintPage}
             setMagicSchoolData={setProjectDataMintPage}
-            projectToCheck={`${projectName} Login Page`}
             name={`${projectName} Mint Page`}
+<<<<<<< HEAD
             autoOpen={autoOpen}
             setAutoOpen={setAutoOpen}
+=======
+            professor={"/zeroAvatar.png"}
+>>>>>>> main
           />
           <AddressComp flow={flow} user={user} />
           <div style={{ width: "1rem" }}></div>
@@ -65,12 +83,23 @@ const ProjectNavbar = ({
         <div className="buttons">
        
           <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to deploy the Orbies Contract"}
+            magicSchoolData={stepsCadence}
+            setMagicSchoolData={setStepsCadence}
+            name={`${projectName} Cadence Page`}
+            professor={"/frlabsAvatar.png"}
+          />
+          <MagicSchoolPopover
+            title={"Explore the dapp and click this icon after that to learn how to build the Login Page"}
             magicSchoolData={projectDataLoginPage}
             setMagicSchoolData={setProjectDataLoginPage}
-            projectToCheck={`${projectName} Cadence Config`}
             name={`${projectName} Login Page`}
+<<<<<<< HEAD
             autoOpen={autoOpen}
             setAutoOpen={setAutoOpen}
+=======
+            professor={"/zeroAvatar.png"}
+>>>>>>> main
           />
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP
@@ -81,6 +110,8 @@ const ProjectNavbar = ({
   );
 };
 
+export default ProjectNavbar;
+
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: row;
@@ -90,7 +121,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   color: white;
   z-index: 20;
-  padding: 1rem 3rem;
+  padding: .5rem 3rem;
   font-family: "Monument";
 
   section {
@@ -107,19 +138,27 @@ const HeaderWrapper = styled.header`
   h2 {
     color: white;
     font-family: MonumentBold;
+    font-size: 1.7rem;
   }
 
   img {
+<<<<<<< HEAD
     // padding-right: 10px !important;
 
+=======
+>>>>>>> main
     &:hover {
       cursor: pointer;
     }
   }
 
+  .addressBox:hover{
+    cursor: pointer;
+  }
+
   .auth-btn {
     font-family: "Monument";
-    font-size: 12px;
+    font-size: 10px;
     padding: 10px 30px;
     background-color: gray;
     border-radius: 40px;
@@ -155,9 +194,13 @@ const HeaderWrapper = styled.header`
     color: white;
     font-family: "MonumentBold";
   }
+<<<<<<< HEAD
 `;
 
 
 
 
 export default ProjectNavbar;
+=======
+`;
+>>>>>>> main

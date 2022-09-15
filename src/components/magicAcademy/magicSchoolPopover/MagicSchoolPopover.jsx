@@ -108,6 +108,7 @@ margin: 0rem 1rem;
     div{
         font-family: "Monument" !important;
     }
+
     button{
         // color: #00FFB2;
         border-radius: 50%;

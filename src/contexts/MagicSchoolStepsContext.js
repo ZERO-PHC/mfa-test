@@ -27,8 +27,29 @@ export const StepsProvider = ({ children }) => {
   const [stepsMintSamplers, setStepsMintSamplers] = useState(
     MintPageDataSamplers
   );
-  const [stepsCadence, setStepsCadence] = useState(CadencePageData);
+  const [stepsCadence, setStepsCadence] = useState();
   const { user } = useAuth();
+
+  // useEffect that calls createLessons function
+  useEffect(() => {
+    createLessons();
+  }, []);
+
+
+  function createLessons() {
+    
+    LoginPageDataSamplers.forEach((step, i) => {
+      const docRef = doc(db, "lessons", "auth", "steps", `${i}`);
+
+      setDoc(docRef, step).catch((error) => {
+        console.error("Error adding document: ", error);
+      }
+    ).then(() => {
+      console.log("Document successfully written!");
+
+    });
+    });
+  }
 
   // create a function to update the steps from the user
   const completeStep = async (n) => {

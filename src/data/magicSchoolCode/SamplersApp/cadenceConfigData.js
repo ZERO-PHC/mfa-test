@@ -20,8 +20,8 @@ export const CadencePageData = [
       "This command will create a flow.json file inside your folder! Copy the command and run it in your terminal!",
     structureLink: "step1-cadence.png",
     codeSnippet: [
-      {
-        code: "flow init",
+      { 
+        code: "flow init",  
         match: false,
         percent: 0,
         professorText: {

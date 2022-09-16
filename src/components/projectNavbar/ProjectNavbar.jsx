@@ -15,21 +15,19 @@ const ProjectNavbar = ({
   projectName,
   logoProjectLink,
   projectDataLoginPage,
-  setProjectDataLoginPage,
   projectDataMintPage,
-  setProjectDataMintPage,
-<<<<<<< HEAD
-  autoOpen,
-  setAutoOpen,
-=======
   stepsCadence,
-  setStepsCadence,
   cadenceScriptsTransaction,
-  setCadenceScriptsTransaction
->>>>>>> main
 }) => {
-  const { logIn, logOut, user, flow } = useAuth();
+  const { logIn, logOut, user, flow, CurrentLesson } = useAuth();
   const router = useRouter();
+
+  const lessons = [
+    projectDataLoginPage,
+    stepsCadence,
+    cadenceScriptsTransaction,
+    projectDataMintPage,
+  ]
 
   useEffect(() => {
     if (!user?.loggedIn) {
@@ -54,7 +52,7 @@ const ProjectNavbar = ({
       </div>
       {user?.addr ? (
         <section>
-          <MagicSchoolPopover
+          {/* <MagicSchoolPopover
             title={"Explore the dapp and click this icon after that to learn how to create the Orbies Scripts and Transactions"}
             magicSchoolData={cadenceScriptsTransaction}
             setMagicSchoolData={setCadenceScriptsTransaction}
@@ -66,13 +64,10 @@ const ProjectNavbar = ({
             magicSchoolData={projectDataMintPage}
             setMagicSchoolData={setProjectDataMintPage}
             name={`${projectName} Mint Page`}
-<<<<<<< HEAD
             autoOpen={autoOpen}
             setAutoOpen={setAutoOpen}
-=======
             professor={"/zeroAvatar.png"}
->>>>>>> main
-          />
+          /> */}
           <AddressComp flow={flow} user={user} />
           <div style={{ width: "1rem" }}></div>
           <div className="addressBox" onClick={logOut}>
@@ -81,26 +76,26 @@ const ProjectNavbar = ({
         </section>
       ) : (
         <div className="buttons">
-       
-          <MagicSchoolPopover
+
+          {/* <MagicSchoolPopover
             title={"Explore the dapp and click this icon after that to learn how to deploy the Orbies Contract"}
             magicSchoolData={stepsCadence}
             setMagicSchoolData={setStepsCadence}
             name={`${projectName} Cadence Page`}
             professor={"/frlabsAvatar.png"}
-          />
-          <MagicSchoolPopover
-            title={"Explore the dapp and click this icon after that to learn how to build the Login Page"}
-            magicSchoolData={projectDataLoginPage}
-            setMagicSchoolData={setProjectDataLoginPage}
-            name={`${projectName} Login Page`}
-<<<<<<< HEAD
-            autoOpen={autoOpen}
-            setAutoOpen={setAutoOpen}
-=======
-            professor={"/zeroAvatar.png"}
->>>>>>> main
-          />
+          /> */}
+
+          {lessons?.map((lesson, index) => {
+            if (index  === CurrentLesson - 1) {
+             return <MagicSchoolPopover
+                title={"Explore the dapp and click this icon after that to learn how to build the Login Page"}
+                magicSchoolData={lesson}
+                name={`${projectName} Login Page`}
+                professor={ lesson === 1 || lesson === 4 ? "/zeroAvatar.png" : "/frlabsAvatar.png"}
+              />
+            }
+          })}
+
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP
           </div>
@@ -142,11 +137,8 @@ const HeaderWrapper = styled.header`
   }
 
   img {
-<<<<<<< HEAD
     // padding-right: 10px !important;
 
-=======
->>>>>>> main
     &:hover {
       cursor: pointer;
     }
@@ -194,13 +186,8 @@ const HeaderWrapper = styled.header`
     color: white;
     font-family: "MonumentBold";
   }
-<<<<<<< HEAD
 `;
 
 
 
 
-export default ProjectNavbar;
-=======
-`;
->>>>>>> main

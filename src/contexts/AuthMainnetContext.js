@@ -21,9 +21,9 @@ export default function AuthMainnetProvider({ children }) {
 
 
   useEffect(() => {
-    fcl.currentUser.subscribe(setUser)
-    console.log(user.addr)
-    if(user.addr != "") getFlow(user.addr)
+    // fcl.currentUser.subscribe(setUser)
+    // console.log(user.addr)
+    // if(user.addr != "") getFlow(user.addr)
   }, []);
 
 

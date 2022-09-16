@@ -4,11 +4,11 @@ import {
     PopoverTrigger,
 
 } from '@chakra-ui/react'
-export default function AvatarComponent({ checkStorage, path, active }) {
+export default function AvatarComponent({  path, active }) {
     return (
         <PopoverTrigger >
 
-            <AvatarWrapper onClick={checkStorage}>
+            <AvatarWrapper>
                <OrbsWrapper>
                {active && 
                <>

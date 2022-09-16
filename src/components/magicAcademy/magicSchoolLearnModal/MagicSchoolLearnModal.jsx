@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
   Fade,
   Modal,
@@ -9,7 +8,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
 } from "@chakra-ui/react";
 import IntroAndFinishView from "../introAndFinishView/IntroAndFinishView";
 import StepWithCodeView from "../stepWithCodeView/StepWithCodeView";
@@ -25,12 +23,15 @@ import { useRouter } from "next/router";
 
 import CodeStructDrawer from '../codeStructDrawer/CodeStructDrawer';
 import { useMagicSchoolSteps } from '../../../contexts/MagicSchoolStepsContext';
+import { useAuth } from "../../../contexts/AuthContext";
 
 
 const MagicSchoolLearnModal = ({
   isOpen,
+  setOpenModal,
   onClose,
   name,
+  step,
   steps,
   setSteps,
 }) => {
@@ -40,14 +41,15 @@ const MagicSchoolLearnModal = ({
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertTxt, setAlertTxt] = useState("");
   const [addedPrivateKey, setAddedPrivateKey] = useState(false);
-  const { completeStep } = useMagicSchoolSteps()
-  const router = useRouter();
+  const { completeStep, handleLessonCompletion } = useMagicSchoolSteps()
+  // deconstruct FirestoreUser from the useAuth hook
+  const { CurrentStep, CurrentLesson } = useAuth();
 
 
   const oneMoreStep = () => {
-    if(steps[n].alert){
+    if (steps[CurrentStep].alert) {
       setAlertOpen(true)
-      setAlertTxt(steps[n].alertText)
+      setAlertTxt(steps[CurrentStep].alertText)
     }
     setN(n + 1);
     completeStep(n)
@@ -60,62 +62,48 @@ const MagicSchoolLearnModal = ({
   };
 
   useEffect(() => {
-    if (steps[n].codeSnippet[0].professorText != undefined) {
-      setProfessorText(steps[n].codeSnippet[0].professorText);
-    }
-  }, [n]);
+    console.log("CurrentStep", CurrentStep)
+  }, [CurrentStep]);
 
-    const onComplete = () => {
-        // localStorage.setItem(name, JSON.stringify(steps))
-        
+  const onComplete = () => {
+    // localStorage.setItem(name, JSON.stringify(steps))
+    handleLessonCompletion()
+    setOpenModal(false)
+  }
 
-        onClose()
-        // if(name.includes("Cadence")){
-        //     // window.location.reload()
-        //     router.push("/samplers")
-        // }
-        // if(name.includes("Login")){
-        //     logIn()
-        }
-        
-  // const onComplete = () => {
-  //   onClose();
-  //   if (name.includes("Cadence")) {
-  //     router.push("/orbies");
-  //   }
-  //   if (name.includes("Login")) {
-  //     logIn();
-  //   }
-  // };
+  // if(!step ) {
+  //   return <div>loading...</div>  
+  // }
 
   return (
     <Wrapper>
-      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen} addedPrivateKey={addedPrivateKey}/>
+      <MagicAlertBadMagic text={alertTxt} alertOpen={alertOpen} setAlertOpen={setAlertOpen} addedPrivateKey={addedPrivateKey} />
       <Fade in={isOpen}>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent className={style.modal}>
-            <ModalHeader className={style.header}>{steps[n].title}</ModalHeader>
+            <ModalHeader className={style.header}>{step.title}</ModalHeader>
             <ModalCloseButton className={style.closeBtn} />
             <ModalBody className={style.body}>
               {
-                (n == 0 || n == steps.length - 1)
+                (CurrentStep == 0 || CurrentStep == steps.length - 1)
                 && (
                   <IntroAndFinishView
-                    professorName={steps[n].professorName}
-                    introduction={steps[n].introduction}
-                    subtitle={steps[n].subtitle}
-                    subtitle2={steps[n].subtitle2}
-                    rewards1={steps[n].rewards1}
-                    rewards2={steps[n].rewards2}
-                    rewards3={steps[n].rewards3}
-                    footer={steps[n].footer}
-                    buttons={steps[n].buttons}
+                    professorName={step.professorName}
+                    introduction={step.introduction}
+                    subtitle={step.subtitle}
+                    subtitle2={step.subtitle2}
+                    rewards1={step.rewards1}
+                    rewards2={step.rewards2}
+                    rewards3={step.rewards3}
+                    footer={step.footer}
+                    buttons={step.buttons}
                   />
                 )
-            }
-              {steps[n].codeSnippet[0].code && (
+              }
+              {step.codeSnippet[0].code && (
                 <StepWithCodeView
+                  step={step}
                   steps={steps}
                   n={n}
                   setSteps={setSteps}
@@ -126,8 +114,8 @@ const MagicSchoolLearnModal = ({
                 />
               )}
               {!(n == 0 || n == steps.length - 1) &&
-                !steps[n].codeSnippet[0].code && 
-                !steps[n].form &&
+                !step.codeSnippet[0].code &&
+                !step.form &&
                 (
                   <StepNoCodeView
                     steps={steps}
@@ -136,25 +124,25 @@ const MagicSchoolLearnModal = ({
                     setStructDrawerOpen={setStructDrawerOpen}
                   />
                 )}
-                {
-                steps[n].form && (
-                    <MagicSchoolFormWrapper
+              {
+                step.form && (
+                  <MagicSchoolFormWrapper
                     structDrawerOpen={structDrawerOpen}
                     setStructDrawerOpen={setStructDrawerOpen}
                     setAddedPrivateKey={setAddedPrivateKey}
-                    step={steps[n]}
-                    />
-              )}
+                    step={step}
+                  />
+                )}
             </ModalBody>
             <ModalFooter className={style.footer}>
-                {
-                (steps[n].codeSnippet[0].code || steps[n].form)
+              {
+                (step.codeSnippet[0].code || step.form)
                 &&
                 <ProfessorTextDialogBox
-                professorText={professorText}
-                step={steps[n]}
+                  professorText={professorText}
+                  step={step}
                 />
-                }
+              }
               <MagicModalFooter
                 n={n}
                 steps={steps}
@@ -162,7 +150,7 @@ const MagicSchoolLearnModal = ({
                 oneLessStep={oneLessStep}
                 onComplete={onComplete}
                 professorAvatar={steps[0].professorAvatar}
-                />
+              />
             </ModalFooter>
           </ModalContent>
         </Modal>

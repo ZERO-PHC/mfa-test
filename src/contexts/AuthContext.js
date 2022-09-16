@@ -35,22 +35,25 @@ fcl.config({
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState({ loggedIn: false, addr: undefined });
   const [FirestoreUser, setFirestoreUser] = useState(null);
-  
+  const [GoogleUser, setGoogleUser] = useState(null);
+  const [CurrentStep, setCurrentStep] = useState(null);
+  const [CurrentLesson, setCurrentLesson] = useState(null);
   const [flow, setFlow] = useState(0);
   const router = useRouter();
 
 
   useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const uid = user.uid;
-          setUser(user);
+      onAuthStateChanged(auth, (googleUser) => {
+        if (googleUser) {
+          setGoogleUser(googleUser);
           // navigate to home page
           router.push("/viewSamplers");
-          console.log({ user });
+          // console.log({ googleUser });
         } else {
-          setUser(null);
-          console.log("no user");
+          router.push("/");
+
+          setGoogleUser(null);
+          console.log("no googleUser");
         }
       });
     // fcl.currentUser.subscribe(setUser)
@@ -58,23 +61,28 @@ export default function AuthProvider({ children }) {
     // if(user.addr != "") getFlow(user.addr)
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const userRef = doc(db, "users", user.email);
-  //     const unsub = onSnapshot(userRef, (snapshot) => {
-  //       if (snapshot.exists) {
-  //         const userObj = snapshot.data();
-  //         console.log("userObj", userObj);
-  //         setFirestoreUser(userObj);
-  //         setCoins(userObj.coins);
-  //       }
-  //     });
-  //     return () => {
-  //       // clean up the listener
-  //       unsub();
-  //     };
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (GoogleUser) {
+      const userRef = doc(db, "users", GoogleUser.uid);
+      const unsub = onSnapshot(userRef, (snapshot) => {
+        if (snapshot.exists) {
+          const userObj = snapshot.data();
+          console.log("userObj", userObj);
+          setFirestoreUser(userObj);
+          setCurrentStep(userObj.currentStep);
+          console.log("currentStep", userObj.currentStep);
+          
+          setCurrentLesson(userObj.currentLesson);
+          console.log("CurrentLesson", userObj.currentLesson);
+        }
+      });
+      return () => {
+        // clean up the listener
+        unsub();
+      };
+      
+    }
+  }, [GoogleUser]);
 
   const provider = new GoogleAuthProvider();
   const login = () => {
@@ -107,19 +115,19 @@ export default function AuthProvider({ children }) {
 
   // create createFirestoreUser function
   const createFirestoreUser = async (user) => {
-    const userRef = doc(db, "users", user.email);
+    const userRef = doc(db, "users", user.uid);
     // const userDoc = await userRef.get();
     // if (!userDoc.exists) {
     const userObj = {
       // name: user.displayName,
       email: user.email,
-      coins: 0,
+      xp: 0,
       // photoURL: user.photoURL,
       uid: user.uid,
       createdAt: new Date(),
       name: 'test',
-      postedArtworks: [],
-      bookmarkedArtworks: [],
+      currentStep: 1,
+      currentLesson: 1,
     };
     await setDoc(userRef, userObj);
     // }
@@ -132,15 +140,14 @@ export default function AuthProvider({ children }) {
   };
 
 
+  const logOut = async () => {
+    await fcl.unauthenticate();
+    setUser({ addr: undefined, loggedIn: false });
+  };
 
-  // const logOut = async () => {
-  //   await fcl.unauthenticate();
-  //   setUser({ addr: undefined, loggedIn: false });
-  // };
-
-  // const logIn = async () => {
-  //   const res = await fcl.authenticate();
-  // };
+  const logIn = async () => {
+    const res = await fcl.authenticate();
+  };
 
 
   const signUp = () => {
@@ -168,6 +175,10 @@ export default function AuthProvider({ children }) {
   }
 
   const value = {
+    GoogleUser,
+    CurrentLesson,
+    CurrentStep,
+    FirestoreUser,
     logout,
     login,
     signUp,

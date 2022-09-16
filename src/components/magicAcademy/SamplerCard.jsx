@@ -5,7 +5,9 @@ import { useRouter } from "next/router"
 
 
 
-export default function SamplerCard({ name, id, xp, active, handleCardSelection }) {
+export default function SamplerCard({ name, id, xp, active, handleCardSelection, path }) {
+    const router = useRouter();
+
     return (
         <Wrapper onClick={handleCardSelection}>
 

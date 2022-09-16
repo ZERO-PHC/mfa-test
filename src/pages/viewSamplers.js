@@ -50,13 +50,10 @@ export default function ViewSamplers() {
         </div>
       </header>
       <section>
-<<<<<<< HEAD
-        {samplers.map((sampler, i) => (
-          <SamplerCard key={i} {...sampler} handleCardSelection={handleCardSelection}  />
-=======
+        {/* {samplers.map((sampler, i) => (
+          <SamplerCard key={i} {...sampler} handleCardSelection={handleCardSelection}  /> */}
         {samplers.map((sampler, index) => (
           <SamplerCard {...sampler} key={index}/>
->>>>>>> main
         ))}
       </section>
     </Wrapper>

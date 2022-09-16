@@ -12,15 +12,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-// import { Canvas, useFrame } from "@react-three/fiber";
-// import {
-//   Image,
-//   useLoader,
-//   Sphere,
-//   PerspectiveCamera,
-//   OrthographicCamera,
-//   OrbitControls,
-// } from "@react-three/drei";
+
 
 // useRouter
 import { useRouter } from "next/router";
@@ -32,18 +24,18 @@ export default function Home() {
   const [Loading, setLoading] = useState(true);
   const { login } = useAuth()
 
-  const onLoad = (spline) => {
-    console.log("loaded", spline);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  };
+  // const onLoad = (spline) => {
+  //   console.log("loaded", spline);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1500);
+  // };
 
   return (
     <Wrapper>
       {/* <Suspense fallback={<div>loading</div>}> */}
       {/* {Loading && <main>loading spinner </main>} */}
-      {!Loading && (
+      {Loading && (
         <HeaderWrapper>
           <header>
             <div>
@@ -70,14 +62,14 @@ export default function Home() {
           </div>
         </HeaderWrapper>
       )}
-      <Spline
+      {/* <Spline
         style={{
           position: "absolute",
           bottom: "0px",
         }}
         scene="https://prod.spline.design/ow1z-xuvzgX1wgCc/scene.splinecode"
         onLoad={onLoad}
-      />
+      /> */}
       {/* </Suspense> */}
     </Wrapper>
   );

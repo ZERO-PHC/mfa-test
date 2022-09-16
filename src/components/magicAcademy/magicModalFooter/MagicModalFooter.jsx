@@ -14,7 +14,8 @@ const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar,
             PREV
           </Button>
           {!steps[n].lastStep ? (
-            <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
+            // <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
+            <Button onClick={oneMoreStep} >
               NEXT
             </Button>
           ) : (

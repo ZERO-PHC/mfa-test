@@ -4,7 +4,7 @@ import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
 import styled from "styled-components";
 
 const Orbies = () => {
-  const { stepsSamplers, setStepsSamplers, stepsMintSamplers, setStepsMintSamplers, stepsCadence, setStepsCadence, orbiesScriptsTransactions, setOrbiesScriptsTransactions } = useMagicSchoolSteps();  
+  const { stepsSamplers, stepsMintSamplers, stepsCadence, orbiesScriptsTransactions } = useMagicSchoolSteps();  
 
   return (
     <Wrapper>
@@ -13,13 +13,9 @@ const Orbies = () => {
       logoProjectLink="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/logo.png"
       projectName="ORBIES"
       projectDataLoginPage={stepsSamplers}
-      setProjectDataLoginPage={setStepsSamplers}
       projectDataMintPage={stepsMintSamplers}
-      setProjectDataMintPage={setStepsMintSamplers}
-      stepsCadence={stepsCadence}
-      setStepsCadence={setStepsCadence}
+      stepsCadence={stepsCadence}   
       cadenceScriptsTransaction={orbiesScriptsTransactions}
-      setCadenceScriptsTransaction={setOrbiesScriptsTransactions}
       />
       <OrbiesSection />
     </Wrapper>

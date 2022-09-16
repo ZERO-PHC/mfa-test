@@ -21,40 +21,17 @@ import * as style from './PopoverStyles.module.css'
 import AvatarComponent from '../AvatarComponent';
 import HorizontalSpacer from '../../HorizontalSpacer';
 
-const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, projectToCheck, autoOpen, setAutoOpen }) => {
+const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, projectToCheck }) => {
     const [OpenModal, setOpenModal] = useState(false);
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure({ isOpen: false })
+    const [PopOpen, setPopOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
-    const { logIn, logOut } = useAuth();
+    const { logIn, logOut, CurrentLesson } = useAuth();
 
 
     useEffect(() => {
-        // setTimeout(() => {
-        //     onOpen()
-        // }, 2000);
+        console.log('magicSchoolData', magicSchoolData)
     }, [])
-
-
-    const checkStorage = () => {
-        if (localStorage.getItem(name)) {
-            setMagicSchoolData(JSON.parse(localStorage.getItem(name)))
-        }
-    }
-
-    const checkProject = () => {
-        if (projectToCheck) {
-            if (typeof window !== 'undefined') {
-                if (localStorage.getItem(projectToCheck)) {
-                    let project = Object.values(JSON.parse(localStorage.getItem(projectToCheck)))
-                    if (project[project.length - 2].completed) {
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-        } else { return true }
-    }
 
     const handleStart = () => {
         onOpen()
@@ -63,11 +40,11 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
 
 
     return (
-        <PopoverStyle onClick={() => setAutoOpen(!autoOpen)}>
-            <Popover isOpen={autoOpen}>
-                <AvatarComponent checkStorage={checkStorage} path='/assets/frAvatar.png' active={true} />
+        <PopoverStyle onClick={() => setPopOpen(!PopOpen)}>
+            <Popover isOpen={PopOpen}>
+                <AvatarComponent  path='/assets/frAvatar.png' active={CurrentLesson === 2|| CurrentLesson === 3} />
                 <HorizontalSpacer width={'3rem'} />
-                <AvatarComponent checkStorage={checkStorage} path='/assets/ZerøAvatar.png' active={false} />
+                <AvatarComponent  path='/assets/ZerøAvatar.png' active={CurrentLesson === 1 || CurrentLesson === 4} />
 
                 <Portal>
                     <PopoverContent className={style.content}>
@@ -78,7 +55,7 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
                         <PopoverBody className={style.body}>
                             <Button
                                 colorScheme='blue'
-                                onClick={() => setAutoOpen(false)}
+                                onClick={() => setPopOpen(false)}
                             >
                                 EXPLORE
                             </Button>
@@ -94,7 +71,24 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
                     </PopoverContent>
                 </Portal>
             </Popover>
-            <MagicSchoolLearnModal isOpen={OpenModal} onOpen={onOpen} onClose={onClose} onToggle={onToggle} name={name} steps={magicSchoolData} setSteps={setMagicSchoolData} logIn={logIn} />
+            {magicSchoolData?.map((step, index) => {
+                if (index === CurrentLesson) {
+                    return (
+                        <MagicSchoolLearnModal
+                            key={index}
+                            step={step}
+                            steps={magicSchoolData}
+                            setSteps={setSteps}
+                            isOpen={OpenModal}
+                            onClose={onClose}
+                            setOpenModal={setOpenModal}
+                            setMagicSchoolData={setMagicSchoolData}
+                            name={name}
+                        />
+                    )
+                }
+            })}
+        {/* //  <MagicSchoolLearnModal isOpen={OpenModal} setOpenModal={setOpenModal} onOpen={onOpen} onToggle={onToggle} name={name} steps={magicSchoolData} setSteps={setMagicSchoolData} logIn={logIn} /> */}
         </PopoverStyle>
     )
 }

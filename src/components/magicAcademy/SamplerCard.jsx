@@ -2,11 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from "next/image"
 import { useRouter } from "next/router"
+import { useMagicSchoolSteps } from '../../contexts/MagicSchoolStepsContext';
 
 
 
 export default function SamplerCard({ name, id, xp, active, handleCardSelection, path }) {
     const router = useRouter();
+    const { getOrbiesData } = useMagicSchoolSteps()
+
+    const handleCardClick = async () => {
+        await getOrbiesData() 
+        router.push(path)
+    }
 
     return (
         <Wrapper onClick={handleCardSelection}>
@@ -44,7 +51,7 @@ export default function SamplerCard({ name, id, xp, active, handleCardSelection,
                             </li>
                         </ul>
                     </div>
-                    <button disabled={path == undefined ? true : false} onClick={() => router.push(path)}>
+                    <button disabled={path == undefined ? true : false} onClick={() => handleCardClick(path)}>
                         {path == undefined ? "Coming soon..." : "Start"}
                     </button>
                 </div>

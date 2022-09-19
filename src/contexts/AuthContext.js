@@ -16,21 +16,22 @@ import {
   onSnapshot,
   collection,
   getDocs,
+  updateDoc
 } from "firebase/firestore";
 
-// import next router 
+// import next router
 import { useRouter } from "next/router";
 
 export const useAuth = () => useContext(AuthContext);
 
 fcl.config({
   "app.detail.title": "Magic Academy Testnet App", // this adds a custom name to our wallet
-  "app.detail.icon": "https://res.cloudinary.com/do4mactw0/image/upload/v1655577809/Logo_m6ofww.png", // this adds a custom image to our wallet
+  "app.detail.icon":
+    "https://res.cloudinary.com/do4mactw0/image/upload/v1655577809/Logo_m6ofww.png", // this adds a custom image to our wallet
   "accessNode.api": "https://rest-testnet.onflow.org", // this is for the local emulator
   "discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn", // this is for the local dev wallet
   "0xDeployer": process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, // this auto configures `0xDeployer` to be replaced by the address in txs and scripts
-})
-
+});
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState({ loggedIn: false, addr: undefined });
@@ -38,24 +39,25 @@ export default function AuthProvider({ children }) {
   const [GoogleUser, setGoogleUser] = useState(null);
   const [CurrentStep, setCurrentStep] = useState(null);
   const [CurrentLesson, setCurrentLesson] = useState(null);
+  const [Lesson, setLesson] = useState();
+  const [Step, setStep] = useState(null);
   const [flow, setFlow] = useState(0);
   const router = useRouter();
 
-
   useEffect(() => {
-      onAuthStateChanged(auth, (googleUser) => {
-        if (googleUser) {
-          setGoogleUser(googleUser);
-          // navigate to home page
-          router.push("/viewSamplers");
-          // console.log({ googleUser });
-        } else {
-          router.push("/");
+    onAuthStateChanged(auth, (googleUser) => {
+      if (googleUser) {
+        setGoogleUser(googleUser);
+        // navigate to home page
+        router.push("/viewSamplers");
+        // console.log({ googleUser });
+      } else {
+        router.push("/");
 
-          setGoogleUser(null);
-          console.log("no googleUser");
-        }
-      });
+        setGoogleUser(null);
+        console.log("no googleUser");
+      }
+    });
     // fcl.currentUser.subscribe(setUser)
     // console.log(user.addr)
     // if(user.addr != "") getFlow(user.addr)
@@ -67,20 +69,45 @@ export default function AuthProvider({ children }) {
       const unsub = onSnapshot(userRef, (snapshot) => {
         if (snapshot.exists) {
           const userObj = snapshot.data();
-          console.log("userObj", userObj);
+          if(userObj) {
+            console.log("userObj", userObj);
           setFirestoreUser(userObj);
-          setCurrentStep(userObj.currentStep);
+          setCurrentStep(userObj.currentStep );
           console.log("currentStep", userObj.currentStep);
-          
+
+          const currentStep = userObj.currentStep.toString();
+          const stepRef = doc(
+            db,
+            "lessons",
+            "orbies_auth",
+            "steps",
+            currentStep
+          );
+
+          getDoc(stepRef)
+            .then((doc) => {
+              if (doc.exists()) {
+                // console.log("Document data:", doc.data());
+                setStep(doc.data());
+              } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+              }
+            })
+            .catch((error) => {
+              console.log("Error getting document:", error);
+            });
+
           setCurrentLesson(userObj.currentLesson);
           console.log("CurrentLesson", userObj.currentLesson);
+          }
+          
         }
       });
       return () => {
         // clean up the listener
         unsub();
       };
-      
     }
   }, [GoogleUser]);
 
@@ -125,7 +152,7 @@ export default function AuthProvider({ children }) {
       // photoURL: user.photoURL,
       uid: user.uid,
       createdAt: new Date(),
-      name: 'test',
+      name: "test",
       currentStep: 1,
       currentLesson: 1,
     };
@@ -133,12 +160,10 @@ export default function AuthProvider({ children }) {
     // }
   };
 
-
   const logout = async () => {
     await auth.signOut();
     router.push("/");
   };
-
 
   const logOut = async () => {
     await fcl.unauthenticate();
@@ -149,13 +174,11 @@ export default function AuthProvider({ children }) {
     const res = await fcl.authenticate();
   };
 
-
   const signUp = () => {
     fcl.signUp();
   };
 
   async function getFlow(address) {
-   
     try {
       const res = await fcl.query({
         cadence: `
@@ -168,13 +191,144 @@ export default function AuthProvider({ children }) {
         }`,
         args: (arg, t) => [arg(address, t.Address)],
       });
-      setFlow(res)
+      setFlow(res);
     } catch (error) {
-      console.log("err:", error);
+      // console.log("err:", error);
     }
   }
 
+  const updateStep = async (e, guideline, idx) => {
+    const userValue = e.target.value;
+
+    setStep((prevState) => ({
+      ...prevState,
+      codeSnippet: getNewSnippet(
+        prevState.codeSnippet,
+        userValue,
+        guideline,
+        idx
+      ),
+      completed: checkStepCompletion(
+        getNewSnippet(prevState.codeSnippet, userValue, guideline, idx)
+      ),
+    }));
+  };
+
+  const getNewSnippet = (prevCodeSnippet, userValue, guideline, idx) => {
+    const splitedUserValue = userValue.split("");
+    const splitedLine = guideline.code.split("");
+    let length = splitedUserValue.length;
+
+    const newCodeSnippet = prevCodeSnippet;
+    const actualLine = getActualLine(newCodeSnippet, guideline);
+    const isMatched = checkMatch(splitedUserValue, splitedLine, length);
+    actualLine.match = isMatched;
+    actualLine.percent = getPercent(splitedLine, length);
+    actualLine.isCompleted = checkLineCompletion(actualLine.percent, idx);
+    actualLine.input = userValue
+
+    // console.log("newCodeSnippet", newCodeSnippet);
+    return newCodeSnippet;
+  };
+
+  const getPercent = (splitedLine, length) => {
+    return length / splitedLine.length;
+  };
+
+  const getActualLine = (codelines, guideline) => {
+    const actualLine = codelines.find((line) => line.code === guideline.code);
+    console.log("actualLine", actualLine);
+    return actualLine;
+  };
+
+  const checkMatch = (splitedUserValue, splitedLine, length) => {
+    let passed = true;
+
+    for (let i = 0; i < length; i++) {
+      if (splitedUserValue[i] != splitedLine[i]) {
+        passed = false;
+      }
+    }
+
+    return passed;
+  };
+
+  const checkStepCompletion = (codeSnippet) => {
+    console.log("snippet in completion", codeSnippet);
+    const isCompleted = codeSnippet.every((line) => line.isCompleted);
+    console.log("isCompleted", isCompleted);
+    return isCompleted;
+  };
+
+  const checkLineCompletion = (percent, idx) => {
+    if (percent === 1) {
+      updateCompletedLines(idx);
+      return true;
+    }
+  };
+
+  const updateCompletedLines = (idx) => {
+    // get user ref from firestore
+    const completedLinesRef = doc(
+      db,
+      "users",
+      GoogleUser.uid,
+      "completedLines",
+      idx.toString()
+    );
+
+    const completedLine = {
+      lesson: CurrentLesson,
+      step: CurrentStep,
+      line: idx,
+    };
+
+    setDoc(completedLinesRef, completedLine, { merge: true })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        console.log("Document successfully written!");
+      });
+  };
+
+  const handleLessonCompletion = async () => {
+    // update the steps in the database of the user
+    console.log("user", GoogleUser.uid);
+    const docRef = doc(db, "users", GoogleUser.uid);
+    await updateDoc(docRef, {
+      currentLesson: CurrentLesson + 1,
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        console.log("Completed successfully written!");
+        resetCurrentStep();
+      });
+  };
+
+  
+
+  const resetCurrentStep = async () => {
+    // update the steps in the database of the user
+    console.log("user", GoogleUser.uid);
+    const docRef = doc(db, "users", GoogleUser.uid);
+    await updateDoc(docRef, {
+      currentStep: 1,
+    })
+      .catch((error) => {
+        console.error("Error resetting document: ", error);
+      })
+      .then(() => {
+        console.log("Completed reset written!");
+      });
+  };
+
   const value = {
+    handleLessonCompletion, 
+    updateStep,
+    Step,
     GoogleUser,
     CurrentLesson,
     CurrentStep,
@@ -184,7 +338,7 @@ export default function AuthProvider({ children }) {
     signUp,
     user,
     flow,
-    getFlow
+    getFlow,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,30 +1,41 @@
 import { useEffect } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useMagicSchoolSteps } from "../../../contexts/MagicSchoolStepsContext";
 
-const InputComp = ({compareChar, line, steps, step, inputRef}) => {
+const InputComp = ({line, step, index}) => {
+
+    // const { dispatch } = useMagicSchoolSteps()
+    // deconstruct updateLine from the useAuth hook
+    const { updateStep } = useAuth();
+
+
+
     useEffect(() => {
-        inputRef.value = ""
+        // console.log('comp line', line)
     }
-    , [step])
+    , [step, line])
 
     return (
         <div 
-        // key={index} 
         className={`${ line.match ? 'input' : 'input transparent'} 
         ${line.percent == 1 && line.match ? 'full' : ''} 
         ${!line.match && line.percent > 0 ? 'error' : ''}
-        ${steps[step].completed ? 'allChecked' : ''}
-        ${steps[step].codeSnippet == '' ? 'none' : ''} 
+        ${step.completed ? 'allChecked' : ''}
+        ${step.codeSnippet == '' ? 'none' : ''} 
         `} 
         style={{background: `linear-gradient(270deg, rgba(0, 255, 178, ${line.percent}) -4.08%, rgba(217, 217, 217, 0) ${70}%)`}}
         >
             <p className="placeholderParag">{line.code}</p>
         <input 
-        ref={el => inputRef = el} 
-        placeholder={steps[step].codeSnippet.completed ? line.code : ""} 
+        // ref={el => inputRef = el} 
+        value={line.input}
+        placeholder={step.codeSnippet.completed ? line.code : ""} 
         type="text"
         className={`inputText`} 
-        onChange={ e => compareChar(e, line)}/>
-    </div>
+        // onChange={ e => dispatch({ type: "UPDATE_LESSON", payload: {e, line} })}/>
+        onChange={ e => updateStep(e, line, index)}/>
+
+        </div>
     )
 }
 

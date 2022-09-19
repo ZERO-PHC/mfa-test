@@ -9,25 +9,18 @@ import MagicSchoolPopover from "../magicAcademy/magicSchoolPopover/MagicSchoolPo
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import AddressComp from "./addressComp/AddressComp";
+import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
 
 const ProjectNavbar = ({
   projectUrl,
   projectName,
   logoProjectLink,
-  projectDataLoginPage,
-  projectDataMintPage,
-  stepsCadence,
-  cadenceScriptsTransaction,
+  
 }) => {
   const { logIn, logOut, user, flow, CurrentLesson } = useAuth();
+  const { OrbiesLessons } = useMagicSchoolSteps()
   const router = useRouter();
 
-  const lessons = [
-    projectDataLoginPage,
-    stepsCadence,
-    cadenceScriptsTransaction,
-    projectDataMintPage,
-  ]
 
   useEffect(() => {
     if (!user?.loggedIn) {
@@ -39,15 +32,15 @@ const ProjectNavbar = ({
   return (
     <HeaderWrapper>
       <div>
-        <Link href={projectUrl}>
-          <Image
+        {/* <Link href={projectUrl}>
+          {/* <Image
             className="logo"
             width={70}
             height={70}
             src={logoProjectLink}
             alt='Project Logo'
-          />
-        </Link>
+          /> 
+        </Link> */}
         <h2>{projectName}</h2>
       </div>
       {user?.addr ? (
@@ -85,16 +78,13 @@ const ProjectNavbar = ({
             professor={"/frlabsAvatar.png"}
           /> */}
 
-          {lessons?.map((lesson, index) => {
-            if (index  === CurrentLesson - 1) {
+          
              return <MagicSchoolPopover
                 title={"Explore the dapp and click this icon after that to learn how to build the Login Page"}
-                magicSchoolData={lesson}
+                lesson={OrbiesLessons[CurrentLesson - 1]}
                 name={`${projectName} Login Page`}
-                professor={ lesson === 1 || lesson === 4 ? "/zeroAvatar.png" : "/frlabsAvatar.png"}
               />
-            }
-          })}
+            
 
           <div className="auth-btn" onClick={logIn}>
             LOG IN / SIGN UP

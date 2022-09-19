@@ -1,65 +1,23 @@
+import { useAuth } from '../../../contexts/AuthContext';
+import { useMagicSchoolSteps } from '../../../contexts/MagicSchoolStepsContext';
 import InputComp from './InputComp';
 const { default: styled } = require("styled-components")
 
 
-const MagicSchoolInputWrapper = ({step, steps, setSteps, setProfessorText, name}) => {
+const MagicSchoolInputWrapper = ({name}) => {
 
-    let inputRef = ""
+    const { Step } = useAuth()
 
-    const compareChar = (event, line) => {
-        let userValue = event.target.value;
-        const splitedUserValue = userValue.split("")
-        
-        let length1 = splitedUserValue.length
-        const splitedLine = line.code.split("");
-
-        setSteps(prevState => {
-            let isTrue = false;
-            const codeLines = prevState[step].codeSnippet;
-
-            const newState = codeLines.map((obj) => {
-                //IT'S THE SAME LINE
-                if(obj.code == line.code){
-                    if(obj.professorText != undefined){
-                        setProfessorText(obj.professorText)
-                    }
-                    let passed = true;
-                    for(let i = 0; i < splitedUserValue.length; i++){
-                        if(splitedUserValue[i] != splitedLine[i]){
-                            passed = false;
-                            isTrue = false;
-                        }
-                    }
-                    if((splitedUserValue[length1 -1] === splitedLine[length1 -1]) && passed){
-                        return {...obj, match: true, percent: (length1 / splitedLine.length)}
-                    } else {
-                        isTrue = false;
-                        return {...obj, match: false, percent: (length1 / splitedLine.length)}
-                    }
-                 }
-                //IT'S NOT THE SAME LINE
-                return {...obj}
-            });
-            
-            newState.map(code => {
-                if(code.percent == 1 && code.match){
-                    isTrue = true;
-                } else {
-                    isTrue = false;
-                }
-            })
-            localStorage.setItem(name, JSON.stringify(steps))
-            return {...prevState, [step]: {...prevState[step], codeSnippet: newState, completed: isTrue}}
-        })
-    }
+    // upodate only the local state with only getting form fb the data of the actual step the data that we need
+    // and base on that structure 
 
     return (
         <Wrapper>
             <div className={"inputs"}>
                 <form>
-                    {steps[step].codeSnippet.map((line, index) => {
+                    {Step && Step.codeSnippet.map((line, index) => {
                         return (
-                            <InputComp line={line} index={index} compareChar={compareChar} key={index} steps={steps} step={step} inputRef={inputRef}/>
+                            <InputComp key={index} line={line} step={Step} index={index}  />
                         )
                     })}
                 </form>

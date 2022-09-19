@@ -28,6 +28,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 
 const MagicSchoolLearnModal = ({
   isOpen,
+  lesson,
   setOpenModal,
   onClose,
   name,
@@ -41,18 +42,19 @@ const MagicSchoolLearnModal = ({
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertTxt, setAlertTxt] = useState("");
   const [addedPrivateKey, setAddedPrivateKey] = useState(false);
-  const { completeStep, handleLessonCompletion } = useMagicSchoolSteps()
+  const { completeStep,  } = useMagicSchoolSteps()
+  const { handleLessonCompletion } = useAuth();
   // deconstruct FirestoreUser from the useAuth hook
   const { CurrentStep, CurrentLesson } = useAuth();
 
 
   const oneMoreStep = () => {
-    if (steps[CurrentStep].alert) {
+    if (lesson[CurrentStep].alert) {
       setAlertOpen(true)
-      setAlertTxt(steps[CurrentStep].alertText)
+      setAlertTxt(lesson[CurrentStep].alertText)
     }
-    setN(n + 1);
-    completeStep(n)
+    // setN(n + 1);
+    completeStep(CurrentStep + 1)
   };
 
   const oneLessStep = () => {
@@ -63,6 +65,7 @@ const MagicSchoolLearnModal = ({
 
   useEffect(() => {
     console.log("CurrentStep", CurrentStep)
+    console.log('step', step)
   }, [CurrentStep]);
 
   const onComplete = () => {
@@ -71,9 +74,9 @@ const MagicSchoolLearnModal = ({
     setOpenModal(false)
   }
 
-  // if(!step ) {
-  //   return <div>loading...</div>  
-  // }
+  if(!step ) {
+    return <div>loading...</div>  
+  }
 
   return (
     <Wrapper>
@@ -82,11 +85,11 @@ const MagicSchoolLearnModal = ({
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent className={style.modal}>
-            <ModalHeader className={style.header}>{step.title}</ModalHeader>
-            <ModalCloseButton className={style.closeBtn} />
+            <ModalHeader className={style.header}>{lesson.title}</ModalHeader>
+            <ModalCloseButton className={style.closeBtn} onClick={()=> setOpenModal(false)} />
             <ModalBody className={style.body}>
               {
-                (CurrentStep == 0 || CurrentStep == steps.length - 1)
+                (CurrentStep == 0 || CurrentStep == lesson.length - 1)
                 && (
                   <IntroAndFinishView
                     professorName={step.professorName}
@@ -104,8 +107,8 @@ const MagicSchoolLearnModal = ({
               {step.codeSnippet[0].code && (
                 <StepWithCodeView
                   step={step}
-                  steps={steps}
-                  n={n}
+                  lesson={lesson}
+                  n={CurrentStep}
                   setSteps={setSteps}
                   setProfessorText={setProfessorText}
                   name={name}
@@ -113,13 +116,13 @@ const MagicSchoolLearnModal = ({
                   setStructDrawerOpen={setStructDrawerOpen}
                 />
               )}
-              {!(n == 0 || n == steps.length - 1) &&
+              {!(CurrentStep== 0 || CurrentStep== lesson.length - 1) &&
                 !step.codeSnippet[0].code &&
                 !step.form &&
                 (
                   <StepNoCodeView
-                    steps={steps}
-                    n={n}
+                    steps={lesson}
+                    n={CurrentStep}
                     structDrawerOpen={structDrawerOpen}
                     setStructDrawerOpen={setStructDrawerOpen}
                   />
@@ -144,12 +147,13 @@ const MagicSchoolLearnModal = ({
                 />
               }
               <MagicModalFooter
+                step={step}
                 n={n}
-                steps={steps}
+                steps={lesson}
                 oneMoreStep={oneMoreStep}
                 oneLessStep={oneLessStep}
                 onComplete={onComplete}
-                professorAvatar={steps[0].professorAvatar}
+                professorAvatar={lesson[0].professorAvatar}
               />
             </ModalFooter>
           </ModalContent>

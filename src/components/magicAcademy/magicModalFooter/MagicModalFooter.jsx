@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TimeLine from "../timeLine/TimeLine";
 import { Button } from "@chakra-ui/react";
 
-const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar, onComplete }) => {
+const MagicModalFooter = ({step, steps, n, oneMoreStep, oneLessStep, professorAvatar, onComplete }) => {
 
   return (
     <Wrapper>
@@ -13,7 +13,7 @@ const MagicModalFooter = ({ steps, n, oneMoreStep, oneLessStep, professorAvatar,
           <Button mr={3} onClick={oneLessStep} disabled={n == 0}>
             PREV
           </Button>
-          {!steps[n].lastStep ? (
+          {!step.lastStep ? (
             // <Button onClick={oneMoreStep} disabled={!steps[n].completed}>
             <Button onClick={oneMoreStep} >
               NEXT

@@ -23,7 +23,7 @@ export const OrbiesNftsProvider = ({ children }) => {
         });
         setOrbies(res);
     } catch (error) {
-        console.log("err:", error);
+        // console.log("err:", error);
     }}
 
     const mintOrbie = async (name, description, thumbnail, type, addr) => {
@@ -62,7 +62,7 @@ export const OrbiesNftsProvider = ({ children }) => {
         console.log("txid", txid);
     } catch (error) {
         setIsLoading(false);
-        console.log("err", error);
+        // console.log("err", error);
     }
     };
 

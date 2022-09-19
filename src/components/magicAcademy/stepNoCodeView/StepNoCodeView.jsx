@@ -12,8 +12,8 @@ const StepNoCodeView = ({
       <div className={"learnboxIntro"}>
         {steps[n].subtitle && <li>{steps[n].subtitle}</li>}
         {steps[n].subtitle2 && <li>{steps[n].subtitle2}</li>}
-        {steps[n].codeSnippet[0].professorText.title && <p>{steps[n].codeSnippet[0].professorText.title}</p>}
-        {
+        {/* {steps[n].codeSnippet[0].professorText.title && <p>{steps[n].codeSnippet[0].professorText.title}</p>} */}
+        {/* {
                         (
                           steps[n].codeSnippet[0].professorText 
                           &&
@@ -34,7 +34,7 @@ const StepNoCodeView = ({
                                 </a>
                               );
                             }
-                          )}
+                          )} */}
         <ModalBodyButtons
           step={steps[n]}
           structDrawerOpen={structDrawerOpen}

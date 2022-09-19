@@ -21,16 +21,14 @@ import * as style from './PopoverStyles.module.css'
 import AvatarComponent from '../AvatarComponent';
 import HorizontalSpacer from '../../HorizontalSpacer';
 
-const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, projectToCheck }) => {
+const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
     const [OpenModal, setOpenModal] = useState(false);
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure({ isOpen: false })
     const [PopOpen, setPopOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
-    const { logIn, logOut, CurrentLesson } = useAuth();
-
+    const { logIn, logOut, CurrentStep, CurrentLesson } = useAuth();
 
     useEffect(() => {
-        console.log('magicSchoolData', magicSchoolData)
     }, [])
 
     const handleStart = () => {
@@ -40,11 +38,13 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
 
 
     return (
-        <PopoverStyle onClick={() => setPopOpen(!PopOpen)}>
+        <PopoverStyle onClick={() => setPopOpen(!PopOpen)} key={key}>
             <Popover isOpen={PopOpen}>
-                <AvatarComponent  path='/assets/frAvatar.png' active={CurrentLesson === 2|| CurrentLesson === 3} />
-                <HorizontalSpacer width={'3rem'} />
-                <AvatarComponent  path='/assets/ZerøAvatar.png' active={CurrentLesson === 1 || CurrentLesson === 4} />
+                {CurrentLesson && <>
+                    <AvatarComponent path='/assets/frAvatar.png' active={CurrentLesson === 2 || CurrentLesson === 3} />
+                    <HorizontalSpacer width={'3rem'} />
+                    <AvatarComponent path='/assets/ZerøAvatar.png' active={CurrentLesson === 1 || CurrentLesson === 4} />
+                </>}
 
                 <Portal>
                     <PopoverContent className={style.content}>
@@ -71,24 +71,17 @@ const MagicSchoolPopover = ({ magicSchoolData, name, setMagicSchoolData, project
                     </PopoverContent>
                 </Portal>
             </Popover>
-            {magicSchoolData?.map((step, index) => {
-                if (index === CurrentLesson) {
-                    return (
-                        <MagicSchoolLearnModal
-                            key={index}
-                            step={step}
-                            steps={magicSchoolData}
-                            setSteps={setSteps}
-                            isOpen={OpenModal}
-                            onClose={onClose}
-                            setOpenModal={setOpenModal}
-                            setMagicSchoolData={setMagicSchoolData}
-                            name={name}
-                        />
-                    )
-                }
-            })}
-        {/* //  <MagicSchoolLearnModal isOpen={OpenModal} setOpenModal={setOpenModal} onOpen={onOpen} onToggle={onToggle} name={name} steps={magicSchoolData} setSteps={setMagicSchoolData} logIn={logIn} /> */}
+            return (
+            {(lesson && CurrentStep.toString()) && <MagicSchoolLearnModal
+                step={lesson[CurrentStep]}
+                lesson={lesson}
+                isOpen={OpenModal}
+                onClose={onClose}
+                setOpenModal={setOpenModal}
+                name={name}
+            />}
+            )
+
         </PopoverStyle>
     )
 }

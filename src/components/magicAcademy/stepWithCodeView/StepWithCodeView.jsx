@@ -3,25 +3,25 @@ import styled from "styled-components";
 import MagicSchoolInputWrapper from "../magicSchoolInput/MagicSchoolInputWrapper";
 import ModalBodyButtons from "../modalBodyButtons/ModalBodyButtons";
 
-const StepWithCodeView = ({ steps, n, setSteps, setProfessorText, name, structDrawerOpen, setStructDrawerOpen }) => {
+const StepWithCodeView = ({ lesson, n, setSteps, setProfessorText, name, structDrawerOpen, setStructDrawerOpen }) => {
   return (
     <Wrapper>
       <div className={"codebox"}>
         <div className={"codeboxHeader"}>
-          {steps[n].subtitle && <li>{steps[n].subtitle}</li>}
+          {lesson[n].subtitle && <li>{lesson[n].subtitle}</li>}
         </div>
         <div className={"learnbox"}>
-          {steps[n].subtitle2 && <p>{steps[n].subtitle2}</p>}
+          {lesson[n].subtitle2 && <p>{lesson[n].subtitle2}</p>}
           <MagicSchoolInputWrapper
             step={n}
-            steps={steps}
+            lesson={lesson}
             setSteps={setSteps}
             setProfessorText={setProfessorText}
             name={name}
           />
         </div>
         <ModalBodyButtons
-        step={steps[n]}
+        step={lesson[n]}
         structDrawerOpen={structDrawerOpen}
         setStructDrawerOpen={setStructDrawerOpen}
         />

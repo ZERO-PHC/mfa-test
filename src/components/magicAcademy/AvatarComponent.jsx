@@ -2,28 +2,26 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import {
     PopoverTrigger,
-
 } from '@chakra-ui/react'
-export default function AvatarComponent({  path, active }) {
+
+export default function AvatarComponent({ path, active }) {
     return (
         <PopoverTrigger >
-
             <AvatarWrapper>
-               <OrbsWrapper>
-               {active && 
-               <>
-                <div className='orb' > </div >
-                    <div className='orb1' ></div >
-                    <div className='orb2' ></div >
-                    <div className='orb3' ></div >
-               </>
-                   
-                }
+                <OrbsWrapper>
+                    {active &&
+                        <>
+                            <div className='orb' > </div >
+                            <div className='orb1' ></div >
+                            <div className='orb2' ></div >
+                            <div className='orb3' ></div >
+                        </>
+
+                    }
                 </OrbsWrapper>
                 <img src={path} style={{ zIndex: 3 }} alt="avatar" />
             </AvatarWrapper>
         </PopoverTrigger>
-
     )
 }
 

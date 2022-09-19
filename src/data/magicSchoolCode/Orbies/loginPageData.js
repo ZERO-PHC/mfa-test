@@ -2,6 +2,8 @@ import { CssCode } from "./cssCode";
 
 export const OrbiesLoginPageDataSamplers = [
   {
+    id: '0',
+    lesson:1,
     title: "Welcome",
     professorName: "I'm Zerø,",
     introduction: "I will be your React and FCL Professor!",
@@ -14,6 +16,7 @@ export const OrbiesLoginPageDataSamplers = [
     completed: true,
   },
   {
+    id:'1',
     title: "Step 1",
     subtitle: "We love React and NextJS, let's use it! Create a new directory and call it /orbies-dapp",
     subtitle2: "Inside your orbies-dapp directory let's create a next js app",
@@ -23,15 +26,14 @@ export const OrbiesLoginPageDataSamplers = [
         code: "npm create next-app",
         match: false,
         percent: 0,
-        professorText: {
-          title: "Create a new next js app",
-        },
+      
       },
     ],
     completed: false,
     allCode: `npm create next-app`,
   },
   {
+    id:'2',
     title: "Step 2",
     subtitle: "Inside your app file let's install the flow dependencies",
     subtitle2: "Use the command bellow on your terminal",
@@ -50,6 +52,7 @@ export const OrbiesLoginPageDataSamplers = [
     allCode: `npm i @onflow/fcl @onflow/types`,
   },
   {
+    id:'3',
     title: "Step 3",
     subtitle: "Add the styles inside /styles/globals.css",
     subtitle2: "You can remove all the code inside globals.css and paste the code below",
@@ -72,6 +75,7 @@ export const OrbiesLoginPageDataSamplers = [
     allCode: `${CssCode.Globals}`,
   },
   {
+    id:'4',
     title: "Step 4",
     subtitle: "Create a new Folder /flow inside root NextJS app!",
     subtitle2: "Inside /flow create a new file named config.js! Write the code below to be able to copy it!",
@@ -150,6 +154,7 @@ fcl.config({
 })`,
   },
   {
+    id:'5',
     title: "Step 5",
     subtitle: "We will use contexts from React to interact with the blockchain through FCL",
     subtitle2: " Create a new folder named contexts and Inside of /contexts create a file named AuthContext.js",
@@ -508,6 +513,7 @@ export default function AuthProvider({ children }) {
 }`,
   },
   {
+    id:'6',
     title: "Step 6",
     subtitle: "Inside pages/_app.js add the AuthProvider",
     subtitle2: "Fill in the code below, copy and paste it into your /_app.js",
@@ -589,6 +595,7 @@ export default MyApp;
         `,
   },
   {
+    id:'7',
     title: "Step 7",
     subtitle:
       "Create a new folder named components and inside it create a new file called Navbar.jsx",
@@ -775,6 +782,7 @@ export default Navbar;
         `,
   },
   {
+    id:'8',
     title: "Step 8",
     subtitle:
       "Create a new file named OrbiesSection.jsx",
@@ -1113,6 +1121,7 @@ const OrbiesSection = () => {
 export default OrbiesSection;`,
   },
   {
+    id:'9',
     title: "Step 9",
     subtitle: "Go to your index.js file and clean it up!",
     subtitle2: "Let's initialize the Home component and import the code that we made on past steps!",
@@ -1209,6 +1218,7 @@ const Home = () => {
 export default Home;`,
   },
   {
+    id:'10',
     title: "Done",
     subtitle:
       "You got it! Your application is already authenticating the users!",

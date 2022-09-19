@@ -2,7 +2,7 @@ import { OrbiesContract } from "./orbiesContract";
 import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
 
 export const OrbiesCadencePageData = [
-  {
+  {id:'0',
     title: "Welcome",
     professorName: "I'm FRLABS,",
     introduction: "I will be your Flow Professor!",
@@ -15,6 +15,7 @@ export const OrbiesCadencePageData = [
     completed: true,
   },
   {
+    id: '1',
     title: "Step 1",
     subtitle:
       "Create a new folder inside your preference path named /orbiesContract",
@@ -41,6 +42,7 @@ export const OrbiesCadencePageData = [
     allCode: `flow init`,
   },
   {
+    id: '2',
     title: "Step 2",
     subtitle: "Inside of your folder /orbiesContract create a new file named Orbies.cdc",
     subtitle2: "You don't need to do anything here, just copy the code and paste it in your Orbies.cdc file, but if you want learn what it's going on, let's go!",
@@ -995,6 +997,8 @@ export const OrbiesCadencePageData = [
     allCode: `${OrbiesContract}`,
   },
   {
+    id: '3',
+
     title: "Step 3",
     subtitle:
       "Let's create an account that we will use to deploy the Smart Contract",
@@ -1023,6 +1027,8 @@ export const OrbiesCadencePageData = [
     allCode: `flow keys generate`,
   },
   {
+    id: '4',
+
     title: "Step 4",
     subtitle:
       "Go to the Flow Faucet Testnet website and past your Public Key that you just generated",
@@ -1046,6 +1052,7 @@ export const OrbiesCadencePageData = [
     completed: true,
   },
   {
+    id: '5',
     title: "Step 5",
     subtitle: "Get the address generated in the faucet and the private key generated in your terminal",
     subtitle2:
@@ -1076,6 +1083,8 @@ export const OrbiesCadencePageData = [
     alertText: "Apprentice, this was a test and if you filled in your Private Key in the previous step you failed! Lucky for you I'm not a malefactor and we're on Testnet! Never ever share your Private Key with anyone again! It is your master key that holds all your tokens and NFTs"
   },
   {
+    id: '6',
+
     title: "Step 6",
     subtitle: "Last step apprentice! I'm surprised at you!",
     subtitle2:
@@ -1096,6 +1105,8 @@ export const OrbiesCadencePageData = [
     allCode: `flow project deploy --network=testnet`,
   },
   {
+    id: '7',
+
     title: "Done",
     subtitle:
       "You made it! First time ever? Let us know in our discord channel!",

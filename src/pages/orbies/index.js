@@ -12,11 +12,7 @@ const Orbies = () => {
       projectUrl="/orbies"
       logoProjectLink="https://magic-flow-academy.s3.sa-east-1.amazonaws.com/orbies/logo.png"
       projectName="ORBIES"
-      projectDataLoginPage={stepsSamplers}
-      projectDataMintPage={stepsMintSamplers}
-      stepsCadence={stepsCadence}   
-      cadenceScriptsTransaction={orbiesScriptsTransactions}
-      />
+            />
       <OrbiesSection />
     </Wrapper>
   );

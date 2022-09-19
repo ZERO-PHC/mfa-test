@@ -16,7 +16,8 @@ import {
   onSnapshot,
   collection,
   getDocs,
-  updateDoc
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 
 // import next router
@@ -39,6 +40,7 @@ export default function AuthProvider({ children }) {
   const [GoogleUser, setGoogleUser] = useState(null);
   const [CurrentStep, setCurrentStep] = useState(null);
   const [CurrentLesson, setCurrentLesson] = useState(null);
+  const [CurrentLine, setCurrentLine] = useState(null);
   const [Lesson, setLesson] = useState();
   const [Step, setStep] = useState(null);
   const [flow, setFlow] = useState(0);
@@ -69,39 +71,44 @@ export default function AuthProvider({ children }) {
       const unsub = onSnapshot(userRef, (snapshot) => {
         if (snapshot.exists) {
           const userObj = snapshot.data();
-          if(userObj) {
+          if (userObj) {
+            const currentLesson = userObj.currentLesson;
             console.log("userObj", userObj);
-          setFirestoreUser(userObj);
-          setCurrentStep(userObj.currentStep );
-          console.log("currentStep", userObj.currentStep);
+            setFirestoreUser(userObj);
 
-          const currentStep = userObj.currentStep.toString();
-          const stepRef = doc(
-            db,
-            "lessons",
-            "orbies_auth",
-            "steps",
-            currentStep
-          );
+            setCurrentLine(userObj.currentLine);
 
-          getDoc(stepRef)
-            .then((doc) => {
-              if (doc.exists()) {
-                // console.log("Document data:", doc.data());
-                setStep(doc.data());
-              } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-              }
-            })
-            .catch((error) => {
-              console.log("Error getting document:", error);
-            });
+            setCurrentStep(userObj.currentStep);
+            setCurrentLesson(currentLesson);
+            console.log("CurrentLesson", userObj.currentLesson);
+            console.log("currentStep", userObj.currentStep);
 
-          setCurrentLesson(userObj.currentLesson);
-          console.log("CurrentLesson", userObj.currentLesson);
+
+            const currentStep = userObj.currentStep.toString();
+            const stepRef = doc(
+              db,
+              "lessons",
+              getCurrentLesson(currentLesson),
+              "steps",
+              currentStep
+            );
+
+            getDoc(stepRef)
+              .then((doc) => {
+                if (doc.exists()) {
+                  // console.log("Document data:", doc.data());
+                  if (CurrentStep !== userObj.currentStep) {
+                    setStep(doc.data());
+                  }
+                } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!");
+                }
+              })
+              .catch((error) => {
+                console.log("Error getting document:", error);
+              });
           }
-          
         }
       });
       return () => {
@@ -110,6 +117,21 @@ export default function AuthProvider({ children }) {
       };
     }
   }, [GoogleUser]);
+
+  const getCurrentLesson = (currentLesson) => {
+    switch (currentLesson) {
+      case 1:
+        return "orbies_auth";
+      case 2:
+        return "orbies_cadence";
+      case 3:
+        return "orbies_interactions";
+      case 4:
+        return "orbies_mint";
+      default:
+        return "orbies_auth";
+    }
+  };
 
   const provider = new GoogleAuthProvider();
   const login = () => {
@@ -214,6 +236,22 @@ export default function AuthProvider({ children }) {
     }));
   };
 
+  const completeStep = async () => {
+    // update the steps in the database of the user
+    console.log("user", GoogleUser.uid);
+    const docRef = doc(db, "users", GoogleUser.uid);
+    await updateDoc(docRef, {
+      currentStep: CurrentStep + 1,
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        console.log("Document successfully written!");
+        setStep(null);
+      });
+  };
+
   const getNewSnippet = (prevCodeSnippet, userValue, guideline, idx) => {
     const splitedUserValue = userValue.split("");
     const splitedLine = guideline.code.split("");
@@ -225,7 +263,7 @@ export default function AuthProvider({ children }) {
     actualLine.match = isMatched;
     actualLine.percent = getPercent(splitedLine, length);
     actualLine.isCompleted = checkLineCompletion(actualLine.percent, idx);
-    actualLine.input = userValue
+    actualLine.input = userValue;
 
     // console.log("newCodeSnippet", newCodeSnippet);
     return newCodeSnippet;
@@ -262,34 +300,39 @@ export default function AuthProvider({ children }) {
 
   const checkLineCompletion = (percent, idx) => {
     if (percent === 1) {
-      updateCompletedLines(idx);
+      updateCurrentLine(idx);
       return true;
     }
   };
 
-  const updateCompletedLines = (idx) => {
+  const updateCurrentLine = (idx) => {
     // get user ref from firestore
-    const completedLinesRef = doc(
-      db,
-      "users",
-      GoogleUser.uid,
-      "completedLines",
-      idx.toString()
-    );
+    const CurrentLineRef = doc(db, "users", GoogleUser.uid);
 
-    const completedLine = {
-      lesson: CurrentLesson,
-      step: CurrentStep,
-      line: idx,
-    };
-
-    setDoc(completedLinesRef, completedLine, { merge: true })
+    // update the completed lines
+    updateDoc(CurrentLineRef, {
+      currentLine: idx + 1,
+    })
       .catch((error) => {
         console.error("Error adding document: ", error);
       })
       .then(() => {
-        console.log("Document successfully written!");
+        console.log("Document successfully updated!");
       });
+
+    // const completedLine = {
+    //   lesson: CurrentLesson,
+    //   step: CurrentStep,
+    //   line: idx,
+    // };
+
+    // setDoc(CurrentLineRef, completedLine, { merge: true })
+    //   .catch((error) => {
+    //     console.error("Error adding document: ", error);
+    //   })
+    //   .then(() => {
+    //     console.log("Document successfully written!");
+    //   });
   };
 
   const handleLessonCompletion = async () => {
@@ -308,8 +351,6 @@ export default function AuthProvider({ children }) {
       });
   };
 
-  
-
   const resetCurrentStep = async () => {
     // update the steps in the database of the user
     console.log("user", GoogleUser.uid);
@@ -326,7 +367,9 @@ export default function AuthProvider({ children }) {
   };
 
   const value = {
-    handleLessonCompletion, 
+    CurrentLine,
+    handleLessonCompletion,
+    completeStep,
     updateStep,
     Step,
     GoogleUser,

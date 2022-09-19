@@ -7,10 +7,7 @@ const { default: styled } = require("styled-components")
 const MagicSchoolInputWrapper = ({name}) => {
 
     const { Step } = useAuth()
-
-    // upodate only the local state with only getting form fb the data of the actual step the data that we need
-    // and base on that structure 
-
+  
     return (
         <Wrapper>
             <div className={"inputs"}>

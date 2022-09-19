@@ -42,8 +42,8 @@ const MagicSchoolLearnModal = ({
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertTxt, setAlertTxt] = useState("");
   const [addedPrivateKey, setAddedPrivateKey] = useState(false);
-  const { completeStep,  } = useMagicSchoolSteps()
-  const { handleLessonCompletion } = useAuth();
+  const {   } = useMagicSchoolSteps()
+  const { handleLessonCompletion, completeStep } = useAuth();
   // deconstruct FirestoreUser from the useAuth hook
   const { CurrentStep, CurrentLesson } = useAuth();
 

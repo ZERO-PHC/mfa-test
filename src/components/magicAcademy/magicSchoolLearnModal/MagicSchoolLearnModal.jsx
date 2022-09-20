@@ -36,7 +36,7 @@ const MagicSchoolLearnModal = ({
   steps,
   setSteps,
 }) => {
-  const [n, setN] = useState(0);
+  // const [n, setN] = useState(0);
   const [professorText, setProfessorText] = useState([]);
   const [structDrawerOpen, setStructDrawerOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -58,9 +58,9 @@ const MagicSchoolLearnModal = ({
   };
 
   const oneLessStep = () => {
-    if (n > 0) {
-      setN(n - 1);
-    }
+    // if (n > 0) {
+    //   setN(n - 1);
+    // }
   };
 
   useEffect(() => {
@@ -148,7 +148,7 @@ const MagicSchoolLearnModal = ({
               }
               <MagicModalFooter
                 step={step}
-                n={n}
+                // n={n}
                 steps={lesson}
                 oneMoreStep={oneMoreStep}
                 oneLessStep={oneLessStep}

@@ -74,15 +74,14 @@ export default function AuthProvider({ children }) {
           const userObj = snapshot.data();
           if (userObj) {
             const currentLesson = userObj.currentLesson;
-            console.log("userObj", userObj);
+            const currentLessonName = getCurrentLesson(currentLesson);
+            getLesson(currentLessonName);
             setFirestoreUser(userObj);
             setCurrentLine(userObj.currentLine);
             setCurrentStep(userObj.currentStep);
             setCurrentLesson(currentLesson);
-            console.log("CurrentLesson", userObj.currentLesson);
-            console.log("currentStep", userObj.currentStep);
-
             const currentStep = userObj.currentStep.toString();
+            
             const stepRef = doc(
               db,
               "lessons",
@@ -115,6 +114,17 @@ export default function AuthProvider({ children }) {
       };
     }
   }, [GoogleUser]);
+
+  const getLesson = async (lesson) => {
+    const lessonRef = doc(db, "lessons", lesson);
+    const docSnap = await getDoc(lessonRef);
+    if (docSnap.exists()) {
+      console.log("lesson data:", docSnap.data());
+      setLesson(docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  };
 
   const getCurrentLesson = (currentLesson) => {
     switch (currentLesson) {
@@ -173,9 +183,9 @@ export default function AuthProvider({ children }) {
       uid: user.uid,
       createdAt: new Date(),
       name: "test",
-      currentStep: 1,
+      currentStep: 0,
       currentLesson: 1,
-      currentLine: 1,
+      currentLine: 0,
     };
     await setDoc(userRef, userObj);
     // }
@@ -241,6 +251,7 @@ export default function AuthProvider({ children }) {
     const docRef = doc(db, "users", GoogleUser.uid);
     await updateDoc(docRef, {
       currentStep: CurrentStep + 1,
+      currentLine: 0,
     })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -367,6 +378,7 @@ export default function AuthProvider({ children }) {
   };
 
   const value = {
+    Lesson,
     NextChar,
     CurrentLine,
     handleLessonCompletion,

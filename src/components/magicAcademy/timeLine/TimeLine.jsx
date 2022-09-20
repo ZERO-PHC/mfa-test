@@ -1,28 +1,42 @@
 import styled from "styled-components"
+import { useAuth } from "../../../contexts/AuthContext"
+import { useMagicSchoolSteps } from "../../../contexts/MagicSchoolStepsContext"
 
-const TimeLine = ({timeLineLength, n}) => {
+const TimeLine = ({ timeLineLength, n }) => {
+    // deconstruct the Lesson variable from the MagicSchoolStepsContext
+    // const { Lesson } = useMagicSchoolSteps()
+    // deconstruct the currentUser variable from the AuthContext
+    const { CurrentStep, Lesson } = useAuth()
+
+
 
     return (
         <>
-        <Wrapper>
-            {
-            timeLineLength.slice(0, timeLineLength.length -1).map((item, index) => {
-                return (
-                    <div key={index} className="mainDiv">
-                    <div 
-                    className={`${n > item ? "completed timeLineItem" : "timeLineItem"}`}
-                    >
-                    </div>
-                    {index != timeLineLength.length - 2 ? 
-                    <div 
-                    className={`${n > item ? "completed timeLineItemNumber2" : "timeLineItemNumber2"}`}
-                    ></div> 
-                    : null}
-                    </div>
-                )
-            })
-            }
-        </Wrapper>
+            <Wrapper>
+                {(Lesson && CurrentStep) && (
+
+                    // create an array of the length of the lessonLen
+                    [...Array(Lesson.len)].map((e, i) => {
+                        // if the current index is less than the current lesson, then the lesson is complete
+                        // 
+                        return (
+                            <div key={i} className="mainDiv">
+                                <div
+                                    className={`${i < CurrentStep ? "completed timeLineItem" : "timeLineItem"}`}
+                                >
+                                </div>
+                                {i != Lesson.len - 2 ?
+                                    <div
+                                        className={`${i < CurrentStep ? "completed timeLineItemNumber2" : "timeLineItemNumber2"}`}
+                                    ></div>
+                                    : null}
+                            </div>
+                        )
+
+                    })
+
+                )}
+            </Wrapper>
         </>
     )
 }

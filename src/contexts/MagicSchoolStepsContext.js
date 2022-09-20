@@ -173,6 +173,7 @@ export const StepsProvider = ({ children }) => {
     const docRef = doc(db, "users", GoogleUser.uid);
     await updateDoc(docRef, {
       currentStep: CurrentStep + 1,
+      currentLine: 0,
       // currentStep: CurrentStep,
     })
       .catch((error) => {

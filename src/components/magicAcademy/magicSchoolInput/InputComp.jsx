@@ -42,13 +42,14 @@ const InputComp = ({ line, step, index, }) => {
     return (
         <>
             <div
-                style={{ position: 'relative' }}
+                style={{ position: 'relative', display: 'flex', width:'100%', justifyContent: 'space-between', alignItems: 'center' }}
                 className={`${line.match ? 'input' : 'input transparent'} 
                                 ${!line.match && line.percent > 0 ? 'error' : ''}
                                 ${step.codeSnippet == '' ? 'none' : ''} 
         `}
             >
-                {<motion.div
+                <section>
+                         {<motion.div
                     style={{ height: '2rem', background: 'lightgreen', width: '0rem', position: 'absolute', top: '0', opacity: 0.5 }}
                     animate={controls}
                 />
@@ -64,6 +65,11 @@ const InputComp = ({ line, step, index, }) => {
                         className={`inputText`}
                         onChange={e => updateStep(e, line, index)} />
                 </Tooltip>
+                </section>
+           
+                {index < CurrentLine && <motion.div>
+                       + 10 XP
+                    </motion.div>}
 
             </div>
             {CurrentLine === index && <motion.div

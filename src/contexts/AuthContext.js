@@ -43,6 +43,7 @@ export default function AuthProvider({ children }) {
   const [CurrentLine, setCurrentLine] = useState(null);
   const [Lesson, setLesson] = useState();
   const [Step, setStep] = useState(null);
+  const [NextChar, setNextChar] = useState(null);
   const [flow, setFlow] = useState(0);
   const router = useRouter();
 
@@ -75,14 +76,11 @@ export default function AuthProvider({ children }) {
             const currentLesson = userObj.currentLesson;
             console.log("userObj", userObj);
             setFirestoreUser(userObj);
-
             setCurrentLine(userObj.currentLine);
-
             setCurrentStep(userObj.currentStep);
             setCurrentLesson(currentLesson);
             console.log("CurrentLesson", userObj.currentLesson);
             console.log("currentStep", userObj.currentStep);
-
 
             const currentStep = userObj.currentStep.toString();
             const stepRef = doc(
@@ -177,6 +175,7 @@ export default function AuthProvider({ children }) {
       name: "test",
       currentStep: 1,
       currentLesson: 1,
+      currentLine: 1,
     };
     await setDoc(userRef, userObj);
     // }
@@ -248,7 +247,7 @@ export default function AuthProvider({ children }) {
       })
       .then(() => {
         console.log("Document successfully written!");
-        setStep(null);
+        // setStep(null);
       });
   };
 
@@ -265,7 +264,8 @@ export default function AuthProvider({ children }) {
     actualLine.isCompleted = checkLineCompletion(actualLine.percent, idx);
     actualLine.input = userValue;
 
-    // console.log("newCodeSnippet", newCodeSnippet);
+    setNextChar(splitedLine[length]);
+
     return newCodeSnippet;
   };
 
@@ -367,6 +367,7 @@ export default function AuthProvider({ children }) {
   };
 
   const value = {
+    NextChar,
     CurrentLine,
     handleLessonCompletion,
     completeStep,

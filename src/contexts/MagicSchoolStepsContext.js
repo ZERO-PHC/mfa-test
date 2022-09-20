@@ -21,7 +21,7 @@ export const StepsProvider = ({ children }) => {
 
   useEffect(() => {
     // getOrbiesData();
-    createSteps();
+    // createSteps();
   }, []);
 
   const handleAddLesson = (state, payload) => {
@@ -43,7 +43,6 @@ export const StepsProvider = ({ children }) => {
     };
 
     const getNewLesson = (lesson) => {
-      console.log("getting new lesson");
       const guideline = action.payload.line;
       const userValue = action.payload.e.target.value;
       const splitedUserValue = userValue.split("");
@@ -57,9 +56,7 @@ export const StepsProvider = ({ children }) => {
           const isMatched = checkMatch(splitedUserValue, splitedLine, length);
           actualLine.match = isMatched;
           actualLine.percent = getPercent(splitedLine, length);
-
           // const isCompleted = checkCompletion(splitedUserValue, splitedLine, isMatched);
-
           return { ...step, codeSnippet: newCodeSnippet, completed: checkCompletion(splitedUserValue, splitedLine, isMatched) };
         }
 

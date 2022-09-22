@@ -4,7 +4,7 @@ import InputComp from './InputComp';
 const { default: styled } = require("styled-components")
 
 
-const MagicSchoolInputWrapper = ({name}) => {
+const MagicSchoolInputWrapper = ({isCompleted,name}) => {
 
     const { Step } = useAuth()
   
@@ -14,7 +14,7 @@ const MagicSchoolInputWrapper = ({name}) => {
                 <form>
                     {Step && Step.codeSnippet.map((line, index) => {
                         return (
-                            <InputComp key={index} line={line} step={Step} index={index}  />
+                            <InputComp key={index} isCompleted={isCompleted} line={line} step={Step} index={index}  />
                         )
                     })}
                 </form>

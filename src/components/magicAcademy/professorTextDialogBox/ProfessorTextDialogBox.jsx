@@ -1,46 +1,51 @@
 import TeachBox from "../../../../public/teachBox.svg";
 import styled from "styled-components";
 
-const ProfessorTextDialogBox = ({step, professorText}) => {
-    return (
-        <Wrapper>
-            <div className={"professorText"}>
-              <div>
-                  <p>
-                  {professorText.title}
-                  </p>
-                  {professorText != undefined &&
-                    professorText.title != undefined && (
-                      <ul>
-                        {
-                        (
-                          step.codeSnippet[0].professorText 
-                          &&
-                          step.codeSnippet[0].professorText.link != undefined
-                          )
-                        
-                        &&
-                          step.codeSnippet[0].professorText.link.map(
-                            (link, index) => {
-                              return (
-                                <a
-                                  href={link.href}
-                                  key={index}
-                                  target={"_blank"}
-                                  rel={"noreferrer"}
-                                >
-                                  {link.text}
-                                </a>
-                              );
-                            }
-                          )}
-                      </ul>
+const ProfessorTextDialogBox = ({ step, professorText, isComplete }) => {
+  return (
+    <Wrapper>
+      <div className={"professorText"}>
+        {isComplete ?
+          <div>
+            <h3>Well done!</h3>
+            <p>You have completed the lesson. You can now move on to the next lesson.</p>
+          </div>
+          : <div>
+            <p>
+              {professorText.title}
+            </p>
+            {professorText != undefined &&
+              professorText.title != undefined && (
+                <ul>
+                  {
+                    (
+                      step.codeSnippet[0].professorText
+                      &&
+                      step.codeSnippet[0].professorText.link != undefined
+                    )
+
+                    &&
+                    step.codeSnippet[0].professorText.link.map(
+                      (link, index) => {
+                        return (
+                          <a
+                            href={link.href}
+                            key={index}
+                            target={"_blank"}
+                            rel={"noreferrer"}
+                          >
+                            {link.text}
+                          </a>
+                        );
+                      }
                     )}
-                
-                </div>
-              </div>
-        </Wrapper>
-    )
+                </ul>
+              )}
+
+          </div>}
+      </div>
+    </Wrapper>
+  )
 }
 
 export default ProfessorTextDialogBox;

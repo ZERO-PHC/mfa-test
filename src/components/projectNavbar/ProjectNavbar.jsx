@@ -17,7 +17,7 @@ const ProjectNavbar = ({
   logoProjectLink,
   
 }) => {
-  const { logIn, logOut, user, flow, CurrentLesson } = useAuth();
+  const { logIn, logOut, user, flow, CurrentLesson, play } = useAuth();
   const { OrbiesLessons } = useMagicSchoolSteps()
   const router = useRouter();
 

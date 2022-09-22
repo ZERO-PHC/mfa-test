@@ -19,9 +19,11 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
-
-// import next router
+import useSound from 'use-sound';
 import { useRouter } from "next/router";
+
+// import winSfx from '/win.mp3';
+
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -44,8 +46,11 @@ export default function AuthProvider({ children }) {
   const [Lesson, setLesson] = useState();
   const [Step, setStep] = useState(null);
   const [NextChar, setNextChar] = useState(null);
+  const [IsStepCompleted, setIsStepCompleted] = useState(false);
   const [flow, setFlow] = useState(0);
   const router = useRouter();
+  const [play] = useSound('/win.mp3');
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (googleUser) => {
@@ -81,7 +86,13 @@ export default function AuthProvider({ children }) {
             setCurrentStep(userObj.currentStep);
             setCurrentLesson(currentLesson);
             const currentStep = userObj.currentStep.toString();
-            
+
+            const completedSteps = userObj.completedSteps;
+            const isCompletedStep = completedSteps.includes(
+              userObj.currentStep
+            );
+            setIsStepCompleted(isCompletedStep);
+
             const stepRef = doc(
               db,
               "lessons",
@@ -186,6 +197,7 @@ export default function AuthProvider({ children }) {
       currentStep: 0,
       currentLesson: 1,
       currentLine: 0,
+      completedSteps: [],
     };
     await setDoc(userRef, userObj);
     // }
@@ -239,10 +251,37 @@ export default function AuthProvider({ children }) {
         guideline,
         idx
       ),
-      completed: checkStepCompletion(
-        getNewSnippet(prevState.codeSnippet, userValue, guideline, idx)
+      completed: checkCurrentStepCompleted(
+        prevState.codeSnippet,
+        userValue,
+        guideline,
       ),
+    
     }));
+  };
+
+  const checkCurrentStepCompleted = (
+    codeSnippet,
+    userValue,
+    guideline,
+  ) => {
+    // check if the current line is the last line of the current step
+    const isLastLine = CurrentLine === codeSnippet.length - 1;
+
+    //check if the userValue length is equal to the guideline length
+    const isCorrectLength = userValue.length === guideline.code.length;
+
+    // check if the userValue is equal to the guideline
+    const isCorrectValue = userValue === guideline.code;
+
+    console.log("isLastLine", isLastLine, "isCorrectLength", isCorrectLength, "isCorrectValue", isCorrectValue);
+
+    if (isLastLine && isCorrectLength && isCorrectValue) {
+      completeStep();
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const completeStep = async () => {
@@ -250,6 +289,22 @@ export default function AuthProvider({ children }) {
     console.log("user", GoogleUser.uid);
     const docRef = doc(db, "users", GoogleUser.uid);
     await updateDoc(docRef, {
+      completedSteps: arrayUnion(CurrentStep),
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        console.log("Document successfully written!");
+      });
+  };
+
+  const updateCurrentStep = async () => {
+    // update the steps in the database of the user
+    console.log("user", GoogleUser.uid);
+    const docRef = doc(db, "users", GoogleUser.uid);
+    await updateDoc(docRef, {
+      // completedSteps: arrayUnion(CurrentStep),
       currentStep: CurrentStep + 1,
       currentLine: 0,
     })
@@ -258,7 +313,21 @@ export default function AuthProvider({ children }) {
       })
       .then(() => {
         console.log("Document successfully written!");
-        // setStep(null);
+      });
+  };
+
+  const getBackStep = async () => {
+    // update the steps in the database of the user
+    console.log("user", GoogleUser.uid);
+    const docRef = doc(db, "users", GoogleUser.uid);
+    await updateDoc(docRef, {
+      currentStep: CurrentStep - 1,
+    })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      })
+      .then(() => {
+        console.log("Document successfully written!");
       });
   };
 
@@ -311,6 +380,7 @@ export default function AuthProvider({ children }) {
 
   const checkLineCompletion = (percent, idx) => {
     if (percent === 1) {
+      play()
       updateCurrentLine(idx);
       return true;
     }
@@ -378,6 +448,10 @@ export default function AuthProvider({ children }) {
   };
 
   const value = {
+    play,
+    updateCurrentStep,
+    IsStepCompleted,
+    getBackStep,
     Lesson,
     NextChar,
     CurrentLine,

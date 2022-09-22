@@ -81,7 +81,6 @@ const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
                 name={name}
             />}
             )
-
         </PopoverStyle>
     )
 }

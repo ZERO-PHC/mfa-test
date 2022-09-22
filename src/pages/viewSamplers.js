@@ -44,14 +44,7 @@ export default function ViewSamplers() {
   }
   return (
     <Wrapper>
-      <header>
-        <div>
-          <Image src="/assets/logo.png" alt="logo" height={100} width={100} />
-        </div>
-      </header>
       <section>
-        {/* {samplers.map((sampler, i) => (
-          <SamplerCard key={i} {...sampler} handleCardSelection={handleCardSelection}  /> */}
         {samplers.map((sampler, index) => (
           <SamplerCard {...sampler} key={index}/>
         ))}
@@ -61,7 +54,7 @@ export default function ViewSamplers() {
 }
 
 const Wrapper = styled.main`
-  height: 100vh;
+  // height: 100vh;
   width: 100vw;
   overflow: hidden;
   display: flex;
@@ -71,7 +64,10 @@ const Wrapper = styled.main`
   background: linear-gradient(180deg, #6100ff -47.66%, #000000 100%);
 
   header {
-    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
   }
 
   button {
@@ -86,8 +82,8 @@ const Wrapper = styled.main`
   section {
     width: 80%;
 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    // display: flex;
+    // justify-content: center;
+    // flex-wrap: wrap;
   }
 `;

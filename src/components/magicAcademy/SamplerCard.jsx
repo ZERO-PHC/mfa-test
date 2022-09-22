@@ -17,8 +17,7 @@ export default function SamplerCard({ name, id, xp, active, handleCardSelection,
 
     return (
         <Wrapper onClick={handleCardSelection}>
-
-            <section>
+               <section>
                 <div className='sampler-name'>
                     {name}
                 </div>
@@ -55,14 +54,16 @@ export default function SamplerCard({ name, id, xp, active, handleCardSelection,
                         {path == undefined ? "Coming soon..." : "Start"}
                     </button>
                 </div>
-            </div>
+            </div> 
+          
+            
         </Wrapper>
     )
 }
 
 const Wrapper = styled.main`
   height:16rem;
-  width:24rem;
+  width:70%;
   background: black;
   color:white;
   border-radius: 0.5rem;

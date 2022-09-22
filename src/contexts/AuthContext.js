@@ -57,7 +57,7 @@ export default function AuthProvider({ children }) {
       if (googleUser) {
         setGoogleUser(googleUser);
         // navigate to home page
-        router.push("/viewSamplers");
+        router.push("/mfa");
         // console.log({ googleUser });
       } else {
         router.push("/");

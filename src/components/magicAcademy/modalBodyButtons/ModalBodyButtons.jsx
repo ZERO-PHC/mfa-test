@@ -13,7 +13,6 @@ const ModalBodyButtons = ({ step, structDrawerOpen, setStructDrawerOpen, textToC
               {step.allCode && 
               <CopyToClipboard text={textToCopy ? textToCopy : step.allCode}>
                 <button>
-                  {" "}
                   Copy <Icon icon="ci:copy" height={"2em"} />{" "}
                 </button>
               </CopyToClipboard>

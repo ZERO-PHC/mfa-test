@@ -4,14 +4,6 @@ import styled from "styled-components";
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  onSnapshot,
-  collection,
-  getDocs,
-} from "firebase/firestore";
 
 
 // useRouter
@@ -24,53 +16,58 @@ export default function Home() {
   const [Loading, setLoading] = useState(true);
   const { login } = useAuth()
 
-  // const onLoad = (spline) => {
-  //   console.log("loaded", spline);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1500);
-  // };
+  const onLoad = (spline) => {
+    console.log("loaded", spline);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 1500);
+  };
+
+
 
   return (
     <Wrapper>
-      {/* <Suspense fallback={<div>loading</div>}> */}
+      <Suspense fallback={<div>loading</div>}>
       {/* {Loading && <main>loading spinner </main>} */}
-      {Loading && (
+      {/* {Loading && ( */}
+
         <HeaderWrapper>
           <header>
-            <div>
+            
+            {/* <div >
               <Image
                 src="/assets/logo.png"
                 alt="logo"
-                height={100}
-                width={100}
+                // height={100}
+                // width={100}
               />
-            </div>
+            </div> */}
             <div className="slogan">
-              <p>OUR PROFESSORS ARE WAITING FOR YOU</p>
+              <p>WELCOME TO THE MAGIC FLOW ACADEMY</p>
               <span>START NOW YOUR JOURNEY</span>
             </div>
           </header>
           <section className="actions">
-            <button onClick={ login}>
-              login
+            {/* <button onClick={ login}> */}
+            <button onClick={() => router.push('/mfa')}>
+              SIGN UP
             </button>
-            <button>START GAME</button>
+            <button>LOGIN</button>
           </section>
           <div className="hero-img">
             <Image src="/assets/smoke.png" alt="img" layout="fill" />
           </div>
         </HeaderWrapper>
-      )}
-      {/* <Spline
+      {/* // )} */}
+      <Spline
         style={{
           position: "absolute",
-          bottom: "0px",
+          bottom: "-2rem",
         }}
         scene="https://prod.spline.design/ow1z-xuvzgX1wgCc/scene.splinecode"
-        onLoad={onLoad}
-      /> */}
-      {/* </Suspense> */}
+        // onLoad={onLoad}
+      />
+      </Suspense>
     </Wrapper>
   );
 }
@@ -78,6 +75,7 @@ export default function Home() {
 const Wrapper = styled.main`
   width: 100%;
   height: 100vh;
+  max-height: 100vh;
   font-family: "Michroma", sans-serif;
   min-height: 100vh;
   background: linear-gradient(180deg, #6100ff -47.66%, #000000 100%);

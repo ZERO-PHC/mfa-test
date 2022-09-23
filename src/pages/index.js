@@ -19,7 +19,7 @@ export default function Home() {
   const onLoad = (spline) => {
     console.log("loaded", spline);
     // setTimeout(() => {
-    //   setLoading(false);
+      // setLoading(false);
     // }, 1500);
   };
 

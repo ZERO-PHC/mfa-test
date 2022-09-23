@@ -21,7 +21,7 @@ import * as style from './PopoverStyles.module.css'
 import AvatarComponent from '../AvatarComponent';
 import HorizontalSpacer from '../../HorizontalSpacer';
 
-const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
+const MagicSchoolPopover = ({ lesson, name, projectToCheck, key, title }) => {
     const [OpenModal, setOpenModal] = useState(false);
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure({ isOpen: false })
     const [PopOpen, setPopOpen] = useState(false)
@@ -49,8 +49,7 @@ const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
                 <Portal>
                     <PopoverContent className={style.content}>
                         <PopoverArrow className={style.arrow} />
-                        {/* <PopoverHeader className={style.header}>Explore this sample Dapp and click start after that</PopoverHeader> */}
-                        <PopoverHeader className={style.header}>Explore this sample Dapp and click  Start Game after that</PopoverHeader>
+                        <PopoverHeader className={style.header}>{title}</PopoverHeader>
                         <PopoverCloseButton className={style.closeBtn} />
                         <PopoverBody className={style.body}>
                             <Button
@@ -71,7 +70,6 @@ const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
                     </PopoverContent>
                 </Portal>
             </Popover>
-            return (
             {(lesson && CurrentStep.toString()) && <MagicSchoolLearnModal
                 step={lesson[CurrentStep]}
                 lesson={lesson}
@@ -80,7 +78,7 @@ const MagicSchoolPopover = ({ lesson, name, projectToCheck, key }) => {
                 setOpenModal={setOpenModal}
                 name={name}
             />}
-            )
+
         </PopoverStyle>
     )
 }

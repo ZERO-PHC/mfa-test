@@ -126,8 +126,8 @@ const Wrapper = styled.main`
     height: 3%;
     text-align: right;
 
-    // button  {
-    //     margin: 0.5rem 1rem;}
+    button  {
+        margin: 0.1rem 0.5rem;}
   }
 
   .content-wrapper {

@@ -1,7 +1,16 @@
 import styled from "styled-components"
 import Image from "next/image"
+import { useRouter }   from "next/router"
 
 const Navbar = () => {
+    const router = useRouter()
+    // get the current path
+    const path = router.pathname
+
+    // if the path is /magic-academy, then we want to show the navbar
+    // otherwise, we don't want to show the navbar
+    if (path !== "/orbies") 
+
     return (
         <Nav style={{
             background: "rgba(0, 0, 0, 0.5)"

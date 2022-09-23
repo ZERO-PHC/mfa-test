@@ -43,13 +43,12 @@ export default function Home() {
               />
             </div> */}
             <div className="slogan">
-              <p>WELCOME TO THE MAGIC FLOW ACADEMY</p>
+              <p >WELCOME TO THE MAGIC FLOW ACADEMY</p>
               <span>START NOW YOUR JOURNEY</span>
             </div>
           </header>
           <section className="actions">
-            {/* <button onClick={ login}> */}
-            <button onClick={() => router.push('/mfa')}>
+            <button onClick={ login}>
               SIGN UP
             </button>
             <button>LOGIN</button>
@@ -96,7 +95,7 @@ const Wrapper = styled.main`
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 
   header {

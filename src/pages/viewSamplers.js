@@ -3,6 +3,8 @@ import styled from "styled-components";
 import SamplerCard from "../components/magicAcademy/SamplerCard";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Icon } from "@iconify/react";
+
 
 const samplers = [
   {
@@ -81,7 +83,7 @@ const Wrapper = styled.main`
 
   section {
     width: 80%;
-
+    margin: 3rem 0rem;
     // display: flex;
     // justify-content: center;
     // flex-wrap: wrap;

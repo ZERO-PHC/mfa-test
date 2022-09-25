@@ -3,68 +3,69 @@ import styled from 'styled-components'
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useMagicSchoolSteps } from '../../contexts/MagicSchoolStepsContext';
+import { Icon } from "@iconify/react";
 
 
 
 export default function SamplerCard({ name, id, xp, active, handleCardSelection, path }) {
-    const router = useRouter();
-    const { getOrbiesData } = useMagicSchoolSteps()
+  const router = useRouter();
+  const { getOrbiesData } = useMagicSchoolSteps()
 
-    const handleCardClick = async () => {
-        await getOrbiesData()
-        router.push(path)
-    }
+  const handleCardClick = async () => {
+    await getOrbiesData()
+    router.push(path)
+  }
 
-    return (
-        <Wrapper onClick={handleCardSelection}>
-            <div className='header'>
-                <div style={{ width: '40%', height: '100%', position: "relative", borderRight: "1px solid lightgrey" }}>
-                    <div className='sampler-name'>
-                        {name}
-                    </div>
-                    <Image src="/assets/preview.png" alt="preview" layout="fill" objectPosition={"center"} />
-                </div>
-                <div style={{ width: '60%', height: '100%', padding:"0.5rem 1rem" }}>
-                    description
-                </div>
-            </div >
-            <div className='content-wrapper'>
-                <div className='header-title'>
-                    <span>
-                        SAMPLER LVL {id + 1}
-                    </span>
-                </div>
-                <div className='content'>
-                        <ul>
-                            <li>
-                                 XP: {xp}
-                            </li>
-                            <li>
-                                Floats:
-                            </li>
-                        </ul>
+  return (
+    <Wrapper onClick={handleCardSelection}>
+      <div className='header'>
+        <div style={{ width: '40%', height: '100%', position: "relative", borderRight: "1px solid lightgrey" }}>
+          <div className='sampler-name'>
+            {name}
+          </div>
+          <Image src="/assets/preview.png" alt="preview" layout="fill" objectPosition={"center"} />
+        </div>
+        <div style={{ width: '60%', height: '100%', padding: "0.5rem 1rem" }}>
+          In this Sampler you will learn how to build a simple Dapp using the Flow blockchain.
+        </div>
+      </div >
+      <div className='content-wrapper'>
+        <div className='header-title'>
+          <span>
+            SAMPLER LVL {id + 1}
+          </span>
+        </div>
+        <div className='content'>
+          <ul>
+            <li>
+              XP: {xp}
+            </li>
+            <li style={{display:'flex'}}>
+              Float:    <Icon icon="tabler:badge" height={"1.2em"} />
+            </li>
+          </ul>
 
-                </div>
-            </div>
+        </div>
+      </div>
 
-            <footer>
-                <div style={{ width: '100%' }}>
-                    <svg width="100%" height="8" viewBox="0 0 422 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect y="7" x='-214' width="428" height="1" fill="#D9D9D9" />
-                        <rect x="225" width="497" height="1" fill="#D9D9D9" />
-                        <path d="M214 7L225 0V1L214 8V7Z" fill="#D9D9D9" />
-                    </svg>
+      <footer>
+        <div style={{ width: '100%' }}>
+          <svg width="100%" height="8" viewBox="0 0 422 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="7" x='-214' width="428" height="1" fill="#D9D9D9" />
+            <rect x="225" width="497" height="1" fill="#D9D9D9" />
+            <path d="M214 7L225 0V1L214 8V7Z" fill="#D9D9D9" />
+          </svg>
 
-                </div>
-                <button disabled={path == undefined ? true : false} onClick={() => handleCardClick(path)}>
-                    {path == undefined ? "Coming soon..." : "Start"}
-                </button>
-            </footer>
+        </div>
+        <button disabled={path == undefined ? true : false} onClick={() => handleCardClick(path)}>
+          {path == undefined ? "Coming soon..." : "Start"}
+        </button>
+      </footer>
 
 
 
-        </Wrapper>
-    )
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.main`
@@ -107,6 +108,12 @@ const Wrapper = styled.main`
     display:flex;
     width:100%;
     justify-content:space-between;
+  }
+
+  li{
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
   span{

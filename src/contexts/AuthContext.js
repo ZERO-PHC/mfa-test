@@ -57,7 +57,7 @@ export default function AuthProvider({ children }) {
       if (googleUser) {
         setGoogleUser(googleUser);
         // navigate to home page
-        // router.push("/mfa");
+        router.push("/mfa");
         // console.log({ googleUser });
       } else {
         router.push("/");
@@ -296,6 +296,7 @@ export default function AuthProvider({ children }) {
       })
       .then(() => {
         console.log("Document successfully written!");
+        play();
       });
   };
 
@@ -380,7 +381,6 @@ export default function AuthProvider({ children }) {
 
   const checkLineCompletion = (percent, idx) => {
     if (percent === 1) {
-      play()
       updateCurrentLine(idx);
       return true;
     }
@@ -390,7 +390,6 @@ export default function AuthProvider({ children }) {
     // get user ref from firestore
     const CurrentLineRef = doc(db, "users", GoogleUser.uid);
 
-    // update the completed lines
     updateDoc(CurrentLineRef, {
       currentLine: idx + 1,
     })
@@ -400,20 +399,6 @@ export default function AuthProvider({ children }) {
       .then(() => {
         console.log("Document successfully updated!");
       });
-
-    // const completedLine = {
-    //   lesson: CurrentLesson,
-    //   step: CurrentStep,
-    //   line: idx,
-    // };
-
-    // setDoc(CurrentLineRef, completedLine, { merge: true })
-    //   .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    //   })
-    //   .then(() => {
-    //     console.log("Document successfully written!");
-    //   });
   };
 
   const handleLessonCompletion = async () => {
@@ -433,11 +418,9 @@ export default function AuthProvider({ children }) {
   };
 
   const resetCurrentStep = async () => {
-    // update the steps in the database of the user
-    console.log("user", GoogleUser.uid);
     const docRef = doc(db, "users", GoogleUser.uid);
     await updateDoc(docRef, {
-      currentStep: 1,
+      currentStep: 0,
     })
       .catch((error) => {
         console.error("Error resetting document: ", error);

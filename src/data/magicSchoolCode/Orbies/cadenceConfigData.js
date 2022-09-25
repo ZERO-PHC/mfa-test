@@ -1,5 +1,5 @@
 import { OrbiesContract } from "./orbiesContract";
-import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
+// import {deployerAddress, privateKey} from "../../../contexts/MagicSchoolStepsContext"
 
 export const OrbiesCadencePageData = [
   {id:'0',
@@ -1062,11 +1062,13 @@ export const OrbiesCadencePageData = [
     form: [
       {
         text: `"address":`,
-        input: `"${deployerAddress}"`,
+        // input: `"${deployerAddress}"`,
+        input: " ",
       },
       {
         text: `"privateKey": `,
-        input: `"${privateKey}"`,
+        // input: `"${privateKey}"`,
+        input: " ",
       }
     ],
     codeSnippet: [

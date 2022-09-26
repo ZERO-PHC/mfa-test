@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Image from "next/image"
 import { useRouter } from "next/router"
 import { useMagicSchoolSteps } from '../../contexts/MagicSchoolStepsContext';
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 
 
 
@@ -41,7 +41,7 @@ export default function SamplerCard({ name, id, xp, active, handleCardSelection,
               XP: {xp}
             </li>
             <li style={{display:'flex'}}>
-              Float:    <Icon icon="tabler:badge" height={"1.2em"} />
+              {/* Float:    <Icon icon="tabler:badge" height={"1.2em"} /> */}
             </li>
           </ul>
 

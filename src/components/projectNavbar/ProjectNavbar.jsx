@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import MagicSchoolPopover from "../magicAcademy/magicSchoolPopover/MagicSchoolPopover";
 
 import styled from "styled-components";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 import AddressComp from "./addressComp/AddressComp";
 import { useMagicSchoolSteps } from "../../contexts/MagicSchoolStepsContext";
 
@@ -67,7 +67,7 @@ const ProjectNavbar = ({
             <AddressComp flow={flow} user={user} />
             <div style={{ width: "1rem" }}></div>
             <div className="addressBox" onClick={logOut}>
-              <Icon icon="majesticons:logout" height={"2em"} />
+              {/* <Icon icon="majesticons:logout" height={"2em"} /> */}
             </div>
           </section>
         ) : (

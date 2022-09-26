@@ -1,7 +1,7 @@
 import TeachBox from "../../../../public/teachBox.svg";
 import styled from "styled-components";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 
 const ProfessorTextDialogBox = ({ step, professorText, isComplete }) => {
   return (
@@ -12,7 +12,7 @@ const ProfessorTextDialogBox = ({ step, professorText, isComplete }) => {
             <p>Well done!</p>
             <CopyToClipboard text={step.allCode}>
                 <button>
-                  Copy Code <Icon icon="ci:copy" height={"1.5em"} />
+                  {/* Copy Code <Icon icon="ci:copy" height={"1.5em"} /> */}
                 </button>
               </CopyToClipboard>
             <p>You have completed the lesson. You can now move on to the next lesson.</p>

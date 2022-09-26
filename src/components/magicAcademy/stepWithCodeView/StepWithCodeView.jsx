@@ -1,4 +1,4 @@
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import MagicSchoolInputWrapper from "../magicSchoolInput/MagicSchoolInputWrapper";
 import ModalBodyButtons from "../modalBodyButtons/ModalBodyButtons";

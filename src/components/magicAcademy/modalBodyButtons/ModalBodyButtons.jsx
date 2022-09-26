@@ -1,4 +1,4 @@
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import styled from "styled-components";
 import CodeStructDrawer from "../codeStructDrawer/CodeStructDrawer";
@@ -13,13 +13,13 @@ const ModalBodyButtons = ({ step, structDrawerOpen, setStructDrawerOpen, textToC
               {step.allCode && 
               <CopyToClipboard text={textToCopy ? textToCopy : step.allCode}>
                 <button>
-                  Copy <Icon icon="ci:copy" height={"2em"} />{" "}
+                  {/* Copy <Icon icon="ci:copy" height={"2em"} />{" "} */}
                 </button>
               </CopyToClipboard>
               }
               <button onClick={() => setStructDrawerOpen(true)}>
                 Check Structure{" "}
-                <Icon icon="clarity:tree-view-line" height={"2em"} />
+                {/* <Icon icon="clarity:tree-view-line" height={"2em"} /> */}
               </button>
               <CodeStructDrawer
                 open={structDrawerOpen}

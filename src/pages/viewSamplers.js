@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SamplerCard from "../components/magicAcademy/SamplerCard";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
 
 
 const samplers = [
@@ -16,7 +16,7 @@ const samplers = [
   },
   {
     id: 1,
-    name: "Seven Dragons ",
+    name: "Seven Dragons",
     xp: "3000",
     active: true,
   },
